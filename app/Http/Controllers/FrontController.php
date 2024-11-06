@@ -149,7 +149,8 @@ class FrontController extends Controller
     }
 
 
-    public function services(){
+    public function services()
+    {
         return view("front.services");
     }
 
@@ -169,12 +170,36 @@ class FrontController extends Controller
     public function article($id, $titre)
     {
         $article = Blog::find($id);
-        $autres = Blog::Orderby('created_at', 'desc')->take(3)->where('id', '!=', $article->id)->get();
-        return view("front.blog")
+
+        // Vérifiez si l'article existe
+        if (!$article) {
+            abort(404, 'Article non trouvé');
+        }
+
+        // Récupérer l'article précédent
+        $previousArticle = Blog::where('id', '<', $article->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        // Récupérer l'article suivant
+        $nextArticle = Blog::where('id', '>', $article->id)
+            ->orderBy('id', 'asc')
+            ->first();
+
+        // Récupérer d'autres articles en excluant l'article actuel
+        $autres = Blog::where('id', '!=', $article->id)
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        return view("front.article")
             ->with('article', $article)
             ->with('titre', $titre)
-            ->with('autres', $autres);
+            ->with('autres', $autres)
+            ->with('previousArticle', $previousArticle)
+            ->with('nextArticle', $nextArticle);
     }
+
 
     public function blogs(Request $request)
     {
@@ -183,7 +208,7 @@ class FrontController extends Controller
         if ($key) {
             $articles = $articles->where('titre', 'LIKE', '%' . $key . '%');
         }
-        $articles = $articles->orderBy('created_at', 'desc')->paginate(50);
+        $articles = $articles->orderBy('created_at', 'desc')->paginate(20);
         $autres = Blog::Orderby('created_at', 'desc')->take(3)->get();
         return view("front.blogs")
             ->with('articles', $articles)
@@ -229,5 +254,4 @@ class FrontController extends Controller
             ->with('total_etages', 0)
             ->with('total_articles', $total_articles);
     }
-
 }
