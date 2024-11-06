@@ -28,7 +28,7 @@ Route::get('/blog', [FrontController::class, 'blogs'])->name('blog');
 Route::get('/blog/{id}/{titre}', [FrontController::class, 'article'])->name('article');
 Route::get('/projet', [FrontController::class, 'projet'])->name('projet');
 Route::get('/services', [FrontController::class, 'services'])->name('services');
-
+Route::get('/service/{id}/{titre}', [FrontController::class, 'service'])->name('service');
 
 Route::get('/login', [FrontController::class, 'login'])->name('login');
 Route::get('/logout', [FrontController::class, 'logout'])->name('logout');

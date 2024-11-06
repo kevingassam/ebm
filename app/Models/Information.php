@@ -58,42 +58,4 @@ class Information extends Model
     }
 
 
-    //recuperatin des couvertures
-    public function GetCoverBlog(){
-        if ($this->cover_blog) {
-            return Storage::url($this->cover_blog);
-        } else {
-            return "/front/img/bg/breadcumb-bg.jpg";
-        }
-    }
-    public function GetCoverContact(){
-        if ($this->cover_contact) {
-            return Storage::url($this->cover_contact);
-        } else {
-            return "/front/img/bg/breadcumb-bg.jpg";
-        }
-    }
-    public function GetCoverProjet(){
-        if ($this->cover_projet) {
-            return Storage::url($this->cover_projet);
-        } else {
-            return "/front/img/bg/breadcumb-bg.jpg";
-        }
-    }
-    public function GetCoverAbout(){
-        if ($this->cover_about) {
-            return Storage::url($this->cover_about);
-        } else {
-            return "/front/img/bg/breadcumb-bg.jpg";
-        }
-    }
-
-    public function GetCoverContact2(){
-        if ($this->cover_contact2) {
-            return Storage::url($this->cover_contact2);
-        } else {
-            return "/front/img/bg/contact-bg-1-1.png";
-        }
-    }
-
 }

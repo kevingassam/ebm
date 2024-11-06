@@ -9,6 +9,7 @@ use App\Models\Demande;
 use App\Models\DetailsAppartement;
 use App\Models\Partenaire;
 use App\Models\Projet;
+use App\Models\Service;
 use App\Models\Temoignage;
 use Exception;
 use Illuminate\Http\Request;
@@ -151,7 +152,9 @@ class FrontController extends Controller
 
     public function services()
     {
-        return view("front.services");
+        $services = Service::all();
+        return view("front.services")
+            ->with('services', $services);
     }
 
     public function projet_details($id, $nom)
@@ -200,6 +203,21 @@ class FrontController extends Controller
             ->with('nextArticle', $nextArticle);
     }
 
+
+    public function service($id,$titre){
+        $service = Service::find($id);
+        if (!$service) {
+            abort(404);
+        }
+        $autres = Blog::where('id', '!=', $service->id)
+            ->orderBy('created_at', 'desc')
+            ->take(8)
+            ->get();
+        return view("front.service")
+            ->with('service', $service)
+            ->with('titre', $titre)
+            ->with('autres', $autres);
+    }
 
     public function blogs(Request $request)
     {

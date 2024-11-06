@@ -164,6 +164,7 @@
                                                 </a>
 
                                                 <ul class="dropdown-menu">
+                                                    <li><a href="{{ route('services') }}">Tous les services</a></li>
                                                     <li><a href="{{ route('services') }}">About Us</a></li>
                                                     <li><a href="{{ route('services') }}">Our History</a></li>
                                                     <li><a href="{{ route('services') }}">Our Team</a></li>
