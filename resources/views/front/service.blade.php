@@ -94,10 +94,10 @@
                             <!-- .menu-quick-links-container start -->
                             <div class="menu-quick-links-container">
                                 <ul id="menu-quick-links" class="menu">
-                                    @foreach ($autres as $item)
+                                    @foreach ($autres as $autre_service)
                                         <li class="menu-item">
-                                            <a href="{{ route('service', ['id' => $item->id, 'titre' => Str::slug($item->titre)]) }}">
-                                                {{ Str::limit($item->titre ,30) }}
+                                            <a href="{{ route('service', ['id' => $autre_service->id, 'titre' => Str::slug($autre_service->titre)]) }}">
+                                                {{ Str::limit($autre_service->titre ,30) }}
                                             </a>
                                         </li>
                                     @endforeach

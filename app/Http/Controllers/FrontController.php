@@ -20,7 +20,8 @@ class FrontController extends Controller
 {
     public function home()
     {
-        $autres = Blog::Orderby('created_at', 'desc')->take(10)->get();
+        $articles = Blog::Orderby('created_at', 'desc')->take(10)->get();
+        $services = Service::Orderby('created_at', 'desc')->take(10)->get();
         $temoignages = Temoignage::all();
         $projets = Projet::Orderby('created_at', 'desc')->take(15)->get();
         $partenaires = Partenaire::select('nom', 'logo')->get();
@@ -45,14 +46,15 @@ class FrontController extends Controller
             ],
         ];
         return view("front.index")
-            ->with('autres', $autres)
+            ->with('articles', $articles)
             ->with('temoignages', $temoignages)
             ->with('projets', $projets)
             ->with('partenaires', $partenaires)
             ->with('atouts', $atouts)
             ->with('total_projets', $total_projets)
             ->with('total_partenaires', $total_partenaires)
-            ->with('total_articles', $total_articles);
+            ->with('total_articles', $total_articles)
+            ->with('services', $services);
     }
 
     public function contact()
