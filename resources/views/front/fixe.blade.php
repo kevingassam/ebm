@@ -32,11 +32,13 @@
 </head>
 
 <body>
-    <!-- LOADER START -->
-    {{-- <div id="loader">
-            <div id="loading-status"></div><!-- .loading-status end -->
-        </div><!-- #loader end --> --}}
 
+    @if (config('app.env') == 'production')
+        <!-- LOADER START -->
+        <div id="loader">
+            <div id="loading-status"></div><!-- .loading-status end -->
+        </div>
+    @endif
     <!-- Header wrapper start -->
     <div class="header-wrapper header-style-02 header-negative-bottom clearfix">
 
@@ -205,29 +207,6 @@
                                             </form>
                                         </div><!-- #search end -->
 
-                                        <div class="nav-plugins clearfix">
-                                            <!-- WPML Languages start -->
-                                            <div class="wpml-languages enabled">
-                                                <a class="active" href="/front/#">
-                                                    <span>en</span>
-                                                    <i class="fa fa-chevron-down"></i>
-                                                </a>
-
-                                                <ul class="wpml-lang-dropdown">
-                                                    <li>
-                                                        <a href="/front/#">de</a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="/front/#">fr</a>
-                                                    </li>
-
-                                                    <li>
-                                                        <a href="/front/#">en</a>
-                                                    </li>
-                                                </ul><!-- .wpml-lang-dropdown end -->
-                                            </div><!-- .wpml-languages.enabled end -->
-                                        </div><!-- .nav-plugins end -->
                                     </div><!-- .nav-additional-links -->
                                 </nav><!-- .navbar.navbar-default end -->
                             </div> <!-- .main-nav end -->
@@ -264,6 +243,9 @@
                                 <img src="{{ $infos->GetLogo() }}"
                                     alt="ConsultingPress Management Consulting Template" />
                             </a>
+                            <p>
+                                {{ $infos->text_footer ?? '' }}
+                            </p>
                         </li><!-- .widget.widget-text end -->
                     </ul><!-- .footer-widget-container end -->
 
@@ -305,44 +287,33 @@
                     <ul class="footer-widget-container col-md-3 col-sm-6">
                         <li class="widget widget-text">
                             <div class="title">
-                                <h3>Latest News</h3>
+                                <h3>Dernières nouvelles</h3>
                             </div>
 
                             <!-- Latest posts element start -->
                             <ul class="pi-latest-posts-02">
-                                <li class="post-container">
-                                    <div class="post-media">
-                                        <a href="/front/management-news-single.html">
-                                            <img src="/front/img/blog/consultingpress-increase-company-value-by-investing-in-people.jpg"
-                                                alt="ConsultingPress Management Consulting" />
-                                        </a>
-                                    </div><!-- .post-media end -->
+                                @foreach ($last2Blog as $article)
+                                    <li class="post-container">
+                                        <div class="post-media">
+                                            <a
+                                                href="{{ route('article', ['id' => $article->id, 'titre' => Str::slug($article->titre)]) }}">
+                                                <img src="{{ $article->Cover() }}" alt="{{ $article->titre }}" />
+                                            </a>
+                                        </div><!-- .post-media end -->
 
-                                    <div class="post-body">
-                                        <span class="date">25 jul, 2016</span>
-                                        <a href="/front/management-news-single.html">
-                                            <h4>Increase company value by investing in people</h4>
-                                        </a>
-                                    </div><!-- .post-body end -->
-                                </li>
-
-                                <li class="post-container">
-                                    <div class="post-media">
-                                        <a
-                                            href="/front/management-news-single-consultingpress-quality-over-quantity.html">
-                                            <img src="/front/img/blog/consultingpress-delivering-quality-over-quantity.jpg"
-                                                alt="ConsultingPress Management Consulting" />
-                                        </a>
-                                    </div><!-- .post-media end -->
-
-                                    <div class="post-body">
-                                        <span class="date">25 jul, 2016</span>
-                                        <a
-                                            href="/front/management-news-single-consultingpress-quality-over-quantity.html">
-                                            <h4>ConsultingPress Delivering Quality Over Quantity</h4>
-                                        </a>
-                                    </div><!-- .post-body end -->
-                                </li>
+                                        <div class="post-body">
+                                            <span class="date">
+                                                {{ $article->created_at->format('d-m-Y') }}
+                                            </span>
+                                            <a
+                                                href="{{ route('article', ['id' => $article->id, 'titre' => Str::slug($article->titre)]) }}">
+                                                <h4>
+                                                    {{ Str::limit($article->titre, 30) }}
+                                                </h4>
+                                            </a>
+                                        </div><!-- .post-body end -->
+                                    </li>
+                                @endforeach
                             </ul><!-- .pi-latest-posts-02 end -->
                         </li>
                     </ul><!-- .footer-widget-container end -->
@@ -357,14 +328,13 @@
                             <ul class="contact-info-list clearfix">
                                 <li>
                                     <i class="lynny-home"></i>
-                                    Consulting Press<br />
-                                    7791 Woodland Avenue<br />
-                                    10 000 Zagreb, Croatia<br />
+                                    {{ $infos->adresse1 }}
                                 </li>
 
                                 <li>
                                     <i class="lynny-phone-1"></i>
-                                    +00 385 01 258 7856
+                                    {{ $infos->tel1 }} <br>
+                                    {{ $infos->tel2 }}
                                 </li>
 
                                 <li>

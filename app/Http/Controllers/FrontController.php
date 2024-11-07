@@ -274,4 +274,15 @@ class FrontController extends Controller
             ->with('total_etages', 0)
             ->with('total_articles', $total_articles);
     }
+
+
+
+    public function politique(){
+        return view("front.politique");
+    }
+
+    public function mentions(){
+        return view("front.mentions");
+    }
+
 }

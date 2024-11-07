@@ -1,5 +1,5 @@
 @extends('front.fixe')
-@section('titre',"Contactez-nous")
+@section('titre', 'Contactez-nous')
 @section('body')
     <div class="page-title page-title-style-02 bkg-img09">
         <div class="pt-mask-light"></div>
@@ -50,16 +50,20 @@
                 <div class="col-md-4 col-sm-4">
                     <!-- .custom-heading03 start -->
                     <div class="custom-heading-03">
-                        <h3>Headquarters</h3>
+                        <h3>Quartier général</h3>
                     </div><!-- .custom-heading-03 end -->
 
                     <ul class="fa-ul default">
                         <li>
                             <i class="lynny-home"></i>
                             <p>
-                                Consulting Press <br />
-                                7791 Woodland Avenue <br />
-                                10 000 Zagreb, Croatia
+                                @if ($infos->adresse1)
+                                    {{ $infos->adresse1 }}
+                                @endif
+                                @if ($infos->adresse2)
+                                    <br>
+                                    {{ $infos->adresse2 }}
+                                @endif
                             </p>
                         </li>
                     </ul><!-- .fa-ul.default end -->
@@ -69,21 +73,34 @@
                 <div class="col-md-4 col-sm-4">
                     <!-- .custom-heading03 start -->
                     <div class="custom-heading-03">
-                        <h3>Contact Details</h3>
+                        <h3>Coordonnées</h3>
                     </div><!-- .custom-heading-03 end -->
 
                     <ul class="fa-ul default">
                         <li>
                             <i class="lynny-phone-1"></i>
                             <p>
-                                +00 385 01 258 7856
+                                @if ($infos->tel1)
+                                    {{ $infos->tel1 }}
+                                @endif
+                                @if ($infos->tel2)
+                                    <br>
+                                    {{ $infos->tel2 }}
+                                @endif
                             </p>
                         </li>
 
                         <li>
                             <i class="lynny-mail-duplicate"></i>
                             <p>
-                                <a href="mailto:info@consultingpress.com">info@consultingpress.com</a>
+                                @if ($infos->email1)
+                                    <a href="mailto:{{ $infos->email1 }}">{{ $infos->email1 }}</a>
+                                @endif
+                                @if ($infos->email2)
+                                    <br>
+                                    <a href="mailto:{{ $infos->email2 }}">{{ $infos->email2 }}</a>
+                                @endif
+
                             </p>
                         </li>
                     </ul><!-- .fa-ul.default end -->
@@ -93,7 +110,7 @@
                 <div class="col-md-4 col-sm-4">
                     <!-- .custom-heading03 start -->
                     <div class="custom-heading-03">
-                        <h3>Working Hours</h3>
+                        <h3>Heures de travail</h3>
                     </div><!-- .custom-heading-03 end -->
 
                     <ul class="fa-ul default">
@@ -120,17 +137,17 @@
                 <div class="col-md-8">
                     <!-- .custom-heading03 start -->
                     <div class="custom-heading-03">
-                        <h3>Contact us</h3>
+                        <h3>Contactez-nous</h3>
                     </div><!-- .custom-heading-03 end -->
 
                     <form class="wpcf7 wpcf7-contact-us clearfix">
-                        <input type="text" class="wpcf7-text" id="contact-name" placeholder="Name (required)">
+                        <input type="text" class="wpcf7-text" id="contact-name" placeholder="Nom (required)">
                         <input type="email" class="wpcf7-email" id="contact-email" placeholder="Email (required)">
-                        <input type="text" class="wpcf7-text" id="contact-phone" placeholder="Phone ">
-                        <input type="text" class="wpcf7-text" id="contact-subject" placeholder="Subject (required)">
+                        <input type="text" class="wpcf7-text" id="contact-phone" placeholder="Téléphone ">
+                        <input type="text" class="wpcf7-text" id="contact-subject" placeholder="Subjet (required)">
                         <textarea rows="8" class="wpcf7-textarea" id="contact-message" placeholder="Message (required)"></textarea>
                         <div class="g-recaptcha" data-sitekey="6Ld4VykTAAAAAM_qltIuTg7I0hpcdHjX7j68qpRz"></div>
-                        <input type="submit" value="submit" class="wpcf7-submit">
+                        <input type="submit" value="Envoyer le message" class="wpcf7-submit">
                     </form><!-- .wpcf7.clearfix end -->
                 </div><!-- .col-md-8 end -->
 
@@ -142,63 +159,6 @@
                     </div><!-- .custom-heading-03 end -->
 
                     <div class="key-contacts">
-                        <ul class="clearfix">
-                            <li>
-                                <img src="/front/img/pics/team01.jpg"
-                                    alt="ConsultingPress Management Consulting HTML Template Key Contacts">
-
-                                <div class="text-container">
-                                    <div class="contacts-title">
-                                        <h4>Joshua Turner</h4>
-                                        <span class="position">Management Consultant</span>
-                                    </div>
-
-                                    <ul class="fa-ul default clearfix">
-                                        <li>
-                                            <i class="lynny-phone-1"></i>
-                                            <p>
-                                                +00 385 01 258 7856
-                                            </p>
-                                        </li>
-
-                                        <li>
-                                            <i class="lynny-mail-duplicate"></i>
-                                            <p>
-                                                <a href="mailto:joshua@consulting.com">joshua@consulting.com</a>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div><!-- .text-container end -->
-                            </li>
-
-                            <li>
-                                <img src="/front/img/pics/team03.jpg"
-                                    alt="ConsultingPress Management Consulting HTML Template Key Contacts">
-
-                                <div class="text-container">
-                                    <div class="contacts-title">
-                                        <h4>Ashley Valdez</h4>
-                                        <span class="position">Tax Consultant</span>
-                                    </div>
-
-                                    <ul class="fa-ul default clearfix">
-                                        <li>
-                                            <i class="lynny-phone-1"></i>
-                                            <p>
-                                                +00 385 01 258 7856
-                                            </p>
-                                        </li>
-
-                                        <li>
-                                            <i class="lynny-mail-duplicate"></i>
-                                            <p>
-                                                <a href="mailto:ashley@consulting.com">ashley@consulting.com</a>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div><!-- .text-container end -->
-                            </li>
-                        </ul>
                     </div><!-- .key-contact end -->
                 </div><!-- .col-md-4 end -->
             </div><!-- .row end -->
