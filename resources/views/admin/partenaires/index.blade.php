@@ -55,7 +55,6 @@
                                         <input class="form-check-input" type="checkbox">
                                     </th>
                                     <th>Nom</th>
-                                    <th>Description</th>
                                     <th>Date modification</th>
                                     <th>Date publication</th>
                                     <th></th>
@@ -70,16 +69,13 @@
                                         <td>
                                             <a class="d-flex align-items-center gap-3" href="javascript:;">
                                                 <div class="customer-pic">
-                                                    <img src="{{ Storage::url($partenaire->logo) }}" class="rounded-circle"
+                                                    <img src="{{ $partenaire->Cover() }}" class="rounded-circle"
                                                         width="40" height="40" alt="">
                                                 </div>
                                                 <p class="mb-0 customer-name fw-bold">
                                                     {{ $partenaire->nom }}
                                                 </p>
                                             </a>
-                                        </td>
-                                        <td>
-                                            {{ $partenaire->description }}
                                         </td>
                                         <td>
                                             {{ $partenaire->updated_at->diffForHumans() }}
@@ -95,13 +91,13 @@
                                             </button>
                                             <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#ModalDelete{{ $partenaire->id }}">
-                                                <i class="bi bi-trash-fill"></i> Supprimer
+                                                <i class="bi bi-trash-fill"></i>
                                             </button>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="6" class="p-3">
+                                        <td colspan="5" class="p-3">
                                             <div class="text-center alert alert-light">
                                                 Aucun partenaire trouvé.
                                             </div>
@@ -110,6 +106,7 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        {{ $partenaires->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>

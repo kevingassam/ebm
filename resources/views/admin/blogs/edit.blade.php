@@ -96,7 +96,7 @@
                     @if ($blog->photo)
                         <div class="card">
                             <div class="p-2">
-                                <img src="{{ Storage::url($blog->photo) }}" alt="{{ $blog->titre }}" class="w-100"
+                                <img src="{{ $blog->Cover() }}" alt="{{ $blog->titre }}" class="w-100"
                                     srcset="">
                             </div>
                         </div>

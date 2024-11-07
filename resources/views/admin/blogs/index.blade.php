@@ -66,7 +66,7 @@
                                     <td>
                                         <a class="d-flex align-items-center gap-3" href="javascript:;">
                                             <div class="customer-pic">
-                                                <img src="{{ Storage::url($article->photo) }}" class="rounded-circle"
+                                                <img src="{{ $article->Cover() }}" class="rounded-circle"
                                                     width="40" height="40" alt="">
                                             </div>
                                             <p class="mb-0 customer-name fw-bold">
@@ -97,6 +97,7 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        {{ $blogs->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>

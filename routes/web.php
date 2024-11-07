@@ -49,7 +49,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('blogs', BlogController::class);
     Route::resource('projets', ProjetController::class);
     Route::post('/admin/projet.deleteImage', [ProjetController::class, 'deleteSingleImage']);
-    Route::resource('contacts', ContactController::class);
     Route::resource('temoignages', TemoignageController::class);
     Route::resource('configurations', ConfigurationController::class);
     Route::resource('partenaires', PartenaireController::class);

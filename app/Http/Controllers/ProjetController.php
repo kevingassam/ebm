@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appartement;
-use App\Models\DetailsAppartement;
 use App\Models\Projet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +13,7 @@ class ProjetController extends Controller
      */
     public function index()
     {
-        $projets = Projet::all();
+        $projets = Projet::paginate(15);
         return view('admin.projets.index', compact('projets'));
     }
 
@@ -61,10 +59,6 @@ class ProjetController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'required|string',
-            'statut' => 'required|string|max:255',
-            'map' => 'nullable|string',
-            'video' => 'nullable|url',
-            'type' => 'required|string|in:résidentiel,commercial'
         ]);
 
         $photoPath = $request->file('photo')->store('projets/photos', 'public');
@@ -76,14 +70,10 @@ class ProjetController extends Controller
         }
 
         $projet = new Projet();
-        $projet->statut = $validated['statut'];
-        $projet->map = $validated['map'];
-        $projet->video = $validated['video'];
         $projet->photo = $photoPath;
         $projet->photos = json_encode($additionalPhotos);
         $projet->nom = $validated['nom'];
         $projet->description = $validated['description'];
-        $projet->type = $validated['type'];
         $projet->save();
 
         return redirect()->route('projets.index')->with('success', 'Projet créé avec succès !');
@@ -116,18 +106,10 @@ class ProjetController extends Controller
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'photos.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'description' => 'required|string',
-            'map' => 'nullable|string',
-            'video' => 'nullable|url',
-            'statut' => 'required|string|max:255',
-            'type' => 'required|string|in:résidentiel,commercial'
         ]);
 
         $projet->nom = $validated['nom'];
         $projet->description = $validated['description'];
-        $projet->map = $validated['map'];
-        $projet->video = $validated['video'];
-        $projet->statut = $validated['statut'];
-        $projet->type = $validated['type'];
 
         if ($request->hasFile('photo')) {
             Storage::disk('public')->delete($projet->photo);

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class PartenaireController extends Controller
 {
     public function index(){
-        $partenaires = Partenaire::all();
+        $partenaires = Partenaire::paginate(15);
         return view('admin.partenaires.index')
         ->with('partenaires', $partenaires);
     }

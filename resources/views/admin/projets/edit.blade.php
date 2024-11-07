@@ -71,52 +71,6 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-12">
-                                    <div class="col-12">
-                                        <label for="type">
-                                            Type de projet
-                                        </label>
-                                        <select name="type" class="form-select" id="type">
-                                            <option value="résidentiel" @selected($projet->type == 'résidentiel')>Résidentiel</option>
-                                            <option value="commercial" @selected($projet->type == 'commercial')>Commercial</option>
-                                        </select>
-                                        @error('type')
-                                            <span class="small text-danger">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <label for="Tags">
-                                        Lien vidéo youtube
-                                    </label>
-                                    <input type="url" class="form-control" value="{{ $projet->video }}"
-                                        name="video" />
-                                </div>
-                                <div class="col-12">
-                                    <label for="Tags">
-                                        Statut du projet
-                                    </label>
-                                    <select name="statut" class="form-select" id="">
-                                        <option value="en cours" @selected($projet->statut == 'en cours')>En cours</option>
-                                        <option value="terminé" @selected($projet->statut == 'terminé')>Terminé</option>
-                                    </select>
-                                    @error('statut')
-                                        <span class="small text-danger">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-12">
-                                    <label for="Tags">
-                                        Url map pour la carte
-                                    </label>
-                                    <input type="text" class="form-control" value="{{ $projet->map }}" name="map" />
-                                    @error('map')
-                                        <span class="small text-danger">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-12">
                                     <label for="Tags">Image d'illustration</label>
                                     <div class="text-warning small">
                                         Taille : 416px * 400px
@@ -144,14 +98,12 @@
                             <!--end row-->
                         </div>
                     </div>
-                    @if ($projet->photo)
                         <div class="card">
                             <div class="p-2">
-                                <img src="{{ Storage::url($projet->photo) }}" alt="{{ $projet->nom }}" class="w-100"
+                                <img src="{{  $projet->Cover() }}" alt="{{ $projet->nom }}" class="w-100"
                                     srcset="">
                             </div>
                         </div>
-                    @endif
                     @if ($projet->photos)
                         <div class="card">
                             <div class="p-2">

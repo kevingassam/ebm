@@ -56,9 +56,6 @@
                                     <th>Titre</th>
                                     <th>Date modification</th>
                                     <th>Date publication</th>
-                                    <th>Statut</th>
-                                    <th>Type</th>
-                                    <th>Propriétés</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -71,7 +68,7 @@
                                         <td>
                                             <a class="d-flex align-items-center gap-3" href="javascript:;">
                                                 <div class="customer-pic">
-                                                    <img src="{{ Storage::url($projet->photo) }}" class="rounded-circle"
+                                                    <img src="{{ $projet->Cover() }}" class="rounded-circle"
                                                         width="40" height="40" alt="">
                                                 </div>
                                                 <p class="mb-0 customer-name fw-bold">
@@ -84,45 +81,6 @@
                                         </td>
                                         <td>
                                             {{ $projet->created_at->format('d-m-Y H:m') }}
-                                        </td>
-                                        <td>
-                                            @if ($projet->statut == 'en cours')
-                                                <span class="badge bg-danger">En cours</span>
-                                            @elseif ($projet->statut == 'terminé')
-                                                <span class="badge bg-success">Terminer</span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <span class="badge bg-dark text-capitalize">
-                                                {{ $projet->type }}
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-dark" type="button"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#ModalAppartement{{ $projet->id }}">
-                                                <i class="bi bi-house-add"></i>
-                                                Propriétés ( {{ $projet->appartements->count() }} )
-                                            </button>
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="ModalAppartement{{ $projet->id }}" tabindex="-1">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h6 class="modal-title" id="exampleModalLabel">
-                                                                Gestion des types des propriétés
-                                                            </h6>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                        </div>
-                                                        @csrf
-                                                        <div class="modal-body">
-                                                            @livewire('CreateAppartement', ['projet' => $projet])
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <x-ModalProjet :Id="$projet->id"></x-ModalProjet>
                                         </td>
                                         <td class="text-end">
                                             <a href="{{ route('projets.edit', $projet->id) }}" class="btn btn-sm btn-dark">
@@ -141,6 +99,7 @@
                                 @endforelse
                             </tbody>
                         </table>
+                        {{ $projets->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>

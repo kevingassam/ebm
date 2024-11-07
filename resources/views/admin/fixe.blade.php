@@ -118,12 +118,6 @@
                                 Ajouter
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ route('demandes.index') }}">
-                                <span class="material-symbols-outlined">arrow_right</span>
-                                Demandes
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <li class="menu-label">Autres</li>
@@ -147,14 +141,6 @@
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li>
-                    <a href="{{ route('contacts.index') }}">
-                        <div class="parent-icon">
-                            <i class="bi bi-telephone"></i>
-                        </div>
-                        <div class="menu-title">Contacts</div>
-                    </a>
                 </li>
                 <li>
                     <a href="javascript:;" class="has-arrow">

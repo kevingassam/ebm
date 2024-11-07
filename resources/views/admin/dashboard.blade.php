@@ -69,7 +69,7 @@
                         <div class="d-flex align-items-center">
                             <div class="">
                                 <p class="mb-1">Total des contacts</p>
-                                <h4 class="mb-0 text-warning">{{ $total_contacts }}</h4>
+                                <h4 class="mb-0 text-warning">0</h4>
                             </div>
                             <div class="ms-auto widget-icon bg-warning text-dark">
                                 <i class="bi bi-telephone-inbound"></i>

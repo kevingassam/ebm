@@ -32,7 +32,7 @@
                         <div class="card-body">
                             <div class="mb-4">
                                 <label class="mb-3">nom</label>
-                                <input type="text" class="form-control" required placeholder="Nom du projet"
+                                <input type="text" class="form-control" value="{{ old('nom') }}" required placeholder="Nom du projet"
                                     name="nom" />
                                 @error('nom')
                                     <span class="small text-danger">
@@ -43,7 +43,7 @@
                             <div class="mb-4">
                                 <label class="mb-3">Description</label>
                                 <textarea class="form-control" cols="4" rows="6" placeholder="write a description here.."
-                                    name="description"></textarea>
+                                    name="description">{{ old('description') }}</textarea>
                                 @error('description')
                                     <span class="small text-danger">
                                         {{ $message }}
@@ -69,51 +69,6 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row g-3">
-                                <div class="col-12">
-                                    <label for="type">
-                                        Type de projet
-                                    </label>
-                                    <select name="type" class="form-select" id="type">
-                                        <option value="résidentiel">Résidentiel</option>
-                                        <option value="commercial">Commercial</option>
-                                    </select>
-                                    @error('type')
-                                        <span class="small text-danger">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-12">
-                                    <label for="video">
-                                        Lien vidéo youtube
-                                    </label>
-                                    <input type="url" class="form-control" id="video" name="video" />
-                                </div>
-                                <div class="col-12">
-                                    <label for="statut">
-                                        Statut du projet
-                                    </label>
-                                    <select name="statut" class="form-select" id="statut">
-                                        <option value="en cours">En cours</option>
-                                        <option value="terminé">Terminé</option>
-                                    </select>
-                                    @error('statut')
-                                        <span class="small text-danger">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-12">
-                                    <label for="map">
-                                        Url map pour la carte
-                                    </label>
-                                    <input type="text" class="form-control" name="map" id="map" />
-                                    @error('map')
-                                        <span class="small text-danger">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
                                 <div class="col-12">
                                     <label for="photo">Image d'illustration</label>
                                     <div class="text-warning small">

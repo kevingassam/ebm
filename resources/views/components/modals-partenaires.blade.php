@@ -61,8 +61,8 @@
                                 <span class="small text-danger"> {{ $message }} </span>
                             @enderror
                         </div>
-                        <div class="col-4">
-                            <img src="{{ Storage::url($partenaire->logo) }}" class="w-100" alt="" srcset="">
+                        <div class="col-4 pt-2">
+                            <img src="{{  $partenaire->Cover() }}" class="w-100" alt="" srcset="">
                         </div>
                     </div>
                     <div class="mb-3">

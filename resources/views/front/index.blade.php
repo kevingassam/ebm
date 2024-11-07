@@ -691,47 +691,13 @@
                     <!-- Owl Carousel Container start -->
                     <div class="carousel-container">
                         <div id="client-carousel" class="owl-carousel">
-                            <!-- .owl-item start -->
+                            @foreach ($partenaires as $partenaire)
+                                <!-- .owl-item start -->
                             <div class="owl-item">
-                                <img src="/front/img/pics/consultingpress-clients-logo01.png"
-                                    alt="ConsultingPress Partner Logo 01" />
+                                <img src="{{ $partenaire->Cover() }}" alt="{{ $partenaire->nom }}" />
                             </div><!-- .owl-item end -->
+                            @endforeach
 
-                            <!-- .owl-item start -->
-                            <div class="owl-item">
-                                <img src="/front/img/pics/consultingpress-clients-logo02.png"
-                                    alt="ConsultingPress Partner Logo 02" />
-                            </div><!-- .owl-item end -->
-
-                            <!-- .owl-item start -->
-                            <div class="owl-item">
-                                <img src="/front/img/pics/consultingpress-clients-logo03.png"
-                                    alt="ConsultingPress Partner Logo 03" />
-                            </div><!-- .owl-item end -->
-
-                            <!-- .owl-item start -->
-                            <div class="owl-item">
-                                <img src="/front/img/pics/consultingpress-clients-logo04.png"
-                                    alt="ConsultingPress Partner Logo 04" />
-                            </div><!-- .owl-item end -->
-
-                            <!-- .owl-item start -->
-                            <div class="owl-item">
-                                <img src="/front/img/pics/consultingpress-clients-logo05.png"
-                                    alt="ConsultingPress Partner Logo 05" />
-                            </div><!-- .owl-item end -->
-
-                            <!-- .owl-item start -->
-                            <div class="owl-item">
-                                <img src="/front/img/pics/consultingpress-clients-logo06.png"
-                                    alt="ConsultingPress Partner Logo 06" />
-                            </div><!-- .owl-item end -->
-
-                            <!-- .owl-item start -->
-                            <div class="owl-item">
-                                <img src="/front/img/pics/consultingpress-clients-logo07.png"
-                                    alt="ConsultingPress Partner Logo 07" />
-                            </div><!-- .owl-item end -->
                         </div><!-- .owl-carousel end -->
                     </div><!-- Owl Carousel Container end -->
                 </div><!-- .col-md-12 end -->
