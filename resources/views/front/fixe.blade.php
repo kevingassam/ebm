@@ -29,11 +29,16 @@
     <link rel="stylesheet" href="/front/css/style.css">
     <link rel="stylesheet" href="/front/css/color-default.css">
     <link rel="stylesheet" href="/front/css/responsive.css">
+
+
+    @yield('header')
+
+
 </head>
 
 <body>
 
-    @if (config('app.env') == 'production')
+    @if (config('app.env') == "production")
         <!-- LOADER START -->
         <div id="loader">
             <div id="loading-status"></div><!-- .loading-status end -->
@@ -425,6 +430,9 @@
         });
         /* ]]> */
     </script>
+
+
+    @yield('scripts')
 </body>
 
 </html>

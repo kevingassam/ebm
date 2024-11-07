@@ -59,185 +59,34 @@
         <!-- .row start -->
         <div class="row">
             <ul class="industry-sectors-grid clearfix">
+
+                @forelse ($projets as $projet)
                 <li class="col-md-4 col-sm-4">
                     <div class="feature-box service-box-05">
                         <div class="media">
-                            <a href="management-industry-sectors-single.html">
-                                <img src="/front/img/pics/management-industry-sectors-aerspace.jpg" alt="ConsultingPress Management Consulting Industry Sectors Aerospace"/>
-                            </a>
-                        </div><!-- .media end -->
-
-                        <div class="icon-container bkg-color-aqua">
-                            <img src="/front/img/svg/svg-icon-airplane.svg" alt="Aerospace & defense"/>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-                            <a href="management-industry-sectors-single.html">
-                                <h3>Aerospace & Defense</h3>
-                            </a>
-                        </div><!-- .text-container end -->
-                    </div><!-- .feature-box.service-box-05 end -->
-                </li>
-
-                <li class="col-md-4 col-sm-4">
-                    <div class="feature-box service-box-05">
-                        <div class="media">
-                            <a href="management-industry-sectors-energy-chemicals.html">
-                                <img src="/front/img/pics/management-industry-sectors-energy-chemicals.jpg" alt="ConsultingPress Management Consulting Industry Sectors Energy & Chemicals"/>
+                            <a href="{{ route('projet_details',['id'=>$projet->id , 'titre'=>Str::slug($projet->nom)]) }}">
+                                <img src="{{ $projet->Cover() }}" alt="{{ $projet->nom }}"/>
                             </a>
                         </div><!-- .media end -->
 
                         <div class="icon-container bkg-color-red">
-                            <img src="/front/img/svg/svg-icon-chemical.svg" alt="Energy & Chemicals"/>
+                            <img src="/front/img/svg/svg-icon-chemical.svg" alt="{{ $projet->nom }}"/>
                         </div><!-- .icon-container end -->
 
                         <div class="text-container">
-                            <a href="management-industry-sectors-energy-chemicals.html">
-                                <h3>Energy & Chemicals</h3>
+                            <a href="{{ route('projet_details',['id'=>$projet->id , 'titre'=>Str::slug($projet->nom)]) }}">
+                                <h3>
+                                    {{ Str::limit($projet->nom, 30)}}
+                                </h3>
                             </a>
                         </div><!-- .text-container end -->
                     </div><!-- .feature-box.service-box-05 end -->
                 </li>
 
-                <li class="col-md-4 col-sm-4">
-                    <div class="feature-box service-box-05">
-                        <div class="media">
-                            <a href="management-industry-sectors-transportation-and-logistics.html">
-                                <img src="/front/img/pics/management-industry-sectors-transportation-and-logistics.jpg" alt="ConsultingPress Management Consulting Industry Sectors Transport & Logistics"/>
-                            </a>
-                        </div><!-- .media end -->
+                @empty
 
-                        <div class="icon-container bkg-color-brown">
-                            <img src="/front/img/svg/svg-icon-cargo.svg" alt="Transport & Logistics"/>
-                        </div><!-- .icon-container end -->
+                @endforelse
 
-                        <div class="text-container">
-                            <a href="management-industry-sectors-transportation-and-logistics.html">
-                                <h3>Transport & Logistics</h3>
-                            </a>
-                        </div><!-- .text-container end -->
-                    </div><!-- .feature-box.service-box-05 end -->
-                </li>
-
-                <li class="col-md-4 col-sm-4">
-                    <div class="feature-box service-box-05">
-                        <div class="media">
-                            <a href="management-industry-sectors-banking.html">
-                                <img src="/front/img/pics/management-industry-sectors-banking.jpg" alt="ConsultingPress Management Consulting Industry Sectors Banking"/>
-                            </a>
-                        </div><!-- .media end -->
-
-                        <div class="icon-container bkg-color-dark-blue">
-                            <img src="/front/img/svg/svg-icon-stocks.svg" alt="Banking"/>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-                            <a href="management-industry-sectors-banking.html">
-                                <h3>Banking</h3>
-                            </a>
-                        </div><!-- .text-container end -->
-                    </div><!-- .feature-box.service-box-05 end -->
-                </li>
-
-                <li class="col-md-4 col-sm-4">
-                    <div class="feature-box service-box-05">
-                        <div class="media">
-                            <a href="management-industry-sectors-renewable-resources.html">
-                                <img src="/front/img/pics/management-industry-sectors-renewable-resources.jpg" alt="ConsultingPress Management Consulting Industry Sectors Renewable resources"/>
-                            </a>
-                        </div><!-- .media end -->
-
-                        <div class="icon-container bkg-color-green">
-                            <img src="/front/img/svg/svg-icon-renewable-energy.svg" alt="Renewable resources"/>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-                            <a href="management-industry-sectors-renewable-resources.html">
-                                <h3>Renewable resources</h3>
-                            </a>
-                        </div><!-- .text-container end -->
-                    </div><!-- .feature-box.service-box-05 end -->
-                </li>
-
-                <li class="col-md-4 col-sm-4">
-                    <div class="feature-box service-box-05">
-                        <div class="media">
-                            <a href="management-industry-sectors-consumer-goods.html">
-                                <img src="/front/img/pics/management-industry-sectors-consumer-goods.jpg" alt="ConsultingPress Management Consulting Industry Sectors Consumer goods"/>
-                            </a>
-                        </div><!-- .media end -->
-
-                        <div class="icon-container bkg-color-orange">
-                            <img src="/front/img/svg/svg-icon-cup.svg" alt="Consumer goods"/>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-                            <a href="management-industry-sectors-consumer-goods.html">
-                                <h3>Consumer goods</h3>
-                            </a>
-                        </div><!-- .text-container end -->
-                    </div><!-- .feature-box.service-box-05 end -->
-                </li>
-
-                <li class="col-md-4 col-sm-4">
-                    <div class="feature-box service-box-05">
-                        <div class="media">
-                            <a href="management-industry-sectors-travel-and-tourism.html">
-                                <img src="/front/img/pics/management-industry-sectors-travel-and-tourism.jpg" alt="ConsultingPress Management Consulting Industry Sectors Travel & Tourism"/>
-                            </a>
-                        </div><!-- .media end -->
-
-                        <div class="icon-container bkg-color-teal">
-                            <i class="lynny-boat"></i>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-                            <a href="management-industry-sectors-travel-and-tourism.html">
-                                <h3>Travel & Tourism</h3>
-                            </a>
-                        </div><!-- .text-container end -->
-                    </div><!-- .feature-box.service-box-05 end -->
-                </li>
-
-                <li class="col-md-4 col-sm-4">
-                    <div class="feature-box service-box-05">
-                        <div class="media">
-                            <a href="management-industry-sectors-industrial-products.html">
-                                <img src="/front/img/pics/management-industry-sectors-industrial-products.jpg" alt="ConsultingPress Management Consulting Industry Sectors Industrial Products"/>
-                            </a>
-                        </div><!-- .media end -->
-
-                        <div class="icon-container bkg-color-yellow">
-                            <img src="/front/img/svg/svg-icon-cargo-truck.svg" alt="Industrial Products"/>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-                            <a href="management-industry-sectors-industrial-products.html">
-                                <h3>Industrial Products</h3>
-                            </a>
-                        </div><!-- .text-container end -->
-                    </div><!-- .feature-box.service-box-05 end -->
-                </li>
-
-                <li class="col-md-4 col-sm-4">
-                    <div class="feature-box service-box-05">
-                        <div class="media">
-                            <a href="management-industry-sectors-education-non-profit.html">
-                                <img src="/front/img/pics/management-industry-sectors-education-nonprofit.jpg" alt="ConsultingPress Management Consulting Industry Sectors Education & Nonprofit"/>
-                            </a>
-                        </div><!-- .media end -->
-
-                        <div class="icon-container bkg-color-purple">
-                            <img src="/front/img/svg/svg-icon-desktop.svg" alt="Education & Nonprofit"/>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-                            <a href="management-industry-sectors-education-non-profit.html">
-                                <h3>Education & Nonprofit</h3>
-                            </a>
-                        </div><!-- .text-container end -->
-                    </div><!-- .feature-box.service-box-05 end -->
-                </li>
             </ul><!-- .industry-sectors-grid end -->
         </div><!-- .row end -->
     </div><!-- .container end -->

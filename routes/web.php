@@ -29,6 +29,7 @@ Route::get('/blog/{id}/{titre}', [FrontController::class, 'article'])->name('art
 Route::get('/projet', [FrontController::class, 'projet'])->name('projet');
 Route::get('/services', [FrontController::class, 'services'])->name('services');
 Route::get('/service/{id}/{titre}', [FrontController::class, 'service'])->name('service');
+Route::get('/projet/{id}/{titre}', [FrontController::class, 'projet_details'])->name('projet_details');
 Route::get('/politique', [FrontController::class, 'politique'])->name('politique');
 Route::get('/mentions', [FrontController::class, 'mentions'])->name('mentions');
 
@@ -39,11 +40,6 @@ Route::post('/login', [FrontController::class, 'login_post'])->name('login.post'
 
 
 Route::get('/api-logo', [ApiCrmController::class, 'logo'])->name('logo');
-Route::get('/api-produit/{id}', [ApiCrmController::class, 'produit'])->name('api-produit');
-Route::get('/api-propriete/{id}', [ApiCrmController::class, 'propriete'])->name('api-propriete');
-Route::get('/api-appartement/{id}', [ApiCrmController::class, 'appartement'])->name('api-appartement');
-Route::get('/api-projet/{id}', [ApiCrmController::class, 'projet'])->name('api-projet');
-
 
 Route::middleware('auth')->group(function () {
 

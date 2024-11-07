@@ -17,10 +17,6 @@ return new class extends Migration
             $table->string("photo");
             $table->text("photos")->nullable();
             $table->text("description");
-            $table->text("map")->nullable();
-            $table->text("video")->nullable();
-            $table->enum("type",["résidentiel","commercial"])->default("résidentiel");
-            $table->enum("statut",["en cours", "terminé"])->default("en cours");
             $table->timestamps();
         });
     }

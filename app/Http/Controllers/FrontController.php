@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appartement;
 use App\Models\Blog;
 use App\Models\Contact;
-use App\Models\Demande;
-use App\Models\DetailsAppartement;
 use App\Models\Partenaire;
 use App\Models\Projet;
 use App\Models\Service;
 use App\Models\Temoignage;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -78,14 +74,6 @@ class FrontController extends Controller
             'adresse' => 'nullable|string|max:2550',
         ]);
 
-        $contact  = new Contact();
-        $contact->nom = $request->input('nom');
-        $contact->email = $request->input('email');
-        $contact->telephone = $request->input('telephone');
-        $contact->message = $request->input('message');
-        $contact->save();
-
-
         $token = config('services.contact_form.api_key');
         $url = config('services.contact_form.api') . "contact";
         $response = Http::withHeaders([
@@ -126,23 +114,12 @@ class FrontController extends Controller
     {
         $key = $request->input("key") ?? null;
         $type = $request->input("type") ?? $request->get('type') ?? null;
-        if ($statut) {
-            if ($statut != "en cours" && $statut != "terminé") {
-                $statut = "en cours";
-            }
-        }
         $projets = Projet::query();
-        if ($statut) {
-            $projets = $projets->where('statut', $statut);
-        }
         if ($key) {
             $projets = $projets->where('nom', 'LIKE', '%' . $key . '%');
         }
-        if ($type) {
-            $projets = $projets->where('type', $type);
-        }
         $projets = $projets->paginate(30);
-        $total = Projet::where('statut', $statut)->count();
+        $total = Projet::count();
         return view("front.projets")
             ->with('projets', $projets)
             ->with('statut', $statut)
@@ -152,23 +129,23 @@ class FrontController extends Controller
     }
 
 
+    public function projet_details($id,$titre){
+        $projet = Projet::find($id);
+        if (!$projet) {
+            abort(404);
+        }
+        $autres = Projet::where('id', '!=', $projet->id)->take(5)->get();
+        return view("front.projet")
+            ->with('projet', $projet)
+            ->with('autres', $autres);
+    }
+
+
     public function services()
     {
         $services = Service::all();
         return view("front.services")
             ->with('services', $services);
-    }
-
-    public function projet_details($id, $nom)
-    {
-        $projet = Projet::find($id);
-        if (!$projet) {
-            abort(404);
-        }
-        $autres = Projet::where('type', $projet->type)->where('id', '!=', $projet->id)->take(3)->get();
-        return view("front.details-projet")
-            ->with('projet', $projet)
-            ->with('autres', $autres);
     }
 
 
@@ -265,11 +242,9 @@ class FrontController extends Controller
 
     public function dashboard()
     {
-        $total_contacts = Contact::count();
         $total_projets = Projet::count();
         $total_articles = Blog::count();
         return view("admin.dashboard")
-            ->with('total_contacts', $total_contacts)
             ->with('total_projets', $total_projets)
             ->with('total_etages', 0)
             ->with('total_articles', $total_articles);
