@@ -1,3 +1,7 @@
+@php
+    $top10RandomServices = DB::table('services')->select('id', 'titre')->inRandomOrder()->limit(10)->get();
+@endphp
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -165,10 +169,14 @@
 
                                                 <ul class="dropdown-menu">
                                                     <li><a href="{{ route('services') }}">Tous les services</a></li>
-                                                    <li><a href="{{ route('services') }}">About Us</a></li>
-                                                    <li><a href="{{ route('services') }}">Our History</a></li>
-                                                    <li><a href="{{ route('services') }}">Our Team</a></li>
-                                                    <li><a href="{{ route('services') }}">Team MemberPage</a></li>
+                                                    @foreach ($top10RandomServices as $service)
+                                                        <li>
+                                                            <a
+                                                                href="{{ route('service', ['id' => $service->id, 'titre' => Str::slug($service->titre)]) }}">
+                                                                {{ Str::limit($service->titre, 20) }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
                                                 </ul>
                                             </li>
 
