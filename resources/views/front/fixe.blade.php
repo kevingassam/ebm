@@ -168,7 +168,7 @@
                                             </li>
                                             <li class="current-menu-item">
                                                 <a href="{{ route('about') }}">À propos de nous</a>
-                                            </li>   
+                                            </li>
 
                                             <li class="menu-item-has-children dropdown">
                                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle"
@@ -199,7 +199,7 @@
                                                 <a href="{{ route('contact') }}">Contact</a>
                                             </li>
                                             <li class="current-menu-item">
-                                                <a href="{{ route('home') }}">Demande de devis</a>
+                                                <a href="{{ route('get_devis') }}">Demande de devi</a>
                                             </li>
                                         </ul><!-- .nav.navbar-nav end -->
                                     </div><!-- navbar end -->
@@ -366,14 +366,26 @@
                 <!-- .row start -->
                 <div class="row">
                     <!-- .col-md-6 start -->
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-4 col-sm-4">
                         <p>
                             Copyright © {{ date('Y') }}.
                         </p>
                     </div><!-- .col-md-6 end -->
 
+                    <div class="col-md-4 col-sm-4">
+                        <p>
+                            <a href="{{ route('mentions')}}">
+                                Mentions légales
+                            </a>
+                            -
+                            <a href="{{ route('politique') }}">
+                                Politique de confidentialité
+                            </a>
+                        </p>
+                    </div><!-- .col-md-6 end -->
+
                     <!-- .col-md-6 start -->
-                    <div class="col-md-6 col-sm-6 copyright-right">
+                    <div class="col-md-4 col-sm-4 copyright-right">
                         <p>
                             Conception et développement par
                             <a href="https://e-build.tn" target="__blank">

@@ -15,7 +15,7 @@ class Information extends Model
         if ($this->logo) {
             return Storage::url($this->logo);
         } else {
-            return "https://e-build.tn/assets/images/brand-logo.png";
+            return "/img/logo.png";
         }
 
     }
@@ -24,7 +24,7 @@ class Information extends Model
         if ($this->icon) {
             return Storage::url($this->icon);
         } else {
-            return "https://e-build.tn/assets/favicon/apple-touch-icon.png";
+            return "/img/logo.png";
         }
 
     }

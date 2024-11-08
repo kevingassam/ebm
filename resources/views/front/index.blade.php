@@ -555,31 +555,6 @@
         </div><!-- .container end -->
     </div><!-- .page-content end -->
 
-    <!-- .page-conent start -->
-    <div class="page-content custom-background bkg-color-dark padding-small">
-
-        <!-- .container start -->
-        <div class="container">
-
-            <!-- .row start -->
-            <div class="row">
-                <!-- .col-md-12 start -->
-                <div class="col-md-12">
-                    <!-- Owl Carousel Container start -->
-                    <div class="carousel-container">
-                        <div id="client-carousel" class="owl-carousel">
-                            @foreach ($partenaires as $partenaire)
-                                <!-- .owl-item start -->
-                                <div class="owl-item">
-                                    <img src="{{ $partenaire->Cover() }}" alt="{{ $partenaire->nom }}" />
-                                </div><!-- .owl-item end -->
-                            @endforeach
-                        </div><!-- .owl-carousel end -->
-                    </div><!-- Owl Carousel Container end -->
-                </div><!-- .col-md-12 end -->
-            </div><!-- .row end -->
-        </div><!-- .container end -->
-    </div><!-- .page-content end -->
 @endsection
 
 

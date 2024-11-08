@@ -21,9 +21,7 @@ class FrontController extends Controller
         $services = Service::Orderby('created_at', 'desc')->take(10)->get();
         $temoignages = Temoignage::all();
         $projets = Projet::Orderby('created_at', 'desc')->take(15)->get();
-        $partenaires = Partenaire::select('nom', 'logo')->get();
         $total_projets = Projet::count();
-        $total_partenaires = Partenaire::count();
         $total_articles = Blog::count();
         $banners = Banner::all();
 
@@ -31,9 +29,7 @@ class FrontController extends Controller
             ->with('articles', $articles)
             ->with('temoignages', $temoignages)
             ->with('projets', $projets)
-            ->with('partenaires', $partenaires)
             ->with('total_projets', $total_projets)
-            ->with('total_partenaires', $total_partenaires)
             ->with('total_articles', $total_articles)
             ->with('services', $services)
             ->with('banners', $banners);
@@ -44,6 +40,51 @@ class FrontController extends Controller
         return view("front.contact");
     }
 
+
+
+    public function get_devis(){
+        return view("front.get_devis");
+    }
+
+
+    public function get_devis_post(Request $request){
+        $request->validate([
+            'nom' => ['required','string','max:255'],
+            'email' => ['required','email','max:255'],
+            'telephone' => ['required','numeric'],
+            'message' => ['required','string','max:2550'],
+            'adresse' => ['nullable','string','max:2550'],
+        ]);
+
+
+
+        $token = config('services.contact_form.api_key');
+        $url = config('services.contact_form.api') . "contact";
+        $response = Http::withHeaders([
+            'x-api-key' => $token,
+        ])->post($url, [
+            'nom' => $request->input('nom'),
+            'email' => $request->input('email'),
+            'telephone' => $request->input('telephone'),
+            'message' => $request->input('message'),
+            'adresse' => $request->input('adresse') ?? "-",
+            "domaine" => config('app.app_url_demaine'),
+        ]);
+
+        // Déboguer la réponse
+        $status = $response->status();   // Récupère le code d'état HTTP
+        $body = $response->body();       // Récupère le corps de la réponse
+        if ($response->successful()) {
+            return redirect()->back()
+                ->with('success', 'Votre demande a bien été reçu et va être envoyé vers l\'équipe de support.');
+        } else {
+            // Affichez les détails pour comprendre l'erreur
+            return redirect()->back()
+                ->with('error', 'Une erreur s\'est produite lors de l\'envoi de votre demande. Code: ' . $status . ' - Réponse: ' . $body);
+        }
+
+
+    }
 
 
 
@@ -90,10 +131,8 @@ class FrontController extends Controller
     public function about()
     {
         $temoignages = Temoignage::all();
-        $partenaires = Partenaire::select('nom', 'logo')->get();
         return view("front.about")
-            ->with('temoignages', $temoignages)
-            ->with('partenaires', $partenaires);
+            ->with('temoignages', $temoignages);
     }
 
     public function projet(Request $request, $statut = null)

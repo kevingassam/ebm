@@ -91,14 +91,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('partenaires.index') }}">
-                        <div class="parent-icon">
-                            <i class="bi bi-people"></i>
-                        </div>
-                        <div class="menu-title">Partenaires</div>
-                    </a>
-                </li>
-                <li>
                     <a href="{{ route('services.index') }}">
                         <div class="parent-icon">
                             <i class="bi bi-layers"></i>
