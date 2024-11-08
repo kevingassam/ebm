@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
-class Blog extends Model
+class Banner extends Model
 {
     use HasFactory;
-
 
 
     public function Cover()
@@ -21,4 +20,6 @@ class Blog extends Model
             return Storage::url($photoPath);
         }
     }
+
+
 }

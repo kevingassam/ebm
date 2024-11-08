@@ -14,10 +14,11 @@ class Service extends Model
     public function Cover()
     {
         $photoPath = $this->image;
-        if ($photoPath && Storage::exists($photoPath)) {
+        if (str_starts_with($photoPath, 'https://')) {
+            return $photoPath;
+        }else{
             return Storage::url($photoPath);
         }
-        return $photoPath;
     }
 
 

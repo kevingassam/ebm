@@ -5,145 +5,52 @@
         <!-- #masterslider start -->
         <div id="mastersliderFullWidth02" class="master-slider-full-screen master-slider ms-skin-default mb-0">
 
-            <!-- FIRST SLIDE -->
-            <div class="ms-slide">
-                <img src="/front/masterslider/blank.gif"
-                    data-src="/front/img/slider/consultingpress-management-consulting-unlock-your-business-potential.jpg"
-                    alt="ConsultignPress Unlock Your Business Potential" />
-                <span class="ms-layer pi-caption-small"
-                    style="
-                      left: 0;
-                      top: 200px;" data-type="text"
-                    data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="0">
-                    management consulting
-                </span>
 
-                <h2 class="ms-layer pi-caption" style="
-                    left: 0;
-                    top: 260px;"
-                    data-type="text" data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="500">
-                    Unlock Your
-                </h2>
+            @foreach ($banners as $banner)
+                <!-- FIRST SLIDE -->
+                <div class="ms-slide">
+                    <img src="/front/masterslider/blank.gif"
+                        data-src="{{ $banner->Cover() }}"
+                        alt="{{ $banner->app_name }}" />
+                    <span class="ms-layer pi-caption-small" style="
+          left: 0;
+          top: 200px;" data-type="text"
+                        data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="0">
+                        {{ $infos->app_name }}
+                    </span>
 
-                <h2 class="ms-layer pi-caption" style="
-                    left: 0;
-                    top: 340px;"
-                    data-type="text" data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="800">
-                    Business Potential
-                </h2>
+                    <h2 class="ms-layer pi-caption" style="
+        left: 0;
+        top: 260px;" data-type="text"
+                        data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="500">
+                        {{ $banner->titre }}
+                    </h2>
 
-                <img class="ms-layer pi-link-arrow" src="/front/masterslider/blank.gif"
-                    data-src="/front/img/slider/circle-icon-green.svg" alt=""
-                    style="
-                     left: 0;
-                     top: 445px;" data-type="image"
-                    data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="1100" />
+                    <h2 class="ms-layer pi-caption" style="
+        left: 0;
+        top: 340px;" data-type="text"
+                        data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="800">
 
-                <span class="ms-layer pi-link" style="
-                      left: 55px;
-                      top: 445px;"
-                    data-type="text" data-effect="left(short)" data-duration="500" data-hide-effect="fade"
-                    data-delay="1100">
-                    Découvrez nos services
-                </span>
+                    </h2>
 
-                <a href="{{ route('services') }}"></a>
+                    <img class="ms-layer pi-link-arrow" src="/front/masterslider/blank.gif"
+                        data-src="/front/img/slider/circle-icon-green.svg" alt=""
+                        style="
+         left: 0;
+         top: 445px;" data-type="image" data-effect="left(short)"
+                        data-duration="500" data-hide-effect="fade" data-delay="1100" />
 
-            </div><!-- END OF FIRST SLIDE -->
+                    <span class="ms-layer pi-link" style="
+          left: 55px;
+          top: 445px;" data-type="text"
+                        data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="1100">
+                        {{ $banner->btn_text }}
+                    </span>
 
-            <!-- SECOND SLIDE -->
-            <div class="ms-slide">
-                <img src="/front/masterslider/blank.gif"
-                    data-src="/front/img/slider/consultingpress-management-consulting-shape-your-business-future.jpg"
-                    alt="ConsultingPress Management Consulting" />
-                <span class="ms-layer pi-caption-small"
-                    style="
-                      left: 0;
-                      top: 200px;" data-type="text"
-                    data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="0">
-                    management consulting
-                </span>
+                    <a href="{{ route('service_list') }}"></a>
 
-                <h2 class="ms-layer pi-caption" style="
-                    left: 0;
-                    top: 260px;"
-                    data-type="text" data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="500">
-                    Shape Your
-                </h2>
-
-                <h2 class="ms-layer pi-caption" style="
-                    left: 0;
-                    top: 340px;"
-                    data-type="text" data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="800">
-                    Business Future
-                </h2>
-
-                <img class="ms-layer pi-link-arrow" src="/front/masterslider/blank.gif"
-                    data-src="/front/img/slider/circle-icon-green.svg" alt=""
-                    style="
-                     left: 0;
-                     top: 445px;" data-type="image"
-                    data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="1100" />
-
-                <span class="ms-layer pi-link" style="
-                      left: 55px;
-                      top: 445px;"
-                    data-type="text" data-effect="left(short)" data-duration="500" data-hide-effect="fade"
-                    data-delay="1100">
-                    Découvrez nos services
-                </span>
-
-                <a href="{{ route('services') }}"></a>
-
-            </div><!-- END OF SECOND SLIDE -->
-
-            <!-- THIRD SLIDE -->
-            <div class="ms-slide">
-                <img src="/front/masterslider/blank.gif"
-                    data-src="/front/img/slider/consultingpress-management-consulting-improve-your-business-performance.jpg"
-                    alt="ConsultignPress Management Consulting Improve Your Business Performance" />
-                <span class="ms-layer pi-caption-small"
-                    style="
-                      left: 0;
-                      top: 200px;" data-type="text"
-                    data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="0">
-                    management consulting
-                </span>
-
-                <h2 class="ms-layer pi-caption" style="
-                    left: 0;
-                    top: 260px;"
-                    data-type="text" data-effect="left(short)" data-duration="500" data-hide-effect="fade"
-                    data-delay="500">
-                    Improve Your
-                </h2>
-
-                <h2 class="ms-layer pi-caption" style="
-                    left: 0;
-                    top: 340px;"
-                    data-type="text" data-effect="left(short)" data-duration="500" data-hide-effect="fade"
-                    data-delay="800">
-                    Business Performance
-                </h2>
-
-                <img class="ms-layer pi-link-arrow" src="/front/masterslider/blank.gif"
-                    data-src="/front/img/slider/circle-icon-green.svg" alt=""
-                    style="
-                     left: 0;
-                     top: 445px;" data-type="image"
-                    data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="1100" />
-
-                <span class="ms-layer pi-link"
-                    style="
-                      left: 55px;
-                      top: 445px;" data-type="text"
-                    data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="1100">
-                    Découvrez nos services
-                </span>
-
-                <a href="{{ route('services') }}"></a>
-
-            </div><!-- END OF THIRD SLIDE -->
+                </div><!-- END OF FIRST SLIDE -->
+            @endforeach
 
         </div><!-- #master-slider end -->
     </div><!-- .master-slider-wrapper end -->

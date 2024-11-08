@@ -99,6 +99,14 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('services.index') }}">
+                        <div class="parent-icon">
+                            <i class="bi bi-layers"></i>
+                        </div>
+                        <div class="menu-title">Services</div>
+                    </a>
+                </li>
+                <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon">
                             <span class="material-symbols-outlined">apps</span>
@@ -162,9 +170,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('banners') }}">
+                            <a href="{{ route('banners.index') }}">
                                 <span class="material-symbols-outlined">arrow_right</span>
-                                Bannières page
+                                Hero page d'accueil
                             </a>
                         </li>
                         <li>

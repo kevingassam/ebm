@@ -14,10 +14,11 @@ class Partenaire extends Model
     public function Cover()
     {
         $photoPath = $this->logo;
-        if ($photoPath && Storage::exists($photoPath)) {
+        if (str_starts_with($photoPath, 'https://')) {
+            return $photoPath;
+        }else{
             return Storage::url($photoPath);
         }
-        return $photoPath;
     }
 
 }

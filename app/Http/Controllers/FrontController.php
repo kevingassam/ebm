@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Contact;
 use App\Models\Partenaire;
@@ -24,33 +25,18 @@ class FrontController extends Controller
         $total_projets = Projet::count();
         $total_partenaires = Partenaire::count();
         $total_articles = Blog::count();
-        $atouts = [
-            [
-                'titre' => "Emplacements étudiés",
-                'icon' => "",
-                'description' => "Nous privilégions les emplacements alliant cadre de vie agréable et proximité des commodités de tous les jours. Ainsi, nos appartements sont attractifs pour y habiter vous-même ou pour les mettre en location.",
-            ],
-            [
-                'titre' => "Rapport qualité-prix",
-                'icon' => "",
-                'description' => "Avec Immobilière Ben Mokthar, vous bénéficiez du meilleur rapport qualité-prix. Nous apportons une attention particulière à la qualité et la durabilité des matériaux que nous utilisons, tout en veillant à vous proposer nos biens à leur juste prix.",
-            ],
-            [
-                'titre' => "Architecture recherchée",
-                'icon' => "",
-                'description' => "Nous faisons en sorte que nos réalisations aient une architecture soignée et fonctionnelle. Nous ne construisons pas de simples appartements mais des logements pensés qui allient esthétique et confort pour toute la famille.",
-            ],
-        ];
+        $banners = Banner::all();
+
         return view("front.index")
             ->with('articles', $articles)
             ->with('temoignages', $temoignages)
             ->with('projets', $projets)
             ->with('partenaires', $partenaires)
-            ->with('atouts', $atouts)
             ->with('total_projets', $total_projets)
             ->with('total_partenaires', $total_partenaires)
             ->with('total_articles', $total_articles)
-            ->with('services', $services);
+            ->with('services', $services)
+            ->with('banners', $banners);
     }
 
     public function contact()

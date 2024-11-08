@@ -13,11 +13,6 @@ class ConfigurationController extends Controller
         return view('admin.configuration');
     }
 
-    public function banners()
-    {
-        return view('admin.banners');
-    }
-
     public function about_config()
     {
         return view('admin.about_config');

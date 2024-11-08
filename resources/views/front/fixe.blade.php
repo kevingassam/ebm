@@ -33,6 +33,8 @@
 
     @yield('header')
 
+    @yield('seo')
+
 
 </head>
 
@@ -175,7 +177,7 @@
                                                 </a>
 
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="{{ route('services') }}">Tous les services</a></li>
+                                                    <li><a href="{{ route('service_list') }}">Tous les services</a></li>
                                                     @foreach ($top10RandomServices as $service)
                                                         <li>
                                                             <a
@@ -273,7 +275,7 @@
                                 </li>
 
                                 <li>
-                                    <a href="{{ route('services') }}">Services</a>
+                                    <a href="{{ route('service_list') }}">Services</a>
                                 </li>
 
                                 <li>

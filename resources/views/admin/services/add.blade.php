@@ -1,5 +1,5 @@
 @extends('admin.fixe')
-@section('titre', 'Modifier le projet')
+@section('titre', 'Ajouter un service')
 
 @section('body')
     <!--start main content-->
@@ -14,7 +14,7 @@
                             <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">
-                            Modifier le projet
+                            Ajouter un service
                         </li>
                     </ol>
                 </nav>
@@ -24,18 +24,17 @@
         </div>
         <!--end breadcrumb-->
 
-        <form action="{{ route('projets.update', $projet->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('services.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
             <div class="row">
                 <div class="col-12 col-lg-8">
                     <div class="card">
                         <div class="card-body">
                             <div class="mb-4">
-                                <label class="mb-3">nom</label>
-                                <input type="text" class="form-control" required placeholder="Nom du projet"
-                                    value="{{ $projet->nom }}" name="nom" />
-                                @error('nom')
+                                <label class="mb-3">Titre</label>
+                                <input type="text" class="form-control" value="{{ old('titre') }}" required
+                                    placeholder="titre du service" name="titre" />
+                                @error('titre')
                                     <span class="small text-danger">
                                         {{ $message }}
                                     </span>
@@ -44,7 +43,7 @@
                             <div class="mb-4">
                                 <label class="mb-3">Description</label>
                                 <textarea class="form-control" cols="4" rows="6" placeholder="write a description here.."
-                                    name="description">{{ $projet->description }}</textarea>
+                                    name="description">{{ old('description') }}</textarea>
                                 @error('description')
                                     <span class="small text-danger">
                                         {{ $message }}
@@ -62,7 +61,7 @@
                                     annuller
                                 </button>
                                 <button type="submit" class="btn btn-dark px-4">
-                                    Mettre a jour
+                                    Publier le service
                                 </button>
                             </div>
                         </div>
@@ -71,24 +70,28 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-12">
-                                    <label for="Tags">Image d'illustration</label>
-                                    <div class="text-warning small">
-                                        Taille : 416px * 400px
-                                    </div>
-                                    <input type="file" class="form-control" name="photo" />
-                                    @error('photo')
+                                    <label for="photo">Type de service</label>
+                                    <select name="type" class="form-select" id="type" required>
+                                        <option value=""></option>
+                                        @foreach ($types as $type)
+                                            <option value="{{ $type }}" @selected(old('type') == $type)>
+                                                {{ $type }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('type')
                                         <span class="small text-danger">
                                             {{ $message }}
                                         </span>
                                     @enderror
                                 </div>
                                 <div class="col-12">
-                                    <label for="photos">Gallerie de photos</label>
+                                    <label for="image">Image d'illustration</label>
                                     <div class="text-warning small">
-                                        Taille : 1296px * 555px
+                                        Taille : 416px * 400px
                                     </div>
-                                    <input type="file" class="form-control" name="photos[]" id="photos" multiple />
-                                    @error('photos')
+                                    <input type="file" class="form-control" name="image" id="image" required />
+                                    @error('image')
                                         <span class="small text-danger">
                                             {{ $message }}
                                         </span>
@@ -98,37 +101,7 @@
                             <!--end row-->
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="p-2">
-                            <img src="{{ $projet->Cover() }}" alt="{{ $projet->nom }}" class="w-100" srcset="">
-                        </div>
-                    </div>
-                    @if ($projet->photos)
-                        <div class="card">
-                            <div class="p-2">
-                                <div class="row">
-                                    @forelse (json_decode($projet->photos) ?? [] as $key =>$pic)
-                                        <div class="col-4" id="img-{{ $key }}">
-                                            <div class="img-card">
-                                                <img src="{{ Storage::url($pic) }}" alt="{{ $projet->nom }}"
-                                                    srcset="">
-                                            </div>
-                                            <button type="button" class="btn btn-sm btn-danger w-100 mb-2"
-                                                onclick="delete_image('{{ $key }}','{{ $pic }}')">
-                                                Supprimer
-                                            </button>
-                                        </div>
-                                    @empty
-                                        <div class="col-12 text-center">
-                                            Aucune image pour le moment.
-                                        </div>
-                                </div>
-                    @endforelse
                 </div>
-            </div>
-            </div>
-            @endif
-            </div>
             </div>
         </form>
         <!--end row-->
@@ -146,29 +119,6 @@
             },
             maxfilesize: 1000000,
         });
-
-        function delete_image(key, url) {
-            $.ajax({
-                url: "/admin/projet.deleteImage",
-                type: 'POST',
-                data: {
-                    'key': key,
-                    'url': url,
-                    'projet_id': {{ $projet->id }},
-                    _token: $('meta[name="csrf-token"]').attr("content"),
-                },
-                success: function(response) {
-                    if (response.statut) {
-                        $('#img-' + key).remove();
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr);
-                    console.log(status);
-                    console.log(error);
-                }
-            });
-        }
     </script>
     <script>
         tinymce.init({
@@ -177,35 +127,11 @@
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
         });
     </script>
-
-
-    <style>
-        .img-card {
-            width: 100%;
-            height: 100px;
-            overflow: hidden;
-            border: 1px solid #ccc;
-            position: relative;
-            border-radius: 5px;
-        }
-
-        .img-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .img-card img:hover {
-            opacity: 0.5;
-            cursor: pointer;
-
-        }
-    </style>
 @endsection
 
 
 @section('header')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <script src="https://cdn.tiny.cloud/1/7eigadx4xspqfo7xw2wn60evebnplqcuor4a08g85lc7jq3z/tinymce/7/tinymce.min.js"
         referrerpolicy="origin"></script>
