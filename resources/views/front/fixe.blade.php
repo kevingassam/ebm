@@ -71,7 +71,7 @@
                                     <!-- .logo start -->
                                     <div id="logo">
                                         <a href="{{ route('home') }}">
-                                            <img src="{{ $infos->GetLogo() }}"
+                                            <img src="{{ $infos->GetLogo() }}" style="max-height: 50px !important;"
                                                 alt="ConsultingPress Management Consulting Template" />
                                         </a>
                                     </div><!-- .logo -->
@@ -168,7 +168,7 @@
                                             </li>
                                             <li class="current-menu-item">
                                                 <a href="{{ route('about') }}">À propos de nous</a>
-                                            </li>
+                                            </li>   
 
                                             <li class="menu-item-has-children dropdown">
                                                 <a href="#" data-toggle="dropdown" class="dropdown-toggle"
@@ -245,9 +245,9 @@
                     <ul class="footer-widget-container col-md-3 col-sm-6">
 
                         <!-- .widget.widget-text start -->
-                        <li class="widget widget-text">
+                        <li class="widget widget-text text-center">
                             <a href="{{ route('home') }}">
-                                <img src="{{ $infos->GetLogo() }}"
+                                <img src="{{ $infos->GetLogo() }}" style="max-height: 100px !important;"
                                     alt="ConsultingPress Management Consulting Template" />
                             </a>
                             <p>

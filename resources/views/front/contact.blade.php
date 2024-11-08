@@ -176,7 +176,9 @@
             <div class="row mb-0">
                 <!-- .col-md-12 start -->
                 <div class="col-md-12">
-                    <div id="map" class="map-height-lg"></div>
+                    @if ($infos->map)
+                    <iframe src="{{ $infos->map }}" class="map-height-lg" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    @endif
                 </div><!-- .col-md-12 end -->
             </div><!-- .row end -->
         </div><!-- .container end -->

@@ -139,22 +139,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                <div class="col-sm-12">
-                                    <div class="mb-4">
-                                        <h6 class="mb-1">Vidéo / Image pour la bannière</h6>
-                                        <div class="small text-warning">
-                                            - Pour la bannière, vous pouvez utiliser une image ou une vidéo. <br>
-                                            - L'image doit être au format PNG, JPEG ou GIF. La vidéo doit être au format
-                                            MP4.
-                                        </div>
-                                        <input type="file" class="form-control" name="video" />
-                                        @error('video')
-                                            <span class="small text-danger">
-                                                {{ $message }}
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -252,22 +236,6 @@
                             </div>
                         </div>
                     @endif
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="text-center mt-3">
-                                <h6>
-                                    Banniére {{ $infos->GetTypeMedia() }}
-                                </h6>
-                                @if ($infos->GetTypeMedia() == 'video')
-                                    <video  id="video" src="{{ $infos->GetVideo() }}"
-                                        loop="" muted="" autoplay="" class="w-100">
-                                    </video>
-                                @else
-                                    <img src="{{ $infos->GetVideo() }}" class="w-100" alt="" srcset="">
-                                @endif
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </form>

@@ -547,7 +547,9 @@
             <div class="row mb-0">
                 <!-- .col-md-12 start -->
                 <div class="col-md-12">
-                    <div id="map" class="map-height-lg"></div>
+                    @if ($infos->map)
+                    <iframe src="{{ $infos->map }}" class="map-height-lg" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    @endif
                 </div><!-- .col-md-12 end -->
             </div><!-- .row end -->
         </div><!-- .container end -->
@@ -694,7 +696,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     {{-- Open Graph pour Facebook et autres réseaux --}}
-    <meta property="og:title" content="{{ $title ?? 'Titre par défaut' }}">
+    <meta property="og:title" content="{{ $infos->app_name  }}">
     <meta property="og:description" content="{{ $description ?? 'Description par défaut' }}">
     <meta property="og:image" content="{{ $image ?? asset('default-image.jpg') }}">
     <meta property="og:url" content="{{ url()->current() }}">
@@ -702,7 +704,7 @@
 
     {{-- Balises Twitter Card --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ $title ?? 'Titre par défaut' }}">
+    <meta name="twitter:title" content="{{ $infos->app_name }}">
     <meta name="twitter:description" content="{{ $description ?? 'Description par défaut' }}">
     <meta name="twitter:image" content="{{ $image ?? asset('default-image.jpg') }}">
 
