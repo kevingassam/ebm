@@ -19,7 +19,7 @@ class BannerFactory extends Factory
         return [
             'titre' => $this->faker->sentence(6),
             'photo' => 'https://fakeimg.pl/1918x870/?text=1918x870',
-            'text_btn' => "Découvrez nos services",
+            'btn_text' => "Découvrez nos services",
         ];
     }
 }
