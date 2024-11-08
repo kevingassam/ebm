@@ -18,7 +18,7 @@ class PartenaireFactory extends Factory
     {
         return [
             'nom' => $this->faker->sentence(4),
-            'logo' => 'https://via.placeholder.com/165x60',
+            'logo' => 'https://fakeimg.pl/165x60/?text=165x60',
             'description' => $this->faker->paragraph,
         ];
     }

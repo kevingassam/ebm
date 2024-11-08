@@ -44,10 +44,10 @@
                       top: 445px;"
                     data-type="text" data-effect="left(short)" data-duration="500" data-hide-effect="fade"
                     data-delay="1100">
-                    Learn more
+                    Découvrez nos services
                 </span>
 
-                <a href="/front/management-services-image-grid.html"></a>
+                <a href="{{ route('services') }}"></a>
 
             </div><!-- END OF FIRST SLIDE -->
 
@@ -90,10 +90,10 @@
                       top: 445px;"
                     data-type="text" data-effect="left(short)" data-duration="500" data-hide-effect="fade"
                     data-delay="1100">
-                    Learn more
+                    Découvrez nos services
                 </span>
 
-                <a href="/front/management-services-image-grid.html"></a>
+                <a href="{{ route('services') }}"></a>
 
             </div><!-- END OF SECOND SLIDE -->
 
@@ -138,10 +138,10 @@
                       left: 55px;
                       top: 445px;" data-type="text"
                     data-effect="left(short)" data-duration="500" data-hide-effect="fade" data-delay="1100">
-                    Learn more
+                    Découvrez nos services
                 </span>
 
-                <a href="/front/management-services-image-grid.html"></a>
+                <a href="{{ route('services') }}"></a>
 
             </div><!-- END OF THIRD SLIDE -->
 
@@ -171,9 +171,10 @@
                                         </div>
 
                                         <div class="body">
-                                            <a href="{{ route('service', ['id' => $service->id, 'titre' => Str::slug($service->titre)]) }}">
+                                            <a
+                                                href="{{ route('service', ['id' => $service->id, 'titre' => Str::slug($service->titre)]) }}">
                                                 <h2>
-                                                    {{ Str::limit($service->titre ,30) }}
+                                                    {{ Str::limit($service->titre, 30) }}
                                                 </h2>
                                                 {{ Str::limit(strip_tags($service->description, 80)) }}
                                             </a>
@@ -551,33 +552,33 @@
     </div><!-- .page-content end -->
 
 
-    <!-- .page-conent start -->
-    <div class="page-content custom-background bkg-color-light-grey padding-small mb-120">
-
-        <!-- .container start -->
-        <div class="container">
-
-            <!-- .row start -->
-            <div class="row">
-                <!-- .col-md-12 start -->
-                <div class="col-md-12">
-                    <!-- note start -->
-                    <div class="call-to-action clearfix">
-                        <div class="text">
-                            <h4>Always searching for fresh talents. Send us your resume via email.</h4>
-                        </div>
-
-                        <a href="/front/management-contact-compact.html" class="btn icon-animated">
-                            <span>
-                                <i class="lynny-page-1"></i>
-                                connect with us
-                            </span>
-                        </a>
-                    </div><!-- .call-to-action end -->
-                </div><!-- .col-md-12 end -->
-            </div><!-- .row end -->
-        </div><!-- .container end -->
-    </div><!-- .page-content end -->
+    <br><br>
+    <div class="ts-testimonials-container container">
+        <div class="ts-testimonials">
+            @foreach ($temoignages as $temoignage)
+                <div class="ts-testimonial">
+                    <img src="{{ $temoignage->Cover() }}" alt="{{ $temoignage->nom }}" class="ts-avatar">
+                    <div class="ts-name">{{ $temoignage->nom }}</div>
+                    <div class="ts-position">{{ $temoignage->poste }}</div>
+                    <div class="ts-message">"{{ $temoignage->message }}"</div>
+                    <div class="ts-stars">
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $temoignage->note)
+                                <i class="fas fa-star"></i>
+                            @else
+                                <i class="far fa-star"></i>
+                            @endif
+                        @endfor
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="ts-nav-buttons">
+            <button class="ts-nav-button" onclick="prevSlide()">Précédent</button>
+            <button class="ts-nav-button" onclick="nextSlide()">Suivant</button>
+        </div>
+    </div>
+    <br><br>
 
     <!-- .page-conent start -->
     <div class="page-content">
@@ -625,40 +626,11 @@
                         </div><!-- .owl-carousel end -->
                     </div><!-- Owl Carousel Container end -->
                 </div><!-- .col-md-12 end -->
+
             </div><!-- .row end -->
         </div><!-- .container end -->
     </div><!-- .page-content end -->
 
-    <!-- .page-conent start -->
-    <div class="page-content custom-background bkg-color-light-grey padding-small">
-
-        <!-- .container start -->
-        <div class="container">
-
-            <!-- .row start -->
-            <div class="row">
-                <!-- .col-md-6 start -->
-                <div class="col-md-6">
-                    <h2>Subscribe for our latest news & insights</h2>
-                </div><!-- .col-md-6 end -->
-
-                <!-- .col-md-6 start -->
-                <div class="col-md-6">
-                    <!-- .widget.widget_newsletterwidget start -->
-                    <div class="widget widget_newsletterwidget">
-
-                        <!-- .newsletter.newsletter-widget start -->
-                        <div class="newsletter newsletter-widget">
-                            <form>
-                                <input class="email" type="email" placeholder="Subscribe to our newsletter...">
-                                <input type="submit" class="submit" value="subscribe">
-                            </form>
-                        </div><!-- .newsletter.newsletter-widget end -->
-                    </div><!-- .widget.widget_newsletterwidget end -->
-                </div><!-- .col-md-6 end -->
-            </div><!-- .row end -->
-        </div><!-- .container end -->
-    </div><!-- .page-content end -->
 
     <!-- .page-conent start -->
     <div class="page-content">
@@ -684,24 +656,127 @@
 
             <!-- .row start -->
             <div class="row">
-
                 <!-- .col-md-12 start -->
                 <div class="col-md-12">
-
                     <!-- Owl Carousel Container start -->
                     <div class="carousel-container">
                         <div id="client-carousel" class="owl-carousel">
                             @foreach ($partenaires as $partenaire)
                                 <!-- .owl-item start -->
-                            <div class="owl-item">
-                                <img src="{{ $partenaire->Cover() }}" alt="{{ $partenaire->nom }}" />
-                            </div><!-- .owl-item end -->
+                                <div class="owl-item">
+                                    <img src="{{ $partenaire->Cover() }}" alt="{{ $partenaire->nom }}" />
+                                </div><!-- .owl-item end -->
                             @endforeach
-
                         </div><!-- .owl-carousel end -->
                     </div><!-- Owl Carousel Container end -->
                 </div><!-- .col-md-12 end -->
             </div><!-- .row end -->
         </div><!-- .container end -->
     </div><!-- .page-content end -->
+@endsection
+
+
+@section('scripts')
+    <script>
+        let currentSlide = 0;
+        const testimonials = document.querySelector('.ts-testimonials');
+        const totalSlides = document.querySelectorAll('.ts-testimonial').length;
+
+        function updateSlide() {
+            const translateX = -currentSlide * 100;
+            testimonials.style.transform = `translateX(${translateX}%)`;
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlide();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlide();
+        }
+    </script>
+@endsection
+@section('header')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Section Témoignages */
+        .ts-testimonials-container {
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ts-testimonials {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .ts-testimonial {
+            flex: 1 0 100%;
+            max-width: 100%;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background: #f9f9f9;
+            margin: 0 10px;
+            text-align: center;
+        }
+
+        /* Avatar et Infos */
+        .ts-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+        }
+
+        .ts-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .ts-position {
+            color: #777;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        /* Message */
+        .ts-message {
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        /* Étoiles */
+        .ts-stars {
+            color: #FFD700;
+        }
+
+        /* Boutons de navigation */
+        .ts-nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+
+        .ts-nav-button {
+            background: #6ec25b;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Responsive */
+        @media (min-width: 768px) {
+            .ts-testimonial {
+                flex: 1 0 33.33%;
+                max-width: 33.33%;
+            }
+        }
+    </style>
 @endsection

@@ -71,7 +71,7 @@
                                         <td>
                                             <a class="d-flex align-items-center gap-3" href="javascript:;">
                                                 <div class="customer-pic">
-                                                    <img src="{{ Storage::url($item->photo) }}" class="rounded-circle"
+                                                    <img src="{{ $item->Cover() }}" class="rounded-circle"
                                                         width="40" height="40" alt="">
                                                 </div>
                                                 <p class="mb-0 customer-name fw-bold">
@@ -105,7 +105,7 @@
                                             </button>
                                             <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#ModalDelete{{ $item->id }}">
-                                                <i class="bi bi-trash-fill"></i> Supprimer
+                                                <i class="bi bi-trash-fill"></i>
                                             </button>
                                         </td>
                                     </tr>

@@ -18,11 +18,11 @@ class ProjetFactory extends Factory
     {
         return [
             'nom' => $this->faker->words(3, true),
-            'photo' => 'https://via.placeholder.com/360x244', // Image principale
+            'photo' => 'https://fakeimg.pl/360x244/?text=360x244', // Image principale
             'photos' => json_encode([
-                'https://via.placeholder.com/360x244',
-                'https://via.placeholder.com/360x244',
-                'https://via.placeholder.com/360x244'
+                'https://fakeimg.pl/360x244/?text=360x244',
+                'https://fakeimg.pl/360x244/?text=360x244',
+                'https://fakeimg.pl/360x244/?text=360x244'
             ]), // Array JSON d'images supplémentaires
             'description' => $this->faker->paragraph,
         ];

@@ -18,7 +18,7 @@ class ServiceFactory extends Factory
     {
         return [
             'titre' => $this->faker->sentence(3),
-            'image' => 'https://via.placeholder.com/263x299',
+            'image' => 'https://fakeimg.pl/263x299/?text=263x299',
             'description' => $this->faker->paragraph,
             'type' => $this->faker->randomElement(['Type A', 'Type B', 'Type C']),
         ];

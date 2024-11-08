@@ -140,12 +140,13 @@
                         <h3>Contactez-nous</h3>
                     </div><!-- .custom-heading-03 end -->
 
-                    <form class="wpcf7 wpcf7-contact-us clearfix">
-                        <input type="text" class="wpcf7-text" id="contact-name" placeholder="Nom (required)">
-                        <input type="email" class="wpcf7-email" id="contact-email" placeholder="Email (required)">
-                        <input type="text" class="wpcf7-text" id="contact-phone" placeholder="Téléphone ">
-                        <input type="text" class="wpcf7-text" id="contact-subject" placeholder="Subjet (required)">
-                        <textarea rows="8" class="wpcf7-textarea" id="contact-message" placeholder="Message (required)"></textarea>
+                    <form class="wpcf7 wpcf7-contact-us clearfix" method="POST" action="{{ route('contact.store') }}">
+                        @csrf
+                        <input type="text" class="wpcf7-text" id="contact-name" required name="nom" placeholder="Nom*">
+                        <input type="email" class="wpcf7-email" id="contact-email" required name="email" placeholder="Email*">
+                        <input type="text" class="wpcf7-text" id="contact-phone" required name="telephone" placeholder="Téléphone*">
+                        <input type="text" class="wpcf7-text" id="contact-subject" placeholder="Adresse ">
+                        <textarea rows="8" class="wpcf7-textarea" id="contact-message" required name="message" placeholder="Message*"></textarea>
                         <div class="g-recaptcha" data-sitekey="6Ld4VykTAAAAAM_qltIuTg7I0hpcdHjX7j68qpRz"></div>
                         <input type="submit" value="Envoyer le message" class="wpcf7-submit">
                     </form><!-- .wpcf7.clearfix end -->

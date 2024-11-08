@@ -260,28 +260,32 @@
                         <!-- .widget.widget-pages start -->
                         <li class="widget widget-pages">
                             <div class="title">
-                                <h3>About</h3>
+                                <h3>Raccourcis</h3>
                             </div><!-- .title end -->
 
                             <ul>
                                 <li>
-                                    <a href="/front/management-about.html">About Consulting Press</a>
+                                    <a href="{{ route('home') }}">Accueik</a>
                                 </li>
 
                                 <li>
-                                    <a href="/front/management-our-team.html">Our Team</a>
+                                    <a href="{{ route('about') }}">À propos de nous</a>
                                 </li>
 
                                 <li>
-                                    <a href="/front/management-partners.html">Business Partners</a>
+                                    <a href="{{ route('services') }}">Services</a>
                                 </li>
 
                                 <li>
-                                    <a href="/front/management-contact-multilocation.html">Global Coverage</a>
+                                    <a href="{{ route('projet') }}">Projets</a>
                                 </li>
 
                                 <li>
-                                    <a href="/front/management-contact-compact.html">Contact</a>
+                                    <a href="{{ route('blog') }}">Actualités</a>
+                                </li>
+
+                                <li>
+                                    <a href="{{ route('contact') }}">Contact</a>
                                 </li>
                             </ul>
 

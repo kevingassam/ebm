@@ -18,8 +18,8 @@ class BlogFactory extends Factory
     {
         return [
             'titre' => $this->faker->sentence,
-            'photo' => 'https://via.placeholder.com/420x283',
-            'photos' => 'https://via.placeholder.com/420x283',  
+            'photo' => 'https://fakeimg.pl/420x283/?text=420x283',
+            'photos' => 'https://fakeimg.pl/420x283/?text=420x283',
             'description' => $this->faker->paragraph,
         ];
     }
