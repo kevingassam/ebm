@@ -9,9 +9,7 @@
             @foreach ($banners as $banner)
                 <!-- FIRST SLIDE -->
                 <div class="ms-slide">
-                    <img src="/front/masterslider/blank.gif"
-                        data-src="{{ $banner->Cover() }}"
-                        alt="{{ $banner->app_name }}" />
+                    <img src="/front/masterslider/blank.gif" data-src="{{ $banner->Cover() }}" alt="{{ $banner->app_name }}" />
                     <span class="ms-layer pi-caption-small" style="
           left: 0;
           top: 200px;" data-type="text"
@@ -686,4 +684,32 @@
             }
         }
     </style>
+@endsection
+@section('seo')
+    {{-- Composant SEO - seo.blade.php --}}
+    <meta name="description" content="{{ $description ?? 'Description par défaut de votre site' }}">
+    <meta name="keywords" content="{{ $keywords ?? 'mots-clés, par défaut, pour, SEO' }}">
+    <meta name="author" content="{{ $author ?? 'Nom de l\'auteur du site' }}">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {{-- Open Graph pour Facebook et autres réseaux --}}
+    <meta property="og:title" content="{{ $title ?? 'Titre par défaut' }}">
+    <meta property="og:description" content="{{ $description ?? 'Description par défaut' }}">
+    <meta property="og:image" content="{{ $image ?? asset('default-image.jpg') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="{{ $type ?? 'website' }}">
+
+    {{-- Balises Twitter Card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $title ?? 'Titre par défaut' }}">
+    <meta name="twitter:description" content="{{ $description ?? 'Description par défaut' }}">
+    <meta name="twitter:image" content="{{ $image ?? asset('default-image.jpg') }}">
+
+    {{-- Canonical link --}}
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    {{-- Favicon --}}
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+
 @endsection
