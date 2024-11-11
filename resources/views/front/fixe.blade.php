@@ -71,7 +71,7 @@
                                     <!-- .logo start -->
                                     <div id="logo">
                                         <a href="{{ route('home') }}">
-                                            <img src="{{ $infos->GetLogo() }}" style="max-height: 50px !important;"
+                                            <img src="{{ $infos->GetLogo() }}" style="max-height: 70px !important;"
                                                 alt="ConsultingPress Management Consulting Template" />
                                         </a>
                                     </div><!-- .logo -->

@@ -54,6 +54,7 @@
                                         <input class="form-check-input" type="checkbox">
                                     </th>
                                     <th>Titre</th>
+                                    <th></th>
                                     <th>Date modification</th>
                                     <th>Date publication</th>
                                     <th></th>
@@ -68,8 +69,8 @@
                                         <td>
                                             <a class="d-flex align-items-center gap-3" href="javascript:;">
                                                 <div class="customer-pic">
-                                                    <img src="{{ $projet->Cover() }}" class="rounded-circle"
-                                                        width="40" height="40" alt="">
+                                                    <img src="{{ $projet->Cover() }}" class="rounded-circle" width="40"
+                                                        height="40" alt="">
                                                 </div>
                                                 <p class="mb-0 customer-name fw-bold">
                                                     {{ $projet->nom }}
@@ -77,10 +78,20 @@
                                             </a>
                                         </td>
                                         <td>
+                                            <b class="form-control text-center ">
+                                                <span class="small">
+                                                    <i class="bi bi-camera"></i>
+                                                    {{ count(json_decode($projet->photos)) }}
+                                                    {{ count(json_decode($projet->photos)) > 1 ? 'photos' : 'photo' }}
+                                                </span>
+                                            </b>
+                                        </td>
+                                        <td>
                                             {{ $projet->updated_at->diffForHumans() }}
                                         </td>
                                         <td>
                                             {{ $projet->created_at->format('d-m-Y H:m') }}
+                                            <x-ModalProjet :id="$projet->id"></x-ModalProjet>
                                         </td>
                                         <td class="text-end">
                                             <a href="{{ route('projets.edit', $projet->id) }}" class="btn btn-sm btn-dark">
@@ -94,7 +105,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center">Aucun projet trouvé.</td>
+                                        <td colspan="8" class="text-center">Aucun projet trouvé.</td>
                                     </tr>
                                 @endforelse
                             </tbody>
