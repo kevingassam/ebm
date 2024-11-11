@@ -115,8 +115,8 @@
                                                 <div class="text-container">
                                                     <span>Localisation</span>
                                                     <p>
-                                                        <a href="#">
-                                                            {{ $infos->adresse1 ?? '' }}
+                                                        <a href="{{ route('contact') }}">
+                                                            {{ Str::limit($infos->adresse1 , 20) ?? '' }}
                                                         </a>
                                                     </p>
                                                 </div><!-- .text-container end -->
