@@ -62,7 +62,24 @@
                     <div class="row mb-80">
                         <!-- .col-md-12 start -->
                         <div class="col-md-12">
-                            <img src="{{ $projet->Cover() }}" alt="{{ $projet->nom }}" style="width: 100% !important;" srcset="">
+                            <div class="gallery-container">
+                                <div class="main-image-container">
+                                    <img src="{{ $projet->Cover() }}" alt="{{ $projet->nom }}" id="main-image"
+                                        class="main-image">
+                                </div>
+                                <div class="thumbnail-container">
+                                    <div class="thumbnail">
+                                        <img src="{{ $projet->Cover() }}" alt="{{ $projet->nom }}" class="thumbnail-image other-tof-img">
+                                    </div>
+                                    @foreach (json_decode($projet->photos) ?? [] as $tof)
+                                        <div class="thumbnail">
+                                            <img src="{{ Storage::url($tof) }}" alt="{{ $projet->nom }}"
+                                                class="thumbnail-image other-tof-img">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
                             <!-- .custom-heading-01 start -->
                             <div class="custom-heading-01">
                                 <span>Ce que nous faisons</span>
@@ -92,22 +109,23 @@
                             <!-- .slider-wrapper start -->
                             <div class="slider-wrapper">
                                 <div class="nivo-slider nivoSlider">
-                                    @foreach ($autres as $key=>$item)
-                                    <a href="{{ route('projet_details',['id'=>$item->id , 'titre'=>Str::slug($item->nom)]) }}">
-                                        <img src="{{ $item->Cover() }}"
-                                            alt="{{ $item->nom }}"
-                                            title="#slider-caption-0{{  $key +1 }}">
-                                    </a>
+                                    @foreach ($autres as $key => $item)
+                                        <a
+                                            href="{{ route('projet_details', ['id' => $item->id, 'titre' => Str::slug($item->nom)]) }}">
+                                            <img src="{{ $item->Cover() }}" alt="{{ $item->nom }}"
+                                                title="#slider-caption-0{{ $key + 1 }}">
+                                        </a>
                                     @endforeach
                                 </div><!-- .nivoSlider end -->
 
-                                @foreach ($autres as $key=>$item)
-                                    <div id="slider-caption-0{{  $key +1 }}">
+                                @foreach ($autres as $key => $item)
+                                    <div id="slider-caption-0{{ $key + 1 }}">
                                         <h3>
                                             {{ $item->nom }}
                                         </h3>
 
-                                        <a href="{{ route('projet_details',['id'=>$item->id , 'titre'=>Str::slug($item->nom)]) }}" class="read-more">
+                                        <a href="{{ route('projet_details', ['id' => $item->id, 'titre' => Str::slug($item->nom)]) }}"
+                                            class="read-more">
                                             Voir le projet
                                         </a><!-- .read-more end -->
                                     </div><!-- .slider-caption-01 end -->
@@ -133,14 +151,14 @@
                                 <ul id="menu-quick-links" class="menu">
 
                                     @forelse ($autres as $item)
-                                    <li class="menu-item">
-                                        <a href="{{ route('projet_details',['id'=>$item->id , 'titre'=>Str::slug($item->nom)]) }}">
-                                            {{ Str::limit($item->nom , )}}
-                                        </a>
-                                    </li>
+                                        <li class="menu-item">
+                                            <a
+                                                href="{{ route('projet_details', ['id' => $item->id, 'titre' => Str::slug($item->nom)]) }}">
+                                                {{ Str::limit($item->nom) }}
+                                            </a>
+                                        </li>
 
                                     @empty
-
                                     @endforelse
 
                                 </ul><!-- #menu-quick-links end -->
@@ -153,6 +171,8 @@
             </div><!-- .row end -->
         </div><!-- .container end -->
     </div><!-- .page-content end -->
+
+
 @endsection
 
 
@@ -168,7 +188,48 @@
     <link rel="stylesheet" href="/front/css/style.css">
     <link rel="stylesheet" href="/front/css/color-default.css">
     <link rel="stylesheet" href="/front/css/responsive.css">
-    </head>
+    <style>
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .main-image-container {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .main-image {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .thumbnail-container {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .thumbnail {
+            width: 90px;
+            height: 50px;
+            cursor: pointer;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+ 
+
+        .thumbnail-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 
 @endsection
 
@@ -193,5 +254,12 @@
             VolcannoInclude.contactFormAjax('newsletter');
         });
         /* ]]> */
+
+
+        //change image
+        $(document).on('click', '.other-tof-img', function() {
+            var img = $(this).attr('src');
+            $('#main-image').attr('src', img);
+        });
     </script>
 @endsection
