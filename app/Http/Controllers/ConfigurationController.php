@@ -39,6 +39,9 @@ class ConfigurationController extends Controller
             'instagram' => 'nullable|url',
             'map' => 'nullable|string|max:5000',
             'video' => 'nullable|mimes:jpeg,png,jpg,gif,svg,mp4,mov,avi|max:20480',
+            'about_titre' => 'nullable|string|max:3000',
+            'about_texte' => 'nullable|string|max:50000',
+            'about_cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048'
         ]);
 
         $information = Information::first();
@@ -56,8 +59,16 @@ class ConfigurationController extends Controller
         $information->twitter = $request->input("twitter");
         $information->linkedin = $request->input("linkedin");
         $information->youtube = $request->input("youtube");
+        $information->about_titre = $request->input("about_titre");
+        $information->about_texte = $request->input("about_texte");
 
 
+        if ($request->file("about_cover")) {
+            if ($information->about_cover) {
+                Storage::disk('public')->delete($information->about_cover);
+            }
+            $information->about_cover = $request->file('about_cover')->store('informations/photos', 'public');
+        }
         if ($request->file("logo")) {
             if ($information->logo) {
                 Storage::disk('public')->delete($information->logo);

@@ -17,20 +17,17 @@ class FrontController extends Controller
 {
     public function home()
     {
-        $articles = Blog::Orderby('created_at', 'desc')->take(10)->get();
-        $services = Service::Orderby('created_at', 'desc')->take(10)->get();
+        $articles = Blog::Orderby('created_at', 'desc')->select('id', 'titre', 'photo', 'created_at')->take(10)->get();
+        $services = Service::Orderby('created_at', 'desc')->select('id', 'titre', 'image', 'description')->take(10)->get();
         $temoignages = Temoignage::all();
         $projets = Projet::Orderby('created_at', 'desc')->take(15)->get();
-        $total_projets = Projet::count();
-        $total_articles = Blog::count();
         $banners = Banner::all();
+
 
         return view("front.index")
             ->with('articles', $articles)
             ->with('temoignages', $temoignages)
             ->with('projets', $projets)
-            ->with('total_projets', $total_projets)
-            ->with('total_articles', $total_articles)
             ->with('services', $services)
             ->with('banners', $banners);
     }
@@ -42,18 +39,20 @@ class FrontController extends Controller
 
 
 
-    public function get_devis(){
+    public function get_devis()
+    {
         return view("front.get_devis");
     }
 
 
-    public function get_devis_post(Request $request){
+    public function get_devis_post(Request $request)
+    {
         $request->validate([
-            'nom' => ['required','string','max:255'],
-            'email' => ['required','email','max:255'],
-            'telephone' => ['required','numeric'],
-            'message' => ['required','string','max:2550'],
-            'adresse' => ['nullable','string','max:2550'],
+            'nom' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'telephone' => ['required', 'numeric'],
+            'message' => ['required', 'string', 'max:2550'],
+            'adresse' => ['nullable', 'string', 'max:2550'],
         ]);
 
 
@@ -82,8 +81,6 @@ class FrontController extends Controller
             return redirect()->back()
                 ->with('error', 'Une erreur s\'est produite lors de l\'envoi de votre demande. Code: ' . $status . ' - Réponse: ' . $body);
         }
-
-
     }
 
 
@@ -130,9 +127,13 @@ class FrontController extends Controller
 
     public function about()
     {
+        $articles = Blog::Orderby('id', 'Desc')->take(10)->get();
+        $services = Service::Orderby('id', 'Desc')->take(6)->get();
         $temoignages = Temoignage::all();
         return view("front.about")
-            ->with('temoignages', $temoignages);
+            ->with('temoignages', $temoignages)
+            ->with('articles', $articles)
+            ->with('services', $services);
     }
 
     public function projet(Request $request, $statut = null)
@@ -154,7 +155,8 @@ class FrontController extends Controller
     }
 
 
-    public function projet_details($id,$titre){
+    public function projet_details($id, $titre)
+    {
         $projet = Projet::find($id);
         if (!$projet) {
             abort(404);
@@ -196,6 +198,7 @@ class FrontController extends Controller
         // Récupérer d'autres articles en excluant l'article actuel
         $autres = Blog::where('id', '!=', $article->id)
             ->orderBy('created_at', 'desc')
+            ->select('id','titre','created_at')
             ->take(3)
             ->get();
 
@@ -208,7 +211,8 @@ class FrontController extends Controller
     }
 
 
-    public function service($id,$titre){
+    public function service($id, $titre)
+    {
         $service = Service::find($id);
         if (!$service) {
             abort(404);
@@ -230,7 +234,9 @@ class FrontController extends Controller
         if ($key) {
             $articles = $articles->where('titre', 'LIKE', '%' . $key . '%');
         }
-        $articles = $articles->orderBy('created_at', 'desc')->paginate(20);
+        $articles = $articles->orderBy('created_at', 'desc')
+            ->select('id', 'titre', 'photo', 'created_at')
+            ->paginate(20);
         $autres = Blog::Orderby('created_at', 'desc')->take(3)->get();
         return view("front.blogs")
             ->with('articles', $articles)
@@ -277,12 +283,13 @@ class FrontController extends Controller
 
 
 
-    public function politique(){
+    public function politique()
+    {
         return view("front.politique");
     }
 
-    public function mentions(){
+    public function mentions()
+    {
         return view("front.mentions");
     }
-
 }

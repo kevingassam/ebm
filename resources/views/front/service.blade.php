@@ -28,7 +28,7 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('services') }}">Services</a>
+                                <a href="{{ route('service_list') }}">Services</a>
                             </li>
 
                             <li>

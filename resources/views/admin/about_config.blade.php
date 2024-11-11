@@ -36,38 +36,17 @@
                         <div class="row">
                             <div class="col-12 col-sm-12">
                                 <div class="mb-4">
-                                    <label for="titre">Titre</label>
-                                    <input type="text" class="form-control" name="about_titre"
+                                    <label for="titre" for="about_titre">Titre</label>
+                                    <input type="text" class="form-control" name="about_titre" placeholder="Titre de la page a propos"
                                         value="{{ $infos->about_titre }}">
                                 </div>
                             </div>
                             <div class="col-4 col-sm-12">
                                 <div class="mb-4">
-                                    <h6 class="mb-1">Paragraphe 1</h6>
-                                    <textarea name="about_texte1" id="about_texte1" class="form-control" rows="3">{{ $infos->about_texte1 }}</textarea>
-                                    @error('about_texte1')
-                                        <span class="small text-danger">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-4 col-sm-12">
-                                <div class="mb-4">
-                                    <h6 class="mb-1">Paragraphe 2</h6>
-                                    <textarea name="about_texte2" id="about_texte2" class="form-control" rows="3">{{ $infos->about_texte2 }}</textarea>
-                                    @error('about_texte2')
-                                        <span class="small text-danger">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-4 col-sm-12">
-                                <div class="mb-4">
-                                    <h6 class="mb-1">Paragraphe 3</h6>
-                                    <textarea name="about_texte3" id="about_texte3" class="form-control" rows="3">{{ $infos->about_texte3 }}</textarea>
-                                    @error('about_texte3')
+                                    <label class="mb-3" for="about_texte">Description</label>
+                                    <textarea class="form-control" cols="4" rows="6" placeholder="write a description here.."
+                                        name="about_texte">{{ $infos->about_texte }}</textarea>
+                                    @error('about_texte')
                                         <span class="small text-danger">
                                             {{ $message }}
                                         </span>
@@ -98,81 +77,20 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="col-12">
-                                <label for="Tags" class="form-label fw-bold">
-                                    Video
+                                <label for="about_cover" class="form-label fw-bold">
+                                    Image de présentation
                                 </label>
-                                <input type="file" class="form-control" name="about_video" />
-                                @error('about_video')
+                                <input type="file" class="form-control" name="about_cover" />
+                                @error('about_cover')
                                     <span class="small text-danger">
                                         {{ $message }}
                                     </span>
                                 @enderror
-                                @if ($infos->about_video)
-                                <video  id="video" src="{{ Storage::url($infos->about_video) }}"
-                                    loop="" muted="" autoplay="" class="w-100">
-                                </video>
-                                @endif
+                                <br>
+                                <img src="{{ $infos->GetAboutPhotoCover() }}" class="w-100" alt="about_cover" srcset="">
                             </div>
                         </div>
                     </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="col-12">
-                                <label for="about_photo1" class="form-label fw-bold">
-                                    Image de paragraphe 1
-                                </label>
-                                <input type="file" class="form-control" name="about_photo1" />
-                                @error('about_photo1')
-                                    <span class="small text-danger">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                                @if ($infos->about_photo1)
-                                <img src="{{ Storage::url($infos->about_photo1) }}" class="w-100" alt="" srcset="">
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="col-12">
-                                <label for="about_photo2" class="form-label fw-bold">
-                                    Image de paragraphe 2
-                                </label>
-                                <input type="file" class="form-control" name="about_photo2" />
-                                @error('about_photo2')
-                                    <span class="small text-danger">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                                @if ($infos->about_photo2)
-                                <img src="{{ Storage::url($infos->about_photo2) }}" class="w-100" alt="" srcset="">
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="col-12">
-                                <label for="about_photo3" class="form-label fw-bold">
-                                    Image de paragraphe 3
-                                </label>
-                                <input type="file" class="form-control" name="about_photo3" />
-                                @error('about_photo3')
-                                    <span class="small text-danger">
-                                        {{ $message }}
-                                    </span>
-                                @enderror
-                                @if ($infos->about_photo3)
-                                <img src="{{ Storage::url($infos->about_photo3) }}" class="w-100" alt="" srcset="">
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
         </form>
         <!--end row-->
@@ -184,6 +102,10 @@
 @endsection
 @section('header')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tiny.cloud/1/7eigadx4xspqfo7xw2wn60evebnplqcuor4a08g85lc7jq3z/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
 @endsection
 
 @section('scripts')
@@ -244,4 +166,22 @@
             });
         });
     </script>
+
+<script>
+    $("#fancy-file-upload").FancyFileUpload({
+        params: {
+            action: "fileuploader",
+        },
+        maxfilesize: 1000000,
+    });
+</script>
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+    });
+</script>
 @endsection
+
+

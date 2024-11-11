@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Banner extends Model
 {
+    protected $fillable = ['titre', 'photo', 'btn_text'];
+
     use HasFactory;
 
 

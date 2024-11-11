@@ -207,8 +207,8 @@
                                     <div class="nav-additional-links">
                                         <!-- #search start -->
                                         <div id="search">
-                                            <form>
-                                                <input class="search-submit" type="submit">
+                                            <form method="GET" action="{{ route('blog') }}">
+                                                <input class="search-submit" type="submit" required>
                                                 <input id="m_search" name="s" type="text"
                                                     placeholder="Recherche...">
                                             </form>

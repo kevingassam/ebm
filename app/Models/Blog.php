@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Blog extends Model
 {
+    protected $fillable = ['titre', 'photo', 'photos', 'description'];
+
     use HasFactory;
 
 

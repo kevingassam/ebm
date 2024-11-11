@@ -33,6 +33,13 @@ return new class extends Migration
             $table->string("instagram")->nullable();
             $table->string("linkedin")->nullable();
 
+
+            //page about
+            $table->string("about_cover")->nullable();
+            $table->text("about_titre")->nullable();
+            $table->text("about_texte")->nullable();
+
+
             $table->timestamps();
         });
     }

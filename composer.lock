@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8de101a95d910126a08ca13565cbcfb0",
+    "content-hash": "5d36d3018dc677df83a92882735b4369",
     "packages": [
         {
             "name": "brick/math",
@@ -2060,6 +2060,59 @@
                 }
             ],
             "time": "2024-06-28T09:40:51+00:00"
+        },
+        {
+            "name": "muzammal/syncmodelfillable",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Muzammal01/syncmodelfillable.git",
+                "reference": "3eae08c22006d03a775df6648ecb70ac58da06f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Muzammal01/syncmodelfillable/zipball/3eae08c22006d03a775df6648ecb70ac58da06f8",
+                "reference": "3eae08c22006d03a775df6648ecb70ac58da06f8",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/filesystem": "^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Muzammal\\Syncmodelfillable\\SyncModelFillableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Muzammal\\Syncmodelfillable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Muzammal",
+                    "email": "muzidev55@gmail.com"
+                }
+            ],
+            "description": "A Laravel package to synchronize model fillable fields with migration columns using commands",
+            "support": {
+                "issues": "https://github.com/Muzammal01/syncmodelfillable/issues",
+                "source": "https://github.com/Muzammal01/syncmodelfillable/tree/v1.0.0"
+            },
+            "time": "2024-11-07T12:46:51+00:00"
         },
         {
             "name": "nesbot/carbon",

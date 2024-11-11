@@ -94,292 +94,7 @@
         </div><!-- .container end -->
     </div><!-- .page-content end -->
 
-    <!-- .page-conent start -->
-    <div class="page-content">
 
-        <!-- .container start -->
-        <div class="container">
-
-            <!-- .row start -->
-            <div class="row">
-                <!-- .col-md-12 start -->
-                <div class="col-md-12">
-                    <!-- .custom-heading-02 start -->
-                    <div class="custom-heading-02">
-                        <h2>Our Core Expertise</h2>
-                        <span>explore what we do</span>
-                    </div><!-- .custom-heading-02 end -->
-                </div><!-- .col-md-12 end -->
-            </div><!-- .row end -->
-
-            <!-- .row start -->
-            <div class="row mb-30">
-                <!-- .col-md-4 start -->
-                <div class="col-md-4">
-                    <!-- .service-feature-box-03 start -->
-                    <div class="service-box service-box-03">
-                        <div class="icon-container">
-                            <i class="lynny-radar"></i>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-                            <a href="/front/management-services-single.html">
-                                <h3>Strategy & Growth</h3>
-                            </a>
-                            <p>
-                                Defining your business goals and steps to achieve them.
-                            </p>
-                        </div><!-- .text-container end -->
-                    </div><!-- .service-feature-box-03 end -->
-                </div><!-- .col-md-4 end -->
-
-                <!-- .col-md-4 start -->
-                <div class="col-md-4">
-                    <!-- .service-feature-box-03 start -->
-                    <div class="service-box service-box-03">
-                        <div class="icon-container">
-                            <i class="lynny-globe-2_1"></i>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-                            <a href="/front/management-services-global-expansion.html">
-                                <h3>Global Expansion</h3>
-                            </a>
-
-                            <p>
-                                Helping you grow and defend against the global challenges.
-                            </p>
-                        </div><!-- .text-container end -->
-                    </div><!-- .service-feature-box-03 end -->
-                </div><!-- .col-md-4 end -->
-
-                <!-- .col-md-4 start -->
-                <div class="col-md-4">
-                    <!-- .service-feature-box-03 start -->
-                    <div class="service-box service-box-03">
-                        <div class="icon-container">
-                            <i class="lynny-pages-1"></i>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-
-                            <a href="/front/management-services-audit.html">
-                                <h3>Audit & Assurance</h3>
-                            </a>
-
-                            <p>
-                                Helping to enhance the value of your business.
-                            </p>
-                        </div><!-- .text-container end -->
-                    </div><!-- .service-feature-box-03 end -->
-                </div><!-- .col-md-4 end -->
-            </div><!-- .row end -->
-
-            <!-- .row start -->
-            <div class="row">
-                <!-- .col-md-4 start -->
-                <div class="col-md-4">
-                    <!-- .service-feature-box-03 start -->
-                    <div class="service-box service-box-03">
-                        <div class="icon-container">
-                            <i class="lynny-user-group-2"></i>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-
-                            <a href="/front/management-services-customer-strategy.html">
-                                <h3>Customer Strategy</h3>
-                            </a>
-
-                            <p>
-                                Achieve clear understanding of your customers needs.
-                            </p>
-                        </div><!-- .text-container end -->
-                    </div><!-- .service-feature-box-03 end -->
-                </div><!-- .col-md-4 end -->
-
-                <!-- .col-md-4 start -->
-                <div class="col-md-4">
-                    <!-- .service-feature-box-03 start -->
-                    <div class="service-box service-box-03">
-                        <div class="icon-container">
-                            <i class="lynny-building-2"></i>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-                            <a href="/front/management-services-tax-consulting.html">
-                                <h3>Tax Consulting</h3>
-                            </a>
-
-                            <p>
-                                Understanding global taxes laws and practices.
-                            </p>
-                        </div><!-- .text-container end -->
-                    </div><!-- .service-feature-box-03 end -->
-                </div><!-- .col-md-4 end -->
-
-                <!-- .col-md-4 start -->
-                <div class="col-md-4">
-                    <!-- .service-feature-box-03 start -->
-                    <div class="service-box service-box-03">
-                        <div class="icon-container">
-                            <i class="lynny-globes"></i>
-                        </div><!-- .icon-container end -->
-
-                        <div class="text-container">
-                            <a href="/front/management-services-subcategory.html">
-                                <h3>Mergers & Acquisitions</h3>
-                            </a>
-
-                            <p>
-                                We will help you expand your business.
-                            </p>
-                        </div><!-- .text-container end -->
-                    </div><!-- .service-feature-box-03 end -->
-                </div><!-- .col-md-4 end -->
-            </div><!-- .row end -->
-        </div><!-- .container end -->
-    </div><!-- .page-content end -->
-
-    <!-- .page-conent start -->
-    <div class="page-content custom-background bkg-color-light-grey padding-small mb-120">
-
-        <!-- .container start -->
-        <div class="container">
-
-            <!-- .row start -->
-            <div class="row">
-                <!-- .col-md-12 start -->
-                <div class="col-md-12">
-                    <!-- note start -->
-                    <div class="call-to-action clearfix">
-                        <div class="text">
-                            <h4>We’ll identify your needs and enhance your business growth.</h4>
-                        </div>
-
-                        <a href="/front/management-contact-compact.html" class="btn icon-animated">
-                            <span>
-                                <i class="lynny-page-1"></i>
-                                request a quick quote
-                            </span>
-                        </a>
-                    </div><!-- .call-to-action end -->
-                </div><!-- .col-md-12 end -->
-            </div><!-- .row end -->
-        </div><!-- .container end -->
-    </div><!-- .page-content end -->
-
-    <!-- .page-conent start -->
-    <div class="page-content">
-
-        <!-- .container start -->
-        <div class="container">
-
-            <!-- .row start -->
-            <div class="row">
-                <!-- .col-md-6 start -->
-                <div class="col-md-6">
-                    <!-- .custom-heading-01 start -->
-                    <div class="custom-heading-01">
-                        <span>who we do it for</span>
-                        <h2>Industry sectors coverage</h2>
-                    </div><!-- .custom-heading-01 end -->
-
-                    <p>
-                        We have deep understanding and experience in
-                        implementing sustainable strategies in following
-                        industry sectors:
-                    </p>
-
-                    <ul class="fa-ul ul-circled">
-                        <li>
-                            <div class="icon-container">
-                                <img src="/front/img/svg/svg-icon-airplane.svg" alt="Aerospace & Defense" />
-                            </div><!-- .icon-container end -->
-
-                            <div class="li-content">
-                                <p>
-                                    Aerospace & Defense
-                                </p>
-                            </div><!-- .li-content end -->
-                        </li>
-
-                        <li>
-                            <div class="icon-container">
-                                <img src="/front/img/svg/svg-icon-chemical.svg" alt="Energy & Chemicals" />
-                            </div><!-- .icon-container end -->
-
-                            <div class="li-content">
-                                <p>
-                                    Energy & Chemicals
-                                </p>
-                            </div><!-- .li-content end -->
-                        </li>
-
-                        <li>
-                            <div class="icon-container">
-                                <img src="/front/img/svg/svg-icon-cargo.svg" alt="Transport & Logistics" />
-                            </div><!-- .icon-container end -->
-
-                            <div class="li-content">
-                                <p>
-                                    Transport & Logistics
-                                </p>
-                            </div><!-- .li-content end -->
-                        </li>
-
-                        <li>
-                            <div class="icon-container">
-                                <img src="/front/img/svg/svg-icon-support.svg" alt="Communications " />
-                            </div><!-- .icon-container end -->
-
-                            <div class="li-content">
-                                <p>
-                                    Communications
-                                </p>
-                            </div><!-- .li-content end -->
-                        </li>
-
-                        <li>
-                            <div class="icon-container">
-                                <img src="/front/img/svg/svg-icon-stocks.svg" alt="Banking and Finance" />
-                            </div><!-- .icon-container end -->
-
-                            <div class="li-content">
-                                <p>
-                                    Banking and Finance
-                                </p>
-                            </div><!-- .li-content end -->
-                        </li>
-
-                        <li>
-                            <div class="icon-container">
-                                <img src="/front/img/svg/svg-icon-desktop.svg" alt="Education & Non-profit" />
-                            </div><!-- .icon-container end -->
-
-                            <div class="li-content">
-                                <p>
-                                    Education & Non-profit
-                                </p>
-                            </div><!-- .li-content end -->
-                        </li>
-                    </ul>
-
-                    <a href="/front/management-industry-sectors-02.html" class="read-more">
-                        View all industry sectors
-                    </a><!-- .read-more end -->
-                </div><!-- .col-md-6 end -->
-
-                <!-- .col-md-6 start -->
-                <div class="col-md-6">
-                    <div class="triggerAnimation animated" data-animate="fadeInRight">
-                        <img src="/front/img/pics/consultingpress-management-consulting-industry-sectors.jpg"
-                            alt="ConsultingPress Management Copnsulting Industry Sectors" />
-                    </div>
-                </div><!-- .col-md-6 end -->
-            </div><!-- .row end -->
-        </div><!-- .container end -->
-    </div><!-- .page-content end -->
 
     <!-- .page-conent start -->
     <div class="page-content custom-background bkg-img05 dark">
@@ -399,10 +114,10 @@
                         <div class="odometer-container">
                             <div class="odometer-inner">
                                 <i class="fa fa-arrow-up"></i>
-                                <div class="odometer" data-to='14'></div>
+                                <div class="odometer" data-to='{{ DB::table('blogs')->count() }}'></div>
                             </div>
                             <p>
-                                Industry Sectors covered
+                                Articles de blog
                             </p>
                         </div><!-- .odometer-container end -->
                     </div><!-- .col-md-3 end -->
@@ -414,10 +129,10 @@
                         <div class="odometer-container">
                             <div class="odometer-inner">
                                 <i class="fa fa-arrow-up"></i>
-                                <div class="odometer" data-to='350'></div>
+                                <div class="odometer" data-to='{{ DB::table('services')->count() }}'></div>
                             </div>
                             <p>
-                                Projects Implemented
+                                Services
                             </p>
                         </div><!-- .odometer-container end -->
                     </div><!-- .col-md-3 end -->
@@ -429,10 +144,10 @@
                         <div class="odometer-container">
                             <div class="odometer-inner">
                                 <i class="fa fa-arrow-up"></i>
-                                <div class="odometer" data-to='85'></div>
+                                <div class="odometer" data-to='{{ DB::table('projets')->count() }}'></div>
                             </div>
                             <p>
-                                Partners Worldwide
+                                Projets
                             </p>
                         </div><!-- .odometer-container end -->
                     </div><!-- .col-md-3 end -->
@@ -444,10 +159,10 @@
                         <div class="odometer-container">
                             <div class="odometer-inner">
                                 <i class="fa fa-arrow-up"></i>
-                                <div class="odometer" data-to='1250'></div>
+                                <div class="odometer" data-to='450'></div>
                             </div>
                             <p>
-                                Satisfied Clients
+                                Clients satisfaits
                             </p>
                         </div><!-- .odometer-container end -->
                     </div><!-- .col-md-3 end -->
