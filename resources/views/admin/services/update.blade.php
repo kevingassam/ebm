@@ -59,7 +59,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center justify-content-between">
                                 <button type="button" class="btn btn-sm btn-danger px-4">
-                                    annuller
+                                    annuler
                                 </button>
                                 <button type="submit" class="btn btn-dark px-4">
                                     Mettre a jour
