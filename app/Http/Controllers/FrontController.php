@@ -39,9 +39,16 @@ class FrontController extends Controller
 
 
 
-    public function get_devis()
+    public function get_devis(Request $request)
     {
-        return view("front.get_devis");
+        if($request->get('service_id')){
+            $service_id = $request->get('service_id');
+            $service = Service::find($service_id);
+        }
+        $services = Service::select('id','titre')->get();
+        return view("front.get_devis")
+        ->with('service', $service ?? null)
+        ->with('services', $services);
     }
 
 
@@ -53,9 +60,17 @@ class FrontController extends Controller
             'telephone' => ['required', 'numeric'],
             'message' => ['required', 'string', 'max:2550'],
             'adresse' => ['nullable', 'string', 'max:2550'],
+            'service_id' => 'required|integer|exists:services,id'
         ]);
 
 
+        $service = Service::find($request->input('service_id'));
+        $message = $request->input('message');
+        if($service){
+            $contenu = "<b>Service:</b> ". $service->titre. "<br> <b>Message:</b> ". $message;
+        }else{
+            $contenu =  $message;
+        }
 
         $token = config('services.contact_form.api_key');
         $url = config('services.contact_form.api') . "contact";
@@ -65,7 +80,7 @@ class FrontController extends Controller
             'nom' => $request->input('nom'),
             'email' => $request->input('email'),
             'telephone' => $request->input('telephone'),
-            'message' => $request->input('message'),
+            'message' => $contenu,
             'adresse' => $request->input('adresse') ?? "-",
             "domaine" => config('app.app_url_demaine'),
         ]);

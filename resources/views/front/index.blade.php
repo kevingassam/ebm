@@ -297,98 +297,16 @@
 @endsection
 @section('header')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Section Témoignages */
-        .ts-testimonials-container {
-            margin: 0 auto;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .ts-testimonials {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .ts-testimonial {
-            flex: 1 0 100%;
-            max-width: 100%;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            background: #f9f9f9;
-            margin: 0 10px;
-            text-align: center;
-        }
-
-        /* Avatar et Infos */
-        .ts-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-        }
-
-        .ts-name {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .ts-position {
-            color: #777;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-
-        /* Message */
-        .ts-message {
-            font-style: italic;
-            margin-bottom: 10px;
-        }
-
-        /* Étoiles */
-        .ts-stars {
-            color: #FFD700;
-        }
-
-        /* Boutons de navigation */
-        .ts-nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 15px;
-        }
-
-        .ts-nav-button {
-            background: #6ec25b;
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        /* Responsive */
-        @media (min-width: 768px) {
-            .ts-testimonial {
-                flex: 1 0 33.33%;
-                max-width: 33.33%;
-            }
-        }
-    </style>
 @endsection
 @section('seo')
     {{-- Composant SEO - seo.blade.php --}}
     <meta name="description" content="{{ $description ?? 'Description par défaut de votre site' }}">
     <meta name="keywords" content="{{ $keywords ?? 'mots-clés, par défaut, pour, SEO' }}">
     <meta name="author" content="{{ $author ?? 'Nom de l\'auteur du site' }}">
-    <meta name="robots" content="index, follow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     {{-- Open Graph pour Facebook et autres réseaux --}}
     <meta property="og:title" content="{{ $infos->app_name  }}">
     <meta property="og:description" content="{{ $description ?? 'Description par défaut' }}">
-    <meta property="og:image" content="{{ $image ?? asset('default-image.jpg') }}">
+    <meta property="og:image" content="{{ $infos->GetLogo() }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="{{ $type ?? 'website' }}">
 
@@ -396,12 +314,5 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ $infos->app_name }}">
     <meta name="twitter:description" content="{{ $description ?? 'Description par défaut' }}">
-    <meta name="twitter:image" content="{{ $image ?? asset('default-image.jpg') }}">
-
-    {{-- Canonical link --}}
-    <link rel="canonical" href="{{ url()->current() }}">
-
-    {{-- Favicon --}}
-    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-
+    <meta name="twitter:image" content="{{ $infos->GetLogo() }}">
 @endsection

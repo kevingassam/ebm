@@ -46,15 +46,15 @@
     <div class="container">
         <div class="row">
             <!-- .col-md-8 start -->
-            <div class="col-md-2 mx-auto"></div>
-            <div class="col-md-8 mx-auto">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
                 <!-- .custom-heading03 start -->
                 <div class="custom-heading-03">
                     <h3>
-                        Formulaire de demande de service
+                        Formulaire de demande de devis
                     </h3>
                 </div><!-- .custom-heading-03 end -->
-
+                {{--
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -63,7 +63,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                @endif --}}
 
                 @if (session('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
@@ -73,24 +73,89 @@
                 @endif
 
 
-                <form class="wpcf7 wpcf7-contact-us clearfix" method="POST" action="{{ route('get_devis.post') }}">
+                <form method="POST" action="{{ route('get_devis.post') }}">
                     @csrf
-                    <input type="text" class="wpcf7-text" id="contact-name" value="{{ old('nom') }}" required name="nom" placeholder="Nom*">
-                    <input type="email" class="wpcf7-email" id="contact-email" value="{{ old('email') }}" required name="email"
-                        placeholder="Email*">
-                    <input type="text" class="wpcf7-text" id="contact-phone" value="{{ old('telephone') }}" required name="telephone"
-                        placeholder="Téléphone*">
-                    <input type="text" class="wpcf7-text" id="contact-subject" value="{{ old('adresse') }}" placeholder="Adresse ">
-                    <textarea rows="8" class="wpcf7-textarea" id="contact-message" required name="message" placeholder="Message*">{{ old('message') }}</textarea>
-                    <div class="g-recaptcha" data-sitekey="6Ld4VykTAAAAAM_qltIuTg7I0hpcdHjX7j68qpRz"></div>
-                    <input type="submit" value="Envoyer la demande" class="wpcf7-submit">
+                    <div class="row">
+                        @if ($service)
+                            <div class="col-sm-12">
+                                <div class="alert alert-service">
+                                    Vous avez choisi le service : <strong>{{ $service->titre }}</strong>
+                                </div>
+                                <input type="hidden" name="service_id" value="{{ $service->id }}">
+                            </div>
+                        @endif
+                        <div class="col-sm-6 pb-3-devis">
+                            <label for="">Nom et prénom</label>
+                            <input type="text" class="form-control" value="{{ old('nom') }}" required name="nom"
+                                placeholder="Nom*">
+                            @error('nom')
+                                <span class="small text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6 pb-3-devis">
+                            <label for="">Email</label>
+                            <input type="email" class="form-control" value="{{ old('email') }}" required name="email"
+                                placeholder="Email*">
+                            @error('email')
+                                <span class="small text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6 pb-3-devis">
+                            <label for="">Numéro de téléphone</label>
+                            <input type="text" class="form-control" value="{{ old('telephone') }}" required
+                                name="telephone" placeholder="Téléphone*">
+                            @error('telephone')
+                                <span class="small text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-sm-6 pb-3-devis">
+                            <label for="">Adresse</label>
+                            <input type="text" class="form-control" value="{{ old('adresse') }}" placeholder="Adresse ">
+                            @error('adresse')
+                                <span class="small text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        @if (!$service)
+                            <div class="col-sm-12 pb-3-devis">
+                                <label for="">Choisir un service</label>
+                                <select name="service_id" @required(true) class="form-control">
+                                    <option value=""></option>
+                                    @foreach ($services as $service)
+                                        <option value="{{ $service->id }}" @selected(old('service_id') == $service->id)>
+                                            {{ $service->titre }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('service_id')
+                                    <span class="small text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        @endif
+                        <div class="col-sm-12">
+                            <label for="">Décrire votre besoin</label>
+                            <textarea rows="8" class="form-control" id="contact-message" required name="message" placeholder="Message*">{{ old('message') }}</textarea>
+                            @error('message')
+                                <span class="small text-danger">{{ $message }}</span>
+                            @enderror
+                            <br>
+                            <div class="text-danger small">
+                                - Les champs marqués par (*) sont obligatoires. <br>
+                                - Le service choisi sera contacter pour vous renseigner sur les détails.
+                            </div>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <br>
+                            <button class="btn btn-sm btn-dark" type="submit">
+                                <b class="text-white">
+                                    Demander le devis
+                                    <i class="fa fa-paper-plane"></i>
+                                </b>
+                            </button>
+                        </div>
                 </form><!-- .wpcf7.clearfix end -->
             </div><!-- .col-md-8 end -->
-            <div class="col-md-2 mx-auto"></div>
         </div><!-- .row end -->
     </div>
     <br><br><br>
-
-
-
+</div>
 @endsection

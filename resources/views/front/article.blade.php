@@ -176,3 +176,22 @@
     </div><!-- .page-content end -->
 
 @endsection
+@section('seo')
+    {{-- Composant SEO - seo.blade.php --}}
+    <meta name="description" content="{{ Str::limit(strip_tags($article->description, 80)) }}">
+    <meta name="keywords" content="{{$article->titre }}">
+    <meta name="author" content="{{ $infos->app_name }}">
+    
+    {{-- Open Graph pour Facebook et autres réseaux --}}
+    <meta property="og:title" content="{{ $infos->app_name  }}">
+    <meta property="og:description" content="{{ Str::limit(strip_tags($article->description, 80)) }}">
+    <meta property="og:image" content="{{ $article->Cover() }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="article">
+
+    {{-- Balises Twitter Card --}}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $infos->app_name }}">
+    <meta name="twitter:description" content="{{ Str::limit(strip_tags($article->description, 80)) }}">
+    <meta name="twitter:image" content="{{ $article->Cover() }}">
+@endsection

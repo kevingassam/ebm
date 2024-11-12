@@ -74,7 +74,7 @@
                     </div>
                 </div><!-- .col-md-8 end -->
 
-                <aside class="col-md-4 aside-right">
+              {{--   <aside class="col-md-4 aside-right">
 
                     <!-- .aside-widgets start -->
                     <ul class="aside-widgets">
@@ -98,7 +98,7 @@
                             </div><!-- .feature-box end -->
                         </li><!-- .widget end -->
                     </ul><!-- .aside-widgets -->
-                </aside><!-- aside.col-md-4 end -->
+                </aside><!-- aside.col-md-4 end --> --}}
             </div><!-- .row end -->
         </div><!-- .container end -->
     </div><!-- .page-content end -->

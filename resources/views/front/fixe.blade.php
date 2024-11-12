@@ -10,6 +10,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ $infos->GetIcon() }}" />
+      <link rel="canonical" href="{{ url()->current() }}">
+      <link rel="icon" href="{{ $infos->GetIcon() }}" type="image/x-icon">
+      <meta name="robots" content="index, follow">
 
     <!-- Fonts and icon fonts -->
     <link rel="stylesheet"
@@ -29,7 +32,7 @@
     <link rel="stylesheet" href="/front/css/style.css">
     <link rel="stylesheet" href="/front/css/color-default.css">
     <link rel="stylesheet" href="/front/css/responsive.css">
-
+    <link rel="stylesheet" href="/front/css/add-style.css?v={{ time() }}">
 
     @yield('header')
 

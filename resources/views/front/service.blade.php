@@ -118,8 +118,8 @@
                                         création et gestion d'une entreprise prospère.
                                     </p>
 
-                                    <a href="{{ route('contact') }}" class="read-more">
-                                        Contactez-nous
+                                    <a href="{{ route('get_devis') }}?service_id={{ $service->id }}" class="read-more">
+                                        Obtenir mon devis
                                     </a><!-- .read-more end -->
                                 </div><!-- .text-container end -->
                             </div><!-- .feature-box end -->
