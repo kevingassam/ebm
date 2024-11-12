@@ -323,6 +323,9 @@
     <script src="/admin/js/main.js"></script>
 
 
+
+
+
     @yield('scripts')
 </body>
 

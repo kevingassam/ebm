@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Service extends Model
 {
-    protected $fillable = ['titre', 'image', 'description', 'type'];
+        protected $fillable = ['titre', 'image', 'description', 'type'];
+
 
     use HasFactory;
 

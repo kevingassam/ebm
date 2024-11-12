@@ -3,10 +3,14 @@ $(function () {
 
 
 	// chart 1
+    var chartElement = document.getElementById('chart1');
+	var dataValues = JSON.parse(chartElement.getAttribute('data-values'));
+
+	// Configuration du graphique avec les données récupérées
 	var options = {
 		series: [{
-			name: 'Sales Overview',
-			data: [10, 25, 42, 12, 55, 30, 63, 27, 20]
+			name: 'Visites',
+			data: dataValues // Utilisation des données extraites
 		}],
 		chart: {
 			foreColor: '#9ba7b2',
@@ -25,7 +29,7 @@ $(function () {
 		},
 		plotOptions: {
 			bar: {
-				horizontal: !1,
+				horizontal: false,
 				columnWidth: "30%",
 				endingShape: "rounded"
 			}
@@ -42,27 +46,28 @@ $(function () {
 		fill: {
 			type: 'gradient',
 			gradient: {
-			  shade: 'light',
-			  type: 'vertical',
-			  shadeIntensity: 0.5,
-			  gradientToColors: ['#01e195'],
-			  inverseColors: true,
-			  opacityFrom: 1,
-			  opacityTo: 1,
+				shade: 'light',
+				type: 'vertical',
+				shadeIntensity: 0.5,
+				gradientToColors: ['#01e195'],
+				inverseColors: true,
+				opacityFrom: 1,
+				opacityTo: 1,
 			}
-		  },
+		},
 		colors: ['#0d6efd'],
 		dataLabels: {
 			enabled: false,
-			enabledOnSeries: [1]
 		},
 		xaxis: {
-			categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+			categories: ['Jan','Feb', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct','Nov','Dec'],
 		},
 	};
-	var chart = new ApexCharts(document.querySelector("#chart1"), options);
+
+	// Initialiser et rendre le graphique
+	var chart = new ApexCharts(chartElement, options);
 	chart.render();
-	
+
 
 
 
@@ -169,7 +174,7 @@ chart.render();
 	};
 	var chart = new ApexCharts(document.querySelector("#chart3"), options);
 	chart.render();
-	
+
 
 
 
@@ -244,5 +249,5 @@ chart.render();
 
 
 
-    	
+
 });

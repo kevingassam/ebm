@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Blog;
 use App\Models\Contact;
+use App\Models\PageVisit;
 use App\Models\Partenaire;
 use App\Models\Projet;
 use App\Models\Service;
 use App\Models\Temoignage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class FrontController extends Controller
@@ -41,14 +43,14 @@ class FrontController extends Controller
 
     public function get_devis(Request $request)
     {
-        if($request->get('service_id')){
+        if ($request->get('service_id')) {
             $service_id = $request->get('service_id');
             $service = Service::find($service_id);
         }
-        $services = Service::select('id','titre')->get();
+        $services = Service::select('id', 'titre')->get();
         return view("front.get_devis")
-        ->with('service', $service ?? null)
-        ->with('services', $services);
+            ->with('service', $service ?? null)
+            ->with('services', $services);
     }
 
 
@@ -66,9 +68,9 @@ class FrontController extends Controller
 
         $service = Service::find($request->input('service_id'));
         $message = $request->input('message');
-        if($service){
-            $contenu = "<b>Service:</b> ". $service->titre. "<br> <b>Message:</b> ". $message;
-        }else{
+        if ($service) {
+            $contenu = "<b>Service:</b> " . $service->titre . "<br> <b>Message:</b> " . $message;
+        } else {
             $contenu =  $message;
         }
 
@@ -213,7 +215,7 @@ class FrontController extends Controller
         // Récupérer d'autres articles en excluant l'article actuel
         $autres = Blog::where('id', '!=', $article->id)
             ->orderBy('created_at', 'desc')
-            ->select('id','titre','created_at')
+            ->select('id', 'titre', 'created_at')
             ->take(3)
             ->get();
 
@@ -286,14 +288,29 @@ class FrontController extends Controller
     }
 
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        $total_projets = Projet::count();
-        $total_articles = Blog::count();
+        $year = $request->get('year') ?? date('Y');
+        // Mois sous forme abrégée en français
+        $months = ['Jan', 'Feb', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        // Récupérer le total des visites uniques pour chaque mois de l'année spécifiée
+        $monthlyVisits = PageVisit::select(DB::raw('MONTH(visit_date) as month'), DB::raw('COUNT(*) as total'))
+            ->whereYear('visit_date', $year)
+            ->groupBy(DB::raw('MONTH(visit_date)'))
+            ->orderBy(DB::raw('MONTH(visit_date)'))
+            ->pluck('total', 'month')
+            ->toArray();
+
+        // Créer un tableau avec les totaux, en initialisant les mois sans visite à 0
+        $visitsPerMonth = [];
+        foreach (range(1, 12) as $month) {
+            $visitsPerMonth[] = $monthlyVisits[$month] ?? 0;
+        }
         return view("admin.dashboard")
-            ->with('total_projets', $total_projets)
-            ->with('total_etages', 0)
-            ->with('total_articles', $total_articles);
+            ->with('months', $months)
+            ->with('year', $year)
+            ->with('visitsPerMonth', $visitsPerMonth);
     }
 
 

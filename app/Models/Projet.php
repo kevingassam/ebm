@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Projet extends Model
 {
-    protected $fillable = ['nom', 'photo', 'photos', 'description'];
+        protected $fillable = ['nom', 'photo', 'photos', 'description'];
+
 
     use HasFactory;
 

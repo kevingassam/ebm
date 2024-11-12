@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Temoignage extends Model
 {
-    protected $fillable = ['nom', 'poste', 'photo', 'note', 'message'];
+        protected $fillable = ['nom', 'poste', 'photo', 'note', 'message'];
+
 
     use HasFactory;
 

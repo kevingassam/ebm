@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Storage;
 
 class Information extends Model
 {
-    protected $fillable = ['app_name', 'email1', 'email2', 'tel1', 'tel2', 'logo', 'icon', 'adresse1', 'adresse2', 'text_footer', 'slogan', 'map', 'video', 'facebook', 'twitter', 'youtube', 'instagram', 'linkedin'];
+        protected $fillable = ['app_name', 'email1', 'email2', 'tel1', 'tel2', 'logo', 'icon', 'adresse1', 'adresse2', 'text_footer', 'slogan', 'map', 'video', 'facebook', 'twitter', 'youtube', 'instagram', 'linkedin', 'about_cover', 'about_titre', 'about_texte'];
+
 
     use HasFactory;
 
