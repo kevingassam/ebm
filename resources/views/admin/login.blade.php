@@ -44,8 +44,11 @@
                 <div class="col-12 col-xl-5 col-xxl-4 auth-cover-right align-items-center justify-content-center">
                     <div class="card rounded-0 m-3 mb-0 border-0">
                         <div class="card-body p-sm-5">
-                            <img src="{{ $infos->GetLogo() }}" class="mb-4" height="40" alt="{{ $infos->app_name }}">
-                            <h4 class="fw-bold">{{ $infos->app_name }}</h4>
+                            <a href="{{ route('home') }}">
+                                <img src="{{ $infos->GetLogo() }}" class="mb-4" height="40"
+                                    alt="{{ $infos->app_name }}">
+                                <h4 class="fw-bold text-black">{{ $infos->app_name }}</h4>
+                            </a>
                             <p class="mb-0">Entrez vos identifiants pour vous connecter à votre compte</p>
 
                             <div class="form-body mt-4">
@@ -53,8 +56,9 @@
                                     @csrf
                                     <div class="col-12">
                                         <label for="inputEmailAddress" class="form-label">Adresse Email</label>
-                                        <input type="email" class="form-control  border-3" id="inputEmailAddress" required
-                                            name="email" value="{{ old('email') }}" placeholder="jhon@example.com">
+                                        <input type="email" class="form-control  border-3" id="inputEmailAddress"
+                                            required name="email" value="{{ old('email') }}"
+                                            placeholder="jhon@example.com">
                                         @error('email')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -64,7 +68,7 @@
                                         <div class="input-group" id="show_hide_password">
                                             <input type="password" class="form-control border-end-0  border-3" required
                                                 name="password" id="inputChoosePassword"
-                                                placeholder="Enter Password">
+                                                placeholder="Entre le mot de passe">
                                             <a href="javascript:;" class="input-group-text bg-transparent  border-3"><i
                                                     class="bi bi-eye-slash-fill"></i></a>
                                         </div>
@@ -75,15 +79,16 @@
                                     <div class="col-md-6">
                                         <div class="form-check form-switch  border-3">
                                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-                                            <label class="form-check-label" for="flexSwitchCheckChecked">Remember
-                                                Me</label>
+                                            <label class="form-check-label" for="flexSwitchCheckChecked">
+                                                Souviens-toi de moi
+                                            </label>
                                         </div>
                                     </div>
                                     <div class="col-md-6 text-end">
                                     </div>
                                     <div class="col-12">
                                         <div class="d-grid">
-                                            <button type="submit" class="btn  border-3 btn-danger">
+                                            <button type="submit" class="btn  border-3 btn-dark">
                                                 Connexion
                                             </button>
                                         </div>
@@ -112,8 +117,8 @@
     <!--plugins-->
     <script src="/admin/js/jquery.min.js"></script>
     <style>
-        .bg-primary{
-            background:url('/img/modern-tokyo-street-background.webp')no-repeat;
+        .bg-primary {
+            background: url('/img/business-people-discussing-charts-graphs.webp')no-repeat;
             background-size: cover;
             background-position: center;
         }

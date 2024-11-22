@@ -46,7 +46,6 @@ Route::post('/login', [FrontController::class, 'login_post'])->name('login.post'
 Route::get('/api-logo', [ApiCrmController::class, 'logo'])->name('logo');
 
 Route::middleware('auth')->group(function () {
-
     Route::get('/dashboard', [FrontController::class, 'dashboard'])->name('dashboard');
     Route::get('/about-config', [ConfigurationController::class, 'about_config'])->name('about-config');
     Route::resource('blogs', BlogController::class);

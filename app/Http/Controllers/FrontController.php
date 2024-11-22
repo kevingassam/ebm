@@ -92,7 +92,7 @@ class FrontController extends Controller
         $body = $response->body();       // Récupère le corps de la réponse
         if ($response->successful()) {
             return redirect()->back()
-                ->with('success', 'Votre demande a bien été reçu et va être envoyé vers l\'équipe de support.');
+                ->with('success', 'Votre demande a bien été reçu et va être envoyé vers l\'équipe commerciale .');
         } else {
             // Affichez les détails pour comprendre l'erreur
             return redirect()->back()
@@ -133,7 +133,7 @@ class FrontController extends Controller
         $body = $response->body();       // Récupère le corps de la réponse
         if ($response->successful()) {
             return redirect()->back()
-                ->with('success', 'Votre message a bien été reçu et va être envoyé vers l\'équipe de support.');
+                ->with('success', 'Votre message a bien été reçu et va être envoyé vers l\'équipe commerciale.');
         } else {
             // Affichez les détails pour comprendre l'erreur
             return redirect()->back()
