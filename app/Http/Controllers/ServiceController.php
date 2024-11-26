@@ -9,15 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class ServiceController extends Controller
 {
     //contructor
-    public $ListTypeService ;
-    public function __construct(){
-        $this->ListTypeService = [
-            "Construction de maisons",
-            "Rénovation de maisons",
-            "Construction d'immeubles",
-            "Projets immobiliers pour les promoteurs"
-        ];
-    }
+
     public function index()
     {
         $services = Service::paginate(15);
@@ -27,15 +19,13 @@ class ServiceController extends Controller
 
 
     public function create(){
-        return view('admin.services.add')
-        ->with('types', $this->ListTypeService);
+        return view('admin.services.add');
     }
 
     public function edit($id){
         $service = Service::find($id);
         return view('admin.services.update')
-        ->with('service', $service)
-        ->with('types', $this->ListTypeService);
+        ->with('service', $service);
     }
 
     public function store(Request $request)
@@ -49,7 +39,6 @@ class ServiceController extends Controller
         $service = new Service();
         $service->titre = $request->input('titre');
         $service->description = $request->input('description');
-        $service->type = $request->input('type');
         $service->image = $request->file('image')->store('services', 'public');
         $service->save();
         return redirect()->route('services.index')
@@ -68,7 +57,6 @@ class ServiceController extends Controller
         $service = Service::find($id);
         $service->titre = $request->input('titre');
         $service->description = $request->input('description');
-        $service->type = $request->input('type');
         if ($request->hasFile('image')) {
             Storage::disk('public')->delete($service->image);
             $service->image = $request->file('image')->store('services', 'public');

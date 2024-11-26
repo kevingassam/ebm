@@ -18,6 +18,40 @@ class ConfigurationController extends Controller
         return view('admin.about_config');
     }
 
+
+    public function update_about(Request $request)
+    {
+        $request->validate([
+            'about_titre' => 'nullable|string|max:3000',
+            'about_texte' => 'nullable|string|max:50000',
+            'about_cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
+            'pdf_presentation' => 'nullable|mimes:pdf|max:3048',
+        ]);
+
+        $information = Information::first();
+        $information->about_titre = $request->input("about_titre");
+        $information->about_texte = $request->input("about_texte");
+        if ($request->file("pdf_presentation")) {
+            if ($information->pdf_presentation) {
+                Storage::disk('public')->delete($information->pdf_presentation);
+            }
+            $information->pdf_presentation = $request->file('pdf_presentation')->store('informations/photos', 'public');
+        }
+
+        if ($request->file("about_cover")) {
+            if ($information->about_cover) {
+                Storage::disk('public')->delete($information->about_cover);
+            }
+            $information->about_cover = $request->file('about_cover')->store('informations/photos', 'public');
+        }
+        $information->save();
+        return response()
+            ->json([
+                'statut' => true,
+                'message' => 'Configuration modifiée avec succès!',
+            ], 200);
+    }
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -39,9 +73,6 @@ class ConfigurationController extends Controller
             'instagram' => 'nullable|url',
             'map' => 'nullable|string|max:5000',
             'video' => 'nullable|mimes:jpeg,png,jpg,gif,svg,mp4,mov,avi|max:20480',
-            'about_titre' => 'nullable|string|max:3000',
-            'about_texte' => 'nullable|string|max:50000',
-            'about_cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048'
         ]);
 
         $information = Information::first();
@@ -59,16 +90,10 @@ class ConfigurationController extends Controller
         $information->twitter = $request->input("twitter");
         $information->linkedin = $request->input("linkedin");
         $information->youtube = $request->input("youtube");
-        $information->about_titre = $request->input("about_titre");
-        $information->about_texte = $request->input("about_texte");
 
 
-        if ($request->file("about_cover")) {
-            if ($information->about_cover) {
-                Storage::disk('public')->delete($information->about_cover);
-            }
-            $information->about_cover = $request->file('about_cover')->store('informations/photos', 'public');
-        }
+
+
         if ($request->file("logo")) {
             if ($information->logo) {
                 Storage::disk('public')->delete($information->logo);

@@ -24,7 +24,7 @@
         </div>
         <!--end breadcrumb-->
 
-        <form action="{{ route('configurations.update', $infos->id) }}" id="uploadForm" method="post"
+        <form action="{{ route('update_about') }}" id="uploadForm" method="post"
             enctype="multipart/form-data">
             <input type="hidden" class="form-control" required placeholder="Nom du projet" value="{{ $infos->app_name }}"
                 name="app_name" />
@@ -37,8 +37,8 @@
                             <div class="col-12 col-sm-12">
                                 <div class="mb-4">
                                     <label for="titre" for="about_titre">Titre</label>
-                                    <input type="text" class="form-control" name="about_titre" placeholder="Titre de la page a propos"
-                                        value="{{ $infos->about_titre }}">
+                                    <input type="text" class="form-control" name="about_titre"
+                                        placeholder="Titre de la page a propos" value="{{ $infos->about_titre }}">
                                 </div>
                             </div>
                             <div class="col-4 col-sm-12">
@@ -87,7 +87,29 @@
                                     </span>
                                 @enderror
                                 <br>
-                                <img src="{{ $infos->GetAboutPhotoCover() }}" class="w-100" alt="about_cover" srcset="">
+                                <img src="{{ $infos->GetAboutPhotoCover() }}" class="w-100" alt="about_cover"
+                                    srcset="">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-12">
+                                <label for="pdf_presentation" class="form-label fw-bold">
+                                    Pdf de présentation
+                                </label>
+                                <input type="file" class="form-control" name="pdf_presentation" />
+                                @error('pdf_presentation')
+                                    <span class="small text-danger">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+                                @if ($infos->pdf_presentation)
+                                    <a href="{{ Storage::url($infos->pdf_presentation) }}" target="_blank">
+                                        Voir le pdf
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -167,21 +189,19 @@
         });
     </script>
 
-<script>
-    $("#fancy-file-upload").FancyFileUpload({
-        params: {
-            action: "fileuploader",
-        },
-        maxfilesize: 1000000,
-    });
-</script>
-<script>
-    tinymce.init({
-        selector: 'textarea',
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-    });
-</script>
+    <script>
+        $("#fancy-file-upload").FancyFileUpload({
+            params: {
+                action: "fileuploader",
+            },
+            maxfilesize: 1000000,
+        });
+    </script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        });
+    </script>
 @endsection
-
-

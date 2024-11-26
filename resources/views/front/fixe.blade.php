@@ -202,7 +202,7 @@
                                                 <a href="{{ route('contact') }}">Contact</a>
                                             </li>
                                             <li class="current-menu-item">
-                                                <a href="{{ route('get_devis') }}">Demande de devi</a>
+                                                <a href="{{ route('get_devis') }}">Demande de devis</a>
                                             </li>
                                         </ul><!-- .nav.navbar-nav end -->
                                     </div><!-- navbar end -->

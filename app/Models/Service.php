@@ -25,4 +25,10 @@ class Service extends Model
     }
 
 
+
+    public function SousServices(){
+        return $this->hasMany(SousService::class);
+    }
+
+
 }

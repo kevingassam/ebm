@@ -71,22 +71,6 @@
                         <div class="card-body">
                             <div class="row g-3">
                                 <div class="col-12">
-                                    <label for="photo">Type de service</label>
-                                    <select name="type" class="form-select" id="type" required>
-                                        <option value=""></option>
-                                        @foreach ($types as $type)
-                                            <option value="{{ $type }}" @selected($service->type == $type)>
-                                                {{ $type }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('type')
-                                        <span class="small text-danger">
-                                            {{ $message }}
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-12">
                                     <label for="image">Image d'illustration</label>
                                     <div class="text-warning small">
                                         Taille : 416px * 400px

@@ -9,6 +9,7 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\PartenaireController;
 use App\Http\Controllers\ProjetController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SousServiceController;
 use App\Http\Controllers\TemoignageController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,7 +38,9 @@ Route::middleware(['track.visits'])->group(function () {
     Route::get('/politique', [FrontController::class, 'politique'])->name('politique');
     Route::get('/mentions', [FrontController::class, 'mentions'])->name('mentions');
     Route::get('/get_devis', [FrontController::class, 'get_devis'])->name('get_devis');
+    Route::get('/get_service', [FrontController::class, 'get_service'])->name('get_service');
     Route::post('/get_devis.post', [FrontController::class, 'get_devis_post'])->name('get_devis.post');
+    Route::post('/get_service.post', [FrontController::class, 'get_service_post'])->name('get_service.post');
 });
 
 Route::get('/login', [FrontController::class, 'login'])->name('login');
@@ -53,6 +56,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/projet.deleteImage', [ProjetController::class, 'deleteSingleImage']);
     Route::resource('temoignages', TemoignageController::class);
     Route::resource('configurations', ConfigurationController::class);
+    Route::post('/about/configuration', [ConfigurationController::class, 'update_about'])->name('update_about');
     Route::resource('banners', BannerController::class);
     Route::resource('services', ServiceController::class);
+
+
+    //gestion des sous services
+    Route::get('/sous_service/{id}', [SousServiceController::class, 'index'])->name('sous_service');
+    Route::post('/sous_service/{id}/delete', [SousServiceController::class, 'destroy'])->name('sous_service.destroy');
+    Route::post('/sous_service', [SousServiceController::class, 'store'])->name('sous_service.store');
+    Route::post('/sous_service.update/{id}/update', [SousServiceController::class, 'update'])->name('sous_service.update');
 });
+

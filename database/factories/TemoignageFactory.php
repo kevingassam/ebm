@@ -19,7 +19,6 @@ class TemoignageFactory extends Factory
         return [
             'nom' => $this->faker->sentence(3),
             'poste' => $this->faker->sentence(2),
-            'photo' => 'https://fakeimg.pl/200x200/?text=200x200',
             'note' => 3,
             'message' => $this->faker->paragraph,
         ];

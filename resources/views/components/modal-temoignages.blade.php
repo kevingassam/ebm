@@ -61,20 +61,13 @@
                                 <span class="small text-danger"> {{ $message }} </span>
                             @enderror
                         </div>
-                        <div class="col-6">
+                        <div class="col-12">
                             <label for="note">Note ( 0 - 5 ) </label>
                             <div class="form-control">
                                 <input type="range" class="w-100" required min="0" max="5" value="{{ old('note',$temoignage->note) }}"
                                     id="note" name="note" >
                             </div>
                             @error('note')
-                                <span class="small text-danger"> {{ $message }} </span>
-                            @enderror
-                        </div>
-                        <div class="col-6">
-                            <label for="photo">Photo avatar</label>
-                            <input type="file" class="form-control"  id="photo" name="photo" >
-                            @error('photo')
                                 <span class="small text-danger"> {{ $message }} </span>
                             @enderror
                         </div>

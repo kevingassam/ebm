@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string("nom");
             $table->string("poste");
-            $table->string("photo");
             $table->integer("note")->default(0);
             $table->text("message");
             $table->timestamps();

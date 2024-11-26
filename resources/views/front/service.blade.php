@@ -88,6 +88,26 @@
                     <ul class="aside-widgets">
                         <li class="widget widget_nav_menu clearfix">
                             <div class="title">
+                                <h3>Les sous-services</h3>
+                            </div><!-- .title end -->
+
+                            <!-- .menu-quick-links-container start -->
+                            <div class="menu-quick-links-container">
+                                <ul id="menu-quick-links" class="menu">
+                                    @foreach ($service->SousServices as $sous)
+                                        <li class="menu-item">
+                                            <a href="{{ route('get_service') }}">
+                                                {{ Str::limit($sous->titre ,30) }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul><!-- #menu-quick-links end -->
+                            </div><!-- .menu-quick-links-container end -->
+                        </li><!-- .widget_nav_menu end -->
+
+
+                        <li class="widget widget_nav_menu clearfix">
+                            <div class="title">
                                 <h3>Autres services</h3>
                             </div><!-- .title end -->
 

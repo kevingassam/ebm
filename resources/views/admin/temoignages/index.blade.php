@@ -70,10 +70,6 @@
                                         </td>
                                         <td>
                                             <a class="d-flex align-items-center gap-3" href="javascript:;">
-                                                <div class="customer-pic">
-                                                    <img src="{{ $item->Cover() }}" class="rounded-circle"
-                                                        width="40" height="40" alt="">
-                                                </div>
                                                 <p class="mb-0 customer-name fw-bold">
                                                     {{ $item->nom }}
                                                 </p>
@@ -157,20 +153,13 @@
                                     <span class="small text-danger"> {{ $message }} </span>
                                 @enderror
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <label for="note">Note ( 0 - 5 ) </label>
                                 <div class="form-control">
                                     <input type="range" class="w-100" required min="0" max="5"
                                         id="note" name="note" >
                                 </div>
                                 @error('note')
-                                    <span class="small text-danger"> {{ $message }} </span>
-                                @enderror
-                            </div>
-                            <div class="col-6">
-                                <label for="photo">Photo avatar</label>
-                                <input type="file" class="form-control" required id="photo" name="photo" >
-                                @error('photo')
                                     <span class="small text-danger"> {{ $message }} </span>
                                 @enderror
                             </div>

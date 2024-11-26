@@ -53,8 +53,7 @@
                     <div class="row mb-30">
                         <!-- .col-md-12 start -->
                         <div class="col-md-12">
-                            <img src="{{ $infos->GetAboutPhotoCover() }}"
-                                alt="{{ $infos->app_name }}">
+                            <img src="{{ $infos->GetAboutPhotoCover() }}" alt="{{ $infos->app_name }}">
                         </div><!-- .col-md-12 end -->
                     </div><!-- .row end -->
 
@@ -65,11 +64,11 @@
                             <!-- .custom-heading-01 start -->
                             <div class="custom-heading-01">
                                 <span>{{ $infos->app_name }}</span>
-                                <h2>{{ $infos->about_titre ?? "[ Titre de la page ]" }}</h2>
+                                <h2>{{ $infos->about_titre ?? '[ Titre de la page ]' }}</h2>
                             </div><!-- .custom-heading-01 end -->
 
                             <p>
-                                {!! $infos->about_texte ?? "[ Description de la page ]" !!}
+                                {!! $infos->about_texte ?? '[ Description de la page ]' !!}
                             </p>
                         </div><!-- .col-md-12 end -->
                     </div><!-- .row end -->
@@ -94,6 +93,26 @@
 
                     <!-- .aside-widgets start -->
                     <ul class="aside-widgets">
+                        @if ($infos->pdf_presentation)
+                            <li class="widget">
+                                <div class="feature-box custom-background bkg-color-dark dark">
+                                    <div class="icon-container">
+                                        <i class="lynny-pages-1"></i>
+                                    </div><!-- .icon-container end -->
+
+                                    <div class="text-container">
+                                        <h3>
+                                            Document de présentation  de {{ $infos->app_name }}.
+                                        </h3>
+                                        <a href="{{ Storage::url($infos->pdf_presentation) }}" target="__blank" download="presentation.pdf" class="read-more">
+                                            Télécharger
+                                        </a><!--.read-more end -->
+                                    </div><!-- .text-container end -->
+                                </div><!-- .feature-box end -->
+                            </li><!-- .widget end -->
+                        @endif
+
+
                         <li class="widget widget_nav_menu clearfix">
                             <div class="title">
                                 <h3>Nos derniers articles</h3>
@@ -104,7 +123,8 @@
                                 <ul id="menu-quick-links" class="menu">
                                     @foreach ($articles as $article)
                                         <li class="menu-item current-menu-item">
-                                            <a href="{{ route('article',['id'=>$article->id,'titre'=>Str::slug($article->titre)])}}">
+                                            <a
+                                                href="{{ route('article', ['id' => $article->id, 'titre' => Str::slug($article->titre)]) }}">
                                                 {{ Str::limit($article->titre, 30) }}
                                             </a>
                                         </li>
@@ -124,8 +144,9 @@
                                 <ul id="menu-quick-links" class="menu">
                                     @foreach ($services as $service)
                                         <li class="menu-item current-menu-item">
-                                            <a href="{{ route('service', ['id' => $service->id, 'titre' => Str::slug($service->titre)]) }}">
-                                                {{ Str::limit($service->titre ,20) }}
+                                            <a
+                                                href="{{ route('service', ['id' => $service->id, 'titre' => Str::slug($service->titre)]) }}">
+                                                {{ Str::limit($service->titre, 20) }}
                                             </a>
                                         </li>
                                     @endforeach
@@ -142,15 +163,15 @@
                                 </div><!-- .icon-container end -->
 
                                 <div class="text-container">
-                                    <h3>Demander un devis/h3>
-                                        <p>
-                                            Obtenez des conseils professionnels .
-                                        </p>
+                                    <h3>Demander un devis</h3>
+                                    <p>
+                                        Obtenez des conseils professionnels .
+                                    </p>
 
-                                        <a href="{{ route('get_devis') }}" class="read-more">
-                                            Demander un devis
-                                        </a><!--.read-more end -->
-                                        </a><!-- .read-more end -->
+                                    <a href="{{ route('get_devis') }}" class="read-more">
+                                        Demander un devis
+                                    </a><!--.read-more end -->
+                                    </a><!-- .read-more end -->
                                 </div><!-- .text-container end -->
                             </div><!-- .feature-box end -->
                         </li><!-- .widget end -->

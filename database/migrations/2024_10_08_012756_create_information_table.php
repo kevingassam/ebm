@@ -34,6 +34,10 @@ return new class extends Migration
             $table->string("linkedin")->nullable();
 
 
+
+            $table->string("pdf_presentation")->nullable();
+
+
             //page about
             $table->string("about_cover")->nullable();
             $table->text("about_titre")->nullable();

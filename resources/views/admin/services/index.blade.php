@@ -54,7 +54,7 @@
                                         <input class="form-check-input" type="checkbox">
                                     </th>
                                     <th>Titre</th>
-                                    <th>Type</th>
+                                    <th>Sous Services</th>
                                     <th>Date modification</th>
                                     <th>Date publication</th>
                                     <th></th>
@@ -77,7 +77,7 @@
                                                 </p>
                                             </a>
                                         </td>
-                                        <td> {{ $service->type }} </td>
+                                        <td> {{ $service->SousServices->count() }} </td>
                                         <td>
                                             {{ $service->updated_at->diffForHumans() }}
                                         </td>
@@ -89,6 +89,11 @@
                                             <a href="{{ route('services.edit', $service->id) }}" type="button"
                                                 class="btn btn-sm btn-dark">
                                                 <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <a href="{{ route('sous_service', $service->id) }}" type="button"
+                                                class="btn btn-sm btn-warning">
+                                                <i class="bi bi-list-nested"></i>
+                                                Sous-Services
                                             </a>
                                             <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#ModalDelete{{ $service->id }}">
