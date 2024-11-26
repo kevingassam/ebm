@@ -25,7 +25,7 @@ class ConfigurationController extends Controller
             'about_titre' => 'nullable|string|max:3000',
             'about_texte' => 'nullable|string|max:50000',
             'about_cover' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:3048',
-            'pdf_presentation' => 'nullable|mimes:pdf|max:3048',
+            'pdf_presentation' => 'nullable|file|mimes:pdf|max:4072',
         ]);
 
         $information = Information::first();

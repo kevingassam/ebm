@@ -29,7 +29,6 @@
             <input type="hidden" class="form-control" required placeholder="Nom du projet" value="{{ $infos->app_name }}"
                 name="app_name" />
             @csrf
-            @method('PUT')
             <div class="row">
                 <div class="col-sm-8">
                     <div class="card card-body">
@@ -99,16 +98,22 @@
                                 <label for="pdf_presentation" class="form-label fw-bold">
                                     Pdf de présentation
                                 </label>
-                                <input type="file" class="form-control" name="pdf_presentation" />
+                                <input type="file" class="form-control" name="pdf_presentation" accept=".pdf" />
                                 @error('pdf_presentation')
                                     <span class="small text-danger">
                                         {{ $message }}
                                     </span>
                                 @enderror
                                 @if ($infos->pdf_presentation)
-                                    <a href="{{ Storage::url($infos->pdf_presentation) }}" target="_blank">
-                                        Voir le pdf
-                                    </a>
+                                    <div class="card mt-2 p-2 ">
+                                        <div class="mb-2">
+                                            <iframe src="{{ Storage::url($infos->pdf_presentation) }}" class="w-100" frameborder="0"></iframe>
+                                        </div>
+                                        <a href="{{ Storage::url($infos->pdf_presentation) }}" target="_blank">
+                                            <i class="bi bi-file-pdf"></i>
+                                            Voir le pdf
+                                        </a>
+                                    </div>
                                 @endif
                             </div>
                         </div>

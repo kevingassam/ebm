@@ -88,7 +88,7 @@
                     <ul class="aside-widgets">
                         <li class="widget widget_nav_menu clearfix">
                             <div class="title">
-                                <h3>Les sous-services</h3>
+                                <h3>Les sous-services ( {{ $service->SousServices->count() }} ) </h3>
                             </div><!-- .title end -->
 
                             <!-- .menu-quick-links-container start -->
