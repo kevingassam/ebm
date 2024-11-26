@@ -121,10 +121,10 @@
     </main>
     <!--end main content-->
 
-    
+
 
      <!-- Modal -->
- <div class="modal fade" id="ModalUpdate{{ $sous->id }}" tabindex="-1">
+ <div class="modal fade" id="add" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
