@@ -30,6 +30,9 @@
                             <li>
                                 <a href="{{ route('service_list') }}">Services</a>
                             </li>
+                            <li>
+                                <a href="{{ route('service_list') }}">Sous-Service</a>
+                            </li>
 
                             <li>
                                 <span class="active">{{ Str::limit($service->titre, 30) }}</span>
@@ -84,31 +87,12 @@
 
                 <aside class="col-md-4 aside-right">
 
-                    <!-- .aside-widgets start -->
-                    <ul class="aside-widgets">
-                        <li class="widget widget_nav_menu clearfix">
-                            <div class="title">
-                                <h3>Les sous-services</h3>
-                            </div><!-- .title end -->
 
-                            <!-- .menu-quick-links-container start -->
-                            <div class="menu-quick-links-container">
-                                <ul id="menu-quick-links" class="menu">
-                                    @foreach ($service->SousServices as $sous)
-                                        <li class="menu-item">
-                                            <a href="{{ route('s_service', ['id' => $sous->id, 'titre' => Str::slug($sous->titre)]) }}">
-                                                {{ Str::limit($sous->titre ,30) }}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul><!-- #menu-quick-links end -->
-                            </div><!-- .menu-quick-links-container end -->
-                        </li><!-- .widget_nav_menu end -->
 
 
                         <li class="widget widget_nav_menu clearfix">
                             <div class="title">
-                                <h3>Autres services</h3>
+                                <h3>Autres sous-services</h3>
                             </div><!-- .title end -->
 
                             <!-- .menu-quick-links-container start -->
@@ -132,14 +116,14 @@
                                 </div><!-- .icon-container end -->
 
                                 <div class="text-container">
-                                    <h3>Demander un devis</h3>
+                                    <h3>Demander un service</h3>
                                     <p>
                                         Obtenez des conseils professionnels pour
                                         création et gestion d'une entreprise prospère.
                                     </p>
 
-                                    <a href="{{ route('get_devis') }}?service_id={{ $service->id }}" class="read-more">
-                                        Obtenir mon devis
+                                    <a href="{{ route('get_service') }}?service_id={{ $service->id }}" class="read-more">
+                                        Demander ce service
                                     </a><!-- .read-more end -->
                                 </div><!-- .text-container end -->
                             </div><!-- .feature-box end -->

@@ -291,7 +291,7 @@ class FrontController extends Controller
         if (!$service) {
             abort(404);
         }
-        $autres = Blog::where('id', '!=', $service->id)
+        $autres = Service::where('id', '!=', $service->id)
             ->orderBy('created_at', 'desc')
             ->take(8)
             ->get();
@@ -300,6 +300,23 @@ class FrontController extends Controller
             ->with('titre', $titre)
             ->with('autres', $autres);
     }
+
+
+    public function s_service($id, $titre){
+        $SousService = SousService::find($id);
+        if (!$SousService) {
+            abort(404);
+        }
+        $autres = SousService::where('service_id', '!=', $SousService->service_id)
+            ->orderBy('created_at', 'desc')
+            ->take(8)
+            ->get();
+        return view("front.sous-service")
+            ->with('service', $SousService)
+            ->with('titre', $titre)
+            ->with('autres', $autres);
+    }
+
 
     public function blogs(Request $request)
     {

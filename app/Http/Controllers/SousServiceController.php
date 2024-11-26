@@ -26,7 +26,7 @@ class SousServiceController extends Controller
     {
         $request->validate([
             'titre' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string|max:25500',
             'service_id' => 'required|exists:services,id',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
@@ -46,7 +46,7 @@ class SousServiceController extends Controller
     {
         $request->validate([
             'titre' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'required|string|max:25500',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'service_id' => 'required|exists:services,id',
         ]);

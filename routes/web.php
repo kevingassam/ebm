@@ -34,6 +34,7 @@ Route::middleware(['track.visits'])->group(function () {
     Route::get('/projet', [FrontController::class, 'projet'])->name('projet');
     Route::get('/list/service', [FrontController::class, 'services'])->name('service_list');
     Route::get('/service/{id}/{titre}', [FrontController::class, 'service'])->name('service');
+    Route::get('/sous-service/{id}/{titre}', [FrontController::class, 's_service'])->name('s_service');
     Route::get('/projet/{id}/{titre}', [FrontController::class, 'projet_details'])->name('projet_details');
     Route::get('/politique', [FrontController::class, 'politique'])->name('politique');
     Route::get('/mentions', [FrontController::class, 'mentions'])->name('mentions');
