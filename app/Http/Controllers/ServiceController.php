@@ -33,7 +33,6 @@ class ServiceController extends Controller
         $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string|max:20055',
-            'type' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
         $service = new Service();
@@ -51,7 +50,6 @@ class ServiceController extends Controller
         $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'required|string|max:20055',
-            'type' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
         $service = Service::find($id);
