@@ -39,9 +39,7 @@ Route::middleware(['track.visits'])->group(function () {
     Route::get('/politique', [FrontController::class, 'politique'])->name('politique');
     Route::get('/mentions', [FrontController::class, 'mentions'])->name('mentions');
     Route::get('/get_devis', [FrontController::class, 'get_devis'])->name('get_devis');
-    Route::get('/get_service', [FrontController::class, 'get_service'])->name('get_service');
     Route::post('/get_devis.post', [FrontController::class, 'get_devis_post'])->name('get_devis.post');
-    Route::post('/get_service.post', [FrontController::class, 'get_service_post'])->name('get_service.post');
 });
 
 Route::get('/login', [FrontController::class, 'login'])->name('login');

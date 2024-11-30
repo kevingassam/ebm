@@ -122,7 +122,7 @@
                                         création et gestion d'une entreprise prospère.
                                     </p>
 
-                                    <a href="{{ route('get_service') }}?service_id={{ $service->id }}" class="read-more">
+                                    <a href="{{ route('get_devis') }}?service_id={{ $service->id }}" class="read-more">
                                         Demander ce service
                                     </a><!-- .read-more end -->
                                 </div><!-- .text-container end -->

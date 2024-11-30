@@ -76,14 +76,36 @@
                 <form method="POST" action="{{ route('get_devis.post') }}">
                     @csrf
                     <div class="row">
-                        @if ($service)
-                            <div class="col-sm-12">
-                                <div class="alert alert-service">
-                                    Vous avez choisi le service : <strong>{{ $service->titre }}</strong>
-                                </div>
-                                <input type="hidden" name="service_id" value="{{ $service->id }}">
+
+
+                        <div class="col-sm-12 pb-3-devis">
+                            <div class="form-group">
+                                <label for="service-dropdown">Sélectionnez un service :</label>
+                                <select id="service-dropdown" class="form-control" name="service">
+                                    <option value="">-- Choisir un service --</option>
+                                    @foreach ($services as $service)
+                                        <option value="{{ $service->id }}">{{ $service->titre }}</option>
+                                    @endforeach
+                                </select>
                             </div>
-                        @endif
+
+                            <div class="form-group">
+                                <label>Sous-services disponibles :</label>
+                                <div id="sous-services-container">
+                                    <div class="text-muted small text-danger">
+                                        Aucun sous-service disponible pour le service sélectionné.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sous-services sélectionnés :</label>
+                                <div id="sous-services-container-selected">
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="col-sm-6 pb-3-devis">
                             <label for="">Nom et prénom</label>
                             <input type="text" class="form-control" value="{{ old('nom') }}" required name="nom"
@@ -157,5 +179,90 @@
         </div><!-- .row end -->
     </div>
     <br><br><br>
-</div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    const services = @json($services->mapWithKeys(fn($service) => [$service->id => $service->sousServices]));
+
+    $(document).ready(function () {
+        const selectedSousServices = new Set(); // Ensemble pour stocker les IDs des sous-services sélectionnés
+
+        // Gestion du changement de service
+        $('#service-dropdown').on('change', function () {
+            const serviceId = $(this).val();
+            const sousServices = services[serviceId] || [];
+            const container = $('#sous-services-container');
+
+            container.empty(); // Vide les sous-services précédents
+
+            if (sousServices.length > 0) {
+                sousServices.forEach(sousService => {
+                    const checkbox = `
+                        <div class="form-check">
+                            <input class="form-check-input sous-service-checkbox" type="checkbox"
+                                value="${sousService.id}" id="sous-service-${sousService.id}" name="sous_services[]">
+                            <label class="form-check-label" for="sous-service-${sousService.id}">
+                                ${sousService.titre}
+                            </label>
+                        </div>
+                    `;
+                    container.append(checkbox);
+                });
+
+                // Ajout d'un gestionnaire d'événement pour les nouvelles cases à cocher
+                $('.sous-service-checkbox').on('change', function () {
+                    const sousServiceId = $(this).val();
+                    const sousServiceTitle = $(this).next('label').text();
+
+                    if ($(this).is(':checked')) {
+                        // Ajouter un sous-service à la liste sélectionnée
+                        if (!selectedSousServices.has(sousServiceId)) {
+                            selectedSousServices.add(sousServiceId);
+                            addSelectedSousService(sousServiceId, sousServiceTitle);
+                        }
+                    } else {
+                        // Retirer un sous-service de la liste sélectionnée
+                        removeSelectedSousService(sousServiceId);
+                    }
+                });
+            } else {
+                container.append('<p class="text-muted text-danger">Aucun sous-service disponible.</p>');
+            }
+        });
+
+        // Fonction pour ajouter un sous-service sélectionné
+        function addSelectedSousService(id, title) {
+            const containerSelected = $('#sous-services-container-selected');
+            const sousServiceElement = `
+                <div class="selected-sous-service" data-id="${id}">
+                    <span>- ${title}</span>
+
+                </div>
+            `;
+            containerSelected.append(sousServiceElement);
+
+            // Ajouter un gestionnaire pour le bouton "Supprimer"
+            containerSelected.find('.remove-sous-service').last().on('click', function () {
+                removeSelectedSousService(id);
+            });
+        }
+
+        // Fonction pour retirer un sous-service sélectionné
+        function removeSelectedSousService(id) {
+            selectedSousServices.delete(id); // Retirer de l'ensemble
+            $(`#sous-services-container-selected .selected-sous-service[data-id="${id}"]`).remove(); // Retirer du DOM
+            $(`#sous-service-${id}`).prop('checked', false); // Décocher la case à cocher associée
+        }
+    });
+</script>
+
+<style>
+    .text-danger{
+        color: red;
+        font-weight: bold;
+    }
+</style>
 @endsection

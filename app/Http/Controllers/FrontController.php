@@ -48,68 +48,17 @@ class FrontController extends Controller
             $service_id = $request->get('service_id');
             $service = Service::find($service_id);
         }
-        $services = Service::select('id', 'titre')->get();
-        return view("front.get_devis")
-            ->with('service', $service ?? null)
-            ->with('services', $services);
-    }
-
-
-    public function get_service()
-    {
         $services = Service::all();
         $sous_services = SousService::all();
-        return view("front.get_service")
+        return view("front.get_devis")
+            ->with('service', $service ?? null)
             ->with('services', $services)
             ->with('sous_services', $sous_services);
     }
 
 
-    public function get_service_post(Request $request)
-    {
-        $request->validate([
-            'nom' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'telephone' => ['required', 'numeric'],
-            'adresse' => ['nullable', 'string', 'max:2550'],
-            'sous_services' => 'nullable|array',
-            'sous_services.*' => 'exists:sous_services,id',
-        ]);
-
-        $sousServices = $request->input('sous_services') ?? [];
-
-        $contenu= "J'ai besoin des serives suivants : <br>";
-        foreach ($sousServices as $sousService) {
-            $sousService = SousService::find($sousService);
-            $contenu.= '- ' . $sousService->titre. "<br>";
-        }
-        $token = config('services.contact_form.api_key');
-        $url = config('services.contact_form.api') . "contact";
-        $response = Http::withHeaders([
-            'x-api-key' => $token,
-        ])->post($url, [
-            'nom' => $request->input('nom'),
-            'email' => $request->input('email'),
-            'telephone' => $request->input('telephone'),
-            'message' => $contenu,
-            'adresse' => $request->input('adresse') ?? "-",
-            "domaine" => config('app.app_url_demaine'),
-        ]);
-
-        // Déboguer la réponse
-        $status = $response->status();   // Récupère le code d'état HTTP
-        $body = $response->body();       // Récupère le corps de la réponse
-        if ($response->successful()) {
-            return redirect()->back()
-                ->with('success', 'Votre demande a bien été reçu et va être envoyé vers l\'équipe commerciale .');
-        } else {
-            // Affichez les détails pour comprendre l'erreur
-            return redirect()->back()
-                ->with('error', 'Une erreur s\'est produite lors de l\'envoi de votre demande. Code: ' . $status . ' - Réponse: ' . $body);
-        }
 
 
-    }
 
     public function get_devis_post(Request $request)
     {
@@ -119,16 +68,30 @@ class FrontController extends Controller
             'telephone' => ['required', 'numeric'],
             'message' => ['required', 'string', 'max:2550'],
             'adresse' => ['nullable', 'string', 'max:2550'],
-            'service_id' => 'required|integer|exists:services,id'
+            'sous_services' => 'nullable|array',
+            'sous_services.*' => 'exists:sous_services,id',
         ]);
 
 
         $service = Service::find($request->input('service_id'));
         $message = $request->input('message');
+        $sousServices = $request->input('sous_services') ?? [];
+
+        $contenu =  '';
+
+        if ($sousServices) {
+            $contenu = "J'ai besoin des serives suivants : <br>";
+            foreach ($sousServices as $sousService) {
+                $sousService = SousService::find($sousService);
+                $contenu .= '- ' . $sousService->titre . "<br>";
+            }
+        }
+
+        $contenu .= '<hr> ';
         if ($service) {
-            $contenu = "<b>Service:</b> " . $service->titre . "<br> <b>Message:</b> " . $message;
+            $contenu .= "<b>Service:</b> " . $service->titre . "<br> <b>Message:</b> " . $message;
         } else {
-            $contenu =  $message;
+            $contenu .=  $message;
         }
 
         $token = config('services.contact_form.api_key');
@@ -302,7 +265,8 @@ class FrontController extends Controller
     }
 
 
-    public function s_service($id, $titre){
+    public function s_service($id, $titre)
+    {
         $SousService = SousService::find($id);
         if (!$SousService) {
             abort(404);
