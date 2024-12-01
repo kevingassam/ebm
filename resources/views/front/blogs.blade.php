@@ -70,7 +70,7 @@
                                 </a>
 
                                 <a href="{{ route('article',['id'=>$article->id,'titre'=>Str::slug($article->titre)])}}"
-                                    class="read-more">
+                                    class="read-more" style="color: black;">
                                     Lire l'article
                                 </a><!-- .read-more end -->
                             </div><!-- .post-body end -->

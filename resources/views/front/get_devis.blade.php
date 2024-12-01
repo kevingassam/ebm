@@ -13,7 +13,7 @@
                 <div class="col-md-6">
                     <!-- .pt-heading start -->
                     <div class="pt-heading">
-                        <h1>Demande d'un devi</h1>
+                        <h1>Demande d'un devis</h1>
                     </div><!-- .pt-heading end -->
                 </div><!-- .col-md-6 end -->
 
@@ -22,19 +22,17 @@
                     <!-- breadcrumbs start -->
                     <div class="breadcrumb-container clearfix">
                         <ul class="breadcrumb">
-                            <li>Vous êtes ici : </li>
-
                             <li>
                                 <a href="{{ route('home') }}">Accueil</a>
                             </li>
 
                             <li>
-                                <a href="{{ route('projet') }}">Demande d'un devi</a>
+                                <a href="{{ route('projet') }}">Demande d'un devis</a>
                             </li>
 
                             <li>
                                 <span class="active">
-                                    Demande d'un devi
+                                    Demande d'un devis
                                 </span>
                             </li>
                         </ul><!-- .breadcrumb end -->
@@ -79,31 +77,46 @@
 
 
                         <div class="col-sm-12 pb-3-devis">
-                            <div class="form-group">
-                                <label for="service-dropdown">Sélectionnez un service :</label>
-                                <select id="service-dropdown" class="form-control" name="service">
-                                    <option value="">-- Choisir un service --</option>
-                                    @foreach ($services as $service)
-                                        <option value="{{ $service->id }}">{{ $service->titre }}</option>
+                            <label for="">Sélectionnez un service</label>
+                            <div class="dm-dropdown">
+                                <button type="button" class="button">
+                                    Services*
+                                </button>
+                                <div class="dm-dropdown-content">
+                                    @foreach ($services as $key => $service)
+                                        <div class="dm-dropdown-item">
+                                            <label>
+                                                <input type="checkbox" class="parent-checkbox"
+                                                    data-group="group{{ $key }}">
+                                                {{ $service->titre }}
+                                            </label>
+                                            @if ($service->SousServices)
+                                                <div class="dm-dropdown-subitem">
+                                                    @foreach ($service->SousServices as $item)
+                                                        <label>
+                                                            <input type="checkbox" name="sous_services[]"
+                                                                data-name="{{ $item->titre }}"
+                                                                class="child-checkbox group{{ $key }}"
+                                                                value="{{ $item->id }}">
+                                                            {{ $item->titre }}
+                                                        </label>
+                                                    @endforeach
+                                                </div>
+                                            @endif
+                                        </div>
                                     @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Sous-services disponibles :</label>
-                                <div id="sous-services-container">
-                                    <div class="text-muted small text-danger">
-                                        Aucun sous-service disponible pour le service sélectionné.
-                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Sous-services sélectionnés :</label>
-                                <div id="sous-services-container-selected">
+                                <div id="selected-sous-services" class="selected-sous-services">
+                                    <!-- Les badges des sous-services sélectionnés apparaîtront ici -->
                                 </div>
+
                             </div>
+                            @error('sous_services')
+                                <span class="small text-danger">{{ $message }}</span>
+                            @enderror
+                            <input type="hidden" name="selected_services" id="selectedServices">
                         </div>
+
 
 
                         <div class="col-sm-6 pb-3-devis">
@@ -182,87 +195,100 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function updateSelectedServices() {
+            const selectedServicesContainer = document.getElementById('selected-sous-services');
+            const selectedCheckboxes = Array.from(document.querySelectorAll('.child-checkbox:checked'));
 
-<script>
-    const services = @json($services->mapWithKeys(fn($service) => [$service->id => $service->sousServices]));
+            // Met à jour le champ caché pour le formulaire (IDs uniquement)
+            const hiddenInput = document.getElementById('selectedServices');
+            hiddenInput.value = selectedCheckboxes.map(checkbox => checkbox.value).join(',');
 
-    $(document).ready(function () {
-        const selectedSousServices = new Set(); // Ensemble pour stocker les IDs des sous-services sélectionnés
+            // Réinitialise le conteneur des badges
+            selectedServicesContainer.innerHTML = '';
 
-        // Gestion du changement de service
-        $('#service-dropdown').on('change', function () {
-            const serviceId = $(this).val();
-            const sousServices = services[serviceId] || [];
-            const container = $('#sous-services-container');
+            // Ajoute un badge pour chaque sous-service sélectionné
+            selectedCheckboxes.forEach(checkbox => {
+                const badge = document.createElement('span');
+                badge.className = 'badge';
+                badge.textContent = checkbox.dataset.name; // Récupère le nom à partir de data-name
 
-            container.empty(); // Vide les sous-services précédents
-
-            if (sousServices.length > 0) {
-                sousServices.forEach(sousService => {
-                    const checkbox = `
-                        <div class="form-check">
-                            <input class="form-check-input sous-service-checkbox" type="checkbox"
-                                value="${sousService.id}" id="sous-service-${sousService.id}" name="sous_services[]">
-                            <label class="form-check-label" for="sous-service-${sousService.id}">
-                                ${sousService.titre}
-                            </label>
-                        </div>
-                    `;
-                    container.append(checkbox);
-                });
-
-                // Ajout d'un gestionnaire d'événement pour les nouvelles cases à cocher
-                $('.sous-service-checkbox').on('change', function () {
-                    const sousServiceId = $(this).val();
-                    const sousServiceTitle = $(this).next('label').text();
-
-                    if ($(this).is(':checked')) {
-                        // Ajouter un sous-service à la liste sélectionnée
-                        if (!selectedSousServices.has(sousServiceId)) {
-                            selectedSousServices.add(sousServiceId);
-                            addSelectedSousService(sousServiceId, sousServiceTitle);
-                        }
-                    } else {
-                        // Retirer un sous-service de la liste sélectionnée
-                        removeSelectedSousService(sousServiceId);
-                    }
-                });
-            } else {
-                container.append('<p class="text-muted text-danger">Aucun sous-service disponible.</p>');
-            }
-        });
-
-        // Fonction pour ajouter un sous-service sélectionné
-        function addSelectedSousService(id, title) {
-            const containerSelected = $('#sous-services-container-selected');
-            const sousServiceElement = `
-                <div class="selected-sous-service" data-id="${id}">
-                    <span>- ${title}</span>
-
-                </div>
-            `;
-            containerSelected.append(sousServiceElement);
-
-            // Ajouter un gestionnaire pour le bouton "Supprimer"
-            containerSelected.find('.remove-sous-service').last().on('click', function () {
-                removeSelectedSousService(id);
+                selectedServicesContainer.appendChild(badge);
             });
         }
 
-        // Fonction pour retirer un sous-service sélectionné
-        function removeSelectedSousService(id) {
-            selectedSousServices.delete(id); // Retirer de l'ensemble
-            $(`#sous-services-container-selected .selected-sous-service[data-id="${id}"]`).remove(); // Retirer du DOM
-            $(`#sous-service-${id}`).prop('checked', false); // Décocher la case à cocher associée
-        }
-    });
-</script>
+        // Gestion des interactions parent/sous-éléments
+        document.querySelectorAll('.parent-checkbox').forEach(parent => {
+            parent.addEventListener('change', function() {
+                const group = this.dataset.group;
+                const children = document.querySelectorAll(`.child-checkbox.${group}`);
+                children.forEach(child => (child.checked = this.checked));
+                updateSelectedServices();
+            });
+        });
 
-<style>
-    .text-danger{
-        color: red;
-        font-weight: bold;
-    }
-</style>
+        // Gestion des sous-éléments cochés individuellement
+        document.querySelectorAll('.child-checkbox').forEach(child => {
+            child.addEventListener('change', function() {
+                const group = this.classList[1];
+                const parent = document.querySelector(`.parent-checkbox[data-group="${group}"]`);
+                const children = document.querySelectorAll(`.child-checkbox.${group}`);
+                parent.checked = Array.from(children).every(child => child.checked);
+                updateSelectedServices();
+            });
+        });
+
+        // Initialisation pour s'assurer que tout est synchronisé
+        updateSelectedServices();
+    </script>
+
+    <style>
+        .text-danger {
+            color: red;
+            font-weight: bold;
+        }
+
+        .dm-dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100% !important;
+            border: solid 1px rgba(121, 119, 119, 0.541);
+            padding: 6px;
+            border-radius: 5px !important;
+        }
+
+        .dm-dropdown .button {
+            background-color: transparent;
+            color: #333333be;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+            border-radius: 5px !important;
+        }
+
+        .dm-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 1;
+        }
+
+        .dm-dropdown:hover .dm-dropdown-content {
+            display: block;
+        }
+
+        .dm-dropdown-item {
+            margin-bottom: 5px;
+        }
+
+        .dm-dropdown-subitem {
+            margin-left: 20px;
+        }
+    </style>
 @endsection

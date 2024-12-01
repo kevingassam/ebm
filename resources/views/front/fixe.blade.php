@@ -116,7 +116,7 @@
                                                 </div>
 
                                                 <div class="text-container">
-                                                    <span>Localisation</span>
+                                                    <span>Adresse</span>
                                                     <p>
                                                         <a href="{{ route('contact') }}">
                                                             {{ Str::limit($infos->adresse1 , 20) ?? '' }}
@@ -211,7 +211,7 @@
                                         <!-- #search start -->
                                         <div id="search">
                                             <form method="GET" action="{{ route('blog') }}">
-                                                <input class="search-submit" type="submit" required>
+                                                <input class="search-submit" type="submit" required style="background-color: white;color:black;">
                                                 <input id="m_search" name="s" type="text"
                                                     placeholder="Recherche...">
                                             </form>
@@ -270,7 +270,7 @@
 
                             <ul>
                                 <li>
-                                    <a href="{{ route('home') }}">Accueik</a>
+                                    <a href="{{ route('home') }}">Accueil</a>
                                 </li>
 
                                 <li>

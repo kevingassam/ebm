@@ -52,12 +52,12 @@
                         @forelse ($services as $service)
                             <div class="col-sm-6 col-6 p-2">
                                 <div class="team-horizontal">
-                                    <img src="{{ $service->Cover() }}" alt="{{ $service->titre }}">
+                                    <img src="{{ $service->Cover() }}" alt="{{ $service->titre }}" class="img">
 
                                     <div class="team-details-container">
                                         <!-- .custom-heading-01 start -->
                                         <div class="custom-heading-01">
-                                            <h4>{{ Str::limit($service->titre ,20) }}</h4>
+                                            <h4>{{ Str::limit($service->titre, 20) }}</h4>
                                         </div><!-- .custom-heading-01 end -->
                                         <p>
                                             {{ Str::limit(strip_tags($service->description, 150)) }}
@@ -74,7 +74,7 @@
                     </div>
                 </div><!-- .col-md-8 end -->
 
-              {{--   <aside class="col-md-4 aside-right">
+                {{--   <aside class="col-md-4 aside-right">
 
                     <!-- .aside-widgets start -->
                     <ul class="aside-widgets">
@@ -102,4 +102,12 @@
             </div><!-- .row end -->
         </div><!-- .container end -->
     </div><!-- .page-content end -->
+
+    <style>
+        .img {
+            border: solid 1px rgba(0, 0, 0, 0.575);
+            height: 299px !important;
+            width: 263px !important;
+        }
+    </style>
 @endsection
