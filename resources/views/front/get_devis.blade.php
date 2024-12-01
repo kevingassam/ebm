@@ -93,7 +93,7 @@
                                             @if ($service->SousServices)
                                                 <div class="dm-dropdown-subitem">
                                                     @foreach ($service->SousServices as $item)
-                                                        <label>
+                                                        <label style="width: 100%;">
                                                             <input type="checkbox" name="sous_services[]"
                                                                 data-name="{{ $item->titre }}"
                                                                 class="child-checkbox group{{ $key }}"
