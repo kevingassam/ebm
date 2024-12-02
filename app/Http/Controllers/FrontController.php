@@ -95,14 +95,14 @@ class FrontController extends Controller
         }
 
         $token = config('services.contact_form.api_key');
-        $url = config('services.contact_form.api') . "contact";
+        $url = config('services.contact_form.api') . "store-devis";
         $response = Http::withHeaders([
             'x-api-key' => $token,
         ])->post($url, [
             'nom' => $request->input('nom'),
             'email' => $request->input('email'),
             'telephone' => $request->input('telephone'),
-            'message' => $contenu,
+            'commentaire' => $contenu,
             'adresse' => $request->input('adresse') ?? "-",
             "domaine" => config('app.app_url_demaine'),
         ]);
