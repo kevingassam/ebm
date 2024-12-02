@@ -79,38 +79,36 @@
                         <div class="col-sm-12 pb-3-devis">
                             <label for="">Sélectionnez un service</label>
                             <div class="dm-dropdown dm-dropdown-toggle">
-                                <button type="button" class="button">
-                                    Services*
-                                </button>
+                                <button type="button" class="button">Services*</button>
                                 <div class="dm-dropdown-content">
                                     @foreach ($services as $key => $service)
                                         <div class="dm-dropdown-item">
-                                            <label>
-                                                <input type="checkbox" class="parent-checkbox"
-                                                    data-group="group{{ $key }}">
-                                                {{ $service->titre }}
-                                            </label>
+                                            <input type="checkbox" class="parent-checkbox"
+                                                data-group="group{{ $key }}" id="parent-{{ $key }}">
+                                            <label for="parent-{{ $key }}">{{ $service->titre }}</label>
                                             @if ($service->SousServices)
                                                 <div class="dm-dropdown-subitem">
-                                                    @foreach ($service->SousServices as $item)
-                                                        <label style="width: 100%;">
+                                                    <div class="custom-checkbox">
+                                                        @foreach ($service->SousServices as $item)
                                                             <input type="checkbox" name="sous_services[]"
                                                                 data-name="{{ $item->titre }}"
+                                                                id="child-checkbox{{ $item->id }}"
                                                                 class="child-checkbox group{{ $key }}"
                                                                 value="{{ $item->id }}">
-                                                            {{ $item->titre }}
-                                                        </label>
-                                                    @endforeach
+                                                            <label
+                                                                for="child-checkbox{{ $item->id }}">{{ $item->titre }}</label>
+                                                        @endforeach
+                                                    </div>
                                                 </div>
                                             @endif
                                         </div>
                                     @endforeach
                                 </div>
-                                <div id="selected-sous-services" class="selected-sous-services">
-                                    <!-- Les badges des sous-services sélectionnés apparaîtront ici -->
-                                </div>
-
                             </div>
+                            <div id="selected-sous-services" class="selected-sous-services">
+                                <!-- Les badges des sous-services sélectionnés apparaîtront ici -->
+                            </div>
+
                             @error('sous_services')
                                 <span class="small text-danger">{{ $message }}</span>
                             @enderror
@@ -150,22 +148,6 @@
                                 <span class="small text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        @if (!$service)
-                            <div class="col-sm-12 pb-3-devis">
-                                <label for="">Choisir un service</label>
-                                <select name="service_id" @required(true) class="form-control">
-                                    <option value=""></option>
-                                    @foreach ($services as $service)
-                                        <option value="{{ $service->id }}" @selected(old('service_id') == $service->id)>
-                                            {{ $service->titre }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('service_id')
-                                    <span class="small text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        @endif
                         <div class="col-sm-12">
                             <label for="">Décrire votre besoin</label>
                             <textarea rows="8" class="form-control" id="contact-message" required name="message" placeholder="Message*">{{ old('message') }}</textarea>
@@ -200,50 +182,42 @@
             const selectedServicesContainer = document.getElementById('selected-sous-services');
             const selectedCheckboxes = Array.from(document.querySelectorAll('.child-checkbox:checked'));
 
-            // Met à jour le champ caché pour le formulaire (IDs uniquement)
             const hiddenInput = document.getElementById('selectedServices');
-            hiddenInput.value = selectedCheckboxes.map(checkbox => checkbox.value).join(',');
+            hiddenInput.value = selectedCheckboxes.map((checkbox) => checkbox.value).join(',');
 
-            // Réinitialise le conteneur des badges
             selectedServicesContainer.innerHTML = '';
 
-            // Ajoute un badge pour chaque sous-service sélectionné
-            selectedCheckboxes.forEach(checkbox => {
+            selectedCheckboxes.forEach((checkbox) => {
                 const badge = document.createElement('span');
                 badge.className = 'badge';
-                badge.textContent = checkbox.dataset.name; // Récupère le nom à partir de data-name
+                badge.textContent = checkbox.dataset.name;
 
                 selectedServicesContainer.appendChild(badge);
             });
         }
 
-        // Gestion des interactions parent/sous-éléments
-        document.querySelectorAll('.parent-checkbox').forEach(parent => {
+        document.querySelectorAll('.parent-checkbox').forEach((parent) => {
             parent.addEventListener('change', function() {
                 const group = this.dataset.group;
                 const children = document.querySelectorAll(`.child-checkbox.${group}`);
-                children.forEach(child => (child.checked = this.checked));
+                children.forEach((child) => (child.checked = this.checked));
                 updateSelectedServices();
             });
         });
 
-        // Gestion des sous-éléments cochés individuellement
-        document.querySelectorAll('.child-checkbox').forEach(child => {
+        document.querySelectorAll('.child-checkbox').forEach((child) => {
             child.addEventListener('change', function() {
                 const group = this.classList[1];
                 const parent = document.querySelector(`.parent-checkbox[data-group="${group}"]`);
                 const children = document.querySelectorAll(`.child-checkbox.${group}`);
-                parent.checked = Array.from(children).every(child => child.checked);
+                parent.checked = Array.from(children).every((child) => child.checked);
                 updateSelectedServices();
             });
         });
 
-
-
-
-        // Initialisation pour s'assurer que tout est synchronisé
         updateSelectedServices();
     </script>
+
 
     <style>
         .text-danger {
@@ -297,6 +271,80 @@
 
         .dm-dropdown-subitem {
             margin-left: 20px;
+
+        }
+
+
+        .dm-dropdown-content input[type="checkbox"] {
+            display: none;
+            /* Cache l'input natif */
+        }
+
+        .dm-dropdown-content label {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* Conteneur de la checkbox */
+        .dm-dropdown-content label::before {
+            content: "";
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #6ec25b;
+            /* Couleur principale */
+            border-radius: 4px;
+            margin-right: 10px;
+            background-color: #fff;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Indicateur de coche */
+        .dm-dropdown-content label::after {
+            content: "";
+            position: absolute;
+            top: 3px;
+            left: 6px;
+            /* Alignement au centre */
+            width: 6px;
+            height: 10px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg) scale(0);
+            transform-origin: center;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        /* Lorsqu'une checkbox est cochée */
+        .dm-dropdown-content input[type="checkbox"]:checked+label::before {
+            background-color: #6ec25b;
+            /* Couleur du fond cochée */
+            border-color: #6ec25b;
+        }
+
+        .dm-dropdown-content input[type="checkbox"]:checked+label::after {
+            transform: rotate(45deg) scale(1);
+        }
+
+        /* Styles supplémentaires */
+        .dm-dropdown-subitem label {
+            font-size: 13px;
+            margin-left: 5px;
+        }
+
+        .selected-sous-services .badge {
+            display: inline-block;
+            background-color: #6ec25b;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 12px;
+            margin-right: 5px;
+            font-size: 12px;
         }
     </style>
+
 @endsection
