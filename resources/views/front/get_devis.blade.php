@@ -88,17 +88,18 @@
                                             <label for="parent-{{ $key }}">{{ $service->titre }}</label>
                                             @if ($service->SousServices)
                                                 <div class="dm-dropdown-subitem">
-                                                    <div class="custom-checkbox">
-                                                        @foreach ($service->SousServices as $item)
+                                                    @foreach ($service->SousServices as $item)
+                                                        <div style="margin-bottom: 5px;">
                                                             <input type="checkbox" name="sous_services[]"
                                                                 data-name="{{ $item->titre }}"
                                                                 id="child-checkbox{{ $item->id }}"
                                                                 class="child-checkbox group{{ $key }}"
                                                                 value="{{ $item->id }}">
-                                                            <label
-                                                                for="child-checkbox{{ $item->id }}">{{ $item->titre }}</label>
-                                                        @endforeach
-                                                    </div>
+                                                            <label for="child-checkbox{{ $item->id }}">
+                                                                {{ $item->titre }}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
                                             @endif
                                         </div>
@@ -162,8 +163,8 @@
                         </div>
                         <div class="col-sm-12 text-center">
                             <br>
-                            <button class="btn btn-sm btn-dark" type="submit">
-                                <b class="text-white">
+                            <button class="btn btn-sm " style="background-color: #030d26;" type="submit">
+                                <b style="color: white ;">
                                     Demander le devis
                                     <i class="fa fa-paper-plane"></i>
                                 </b>
@@ -295,7 +296,7 @@
             display: inline-block;
             width: 18px;
             height: 18px;
-            border: 2px solid #6ec25b;
+            border: 2px solid #030d26;
             /* Couleur principale */
             border-radius: 4px;
             margin-right: 10px;
@@ -321,9 +322,9 @@
 
         /* Lorsqu'une checkbox est cochée */
         .dm-dropdown-content input[type="checkbox"]:checked+label::before {
-            background-color: #6ec25b;
+            background-color: #030d26;
             /* Couleur du fond cochée */
-            border-color: #6ec25b;
+            border-color: #030d26;
         }
 
         .dm-dropdown-content input[type="checkbox"]:checked+label::after {
@@ -338,7 +339,7 @@
 
         .selected-sous-services .badge {
             display: inline-block;
-            background-color: #6ec25b;
+            background-color: #030d26;
             color: #fff;
             padding: 5px 10px;
             border-radius: 12px;
