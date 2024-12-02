@@ -78,7 +78,7 @@
 
                         <div class="col-sm-12 pb-3-devis">
                             <label for="">Sélectionnez un service</label>
-                            <div class="dm-dropdown">
+                            <div class="dm-dropdown dm-dropdown-toggle">
                                 <button type="button" class="button">
                                     Services*
                                 </button>
@@ -238,6 +238,9 @@
             });
         });
 
+
+
+
         // Initialisation pour s'assurer que tout est synchronisé
         updateSelectedServices();
     </script>
@@ -274,9 +277,14 @@
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.062);
+            border: solid 1px rgba(0, 0, 0, 0.089);
+            border-radius: 10px;
             padding: 10px;
             z-index: 1;
+            width: 98%;
+            height: 300px;
+            overflow-y: scroll;
         }
 
         .dm-dropdown:hover .dm-dropdown-content {
