@@ -251,7 +251,7 @@
         .dm-dropdown-content {
             display: none;
             position: absolute;
-            background-color: #f9f9f9;
+            background-color: #ffffff;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.062);
             border: solid 1px rgba(0, 0, 0, 0.089);
             border-radius: 10px;
