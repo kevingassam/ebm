@@ -283,7 +283,7 @@
             padding: 10px;
             z-index: 1;
             width: 98%;
-            height: 300px;
+            max-height: 300px;
             overflow-y: scroll;
         }
 
