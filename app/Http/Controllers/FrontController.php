@@ -21,7 +21,11 @@ class FrontController extends Controller
     public function home()
     {
         $articles = Blog::Orderby('created_at', 'desc')->select('id', 'titre', 'photo', 'created_at')->take(10)->get();
-        $services = Service::Orderby('created_at', 'desc')->select('id', 'titre', 'image', 'description')->take(10)->get();
+        $services = Service::Orderby('created_at', 'desc')
+            ->select('id', 'titre', 'image', 'description')
+            ->with('SousServices')
+            ->take(10)
+            ->get();
         $temoignages = Temoignage::all();
         $projets = Projet::Orderby('created_at', 'desc')->take(15)->get();
         $banners = Banner::all();

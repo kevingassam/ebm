@@ -1,6 +1,4 @@
-@php
-    $top10RandomServices = DB::table('services')->select('id', 'titre')->inRandomOrder()->limit(10)->get();
-@endphp
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -10,13 +8,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ $infos->GetIcon() }}" />
-      <link rel="canonical" href="{{ url()->current() }}">
-      <link rel="icon" href="{{ $infos->GetIcon() }}" type="image/x-icon">
-      <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="icon" href="{{ $infos->GetIcon() }}" type="image/x-icon">
+    <meta name="robots" content="index, follow">
 
     <!-- Fonts and icon fonts -->
     <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Poppins:400,300,500,600&amp;subset=latin,latin-ext" type="text/css">
+        href="https://fonts.googleapis.com/css?family=Poppins:400,300,500,600&amp;subset=latin,latin-ext"
+        type="text/css">
     <link rel="stylesheet" href="/front/fonts/font-awesome/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="/front/fonts/lynny/style.min.css">
 
@@ -43,7 +42,7 @@
 
 <body>
 
-    @if (config('app.env') == "production")
+    @if (config('app.env') == 'production')
         <!-- LOADER START -->
         <div id="loader">
             <div id="loading-status"></div><!-- .loading-status end -->
@@ -119,7 +118,7 @@
                                                     <span>Adresse</span>
                                                     <p>
                                                         <a href="{{ route('contact') }}">
-                                                            {{ Str::limit($infos->adresse1 , 20) ?? '' }}
+                                                            {{ Str::limit($infos->adresse1, 20) ?? '' }}
                                                         </a>
                                                     </p>
                                                 </div><!-- .text-container end -->
@@ -180,14 +179,34 @@
                                                 </a>
 
                                                 <ul class="dropdown-menu">
-                                                    <li><a href="{{ route('service_list') }}">Tous les services</a></li>
+                                                    <li><a href="{{ route('service_list') }}">Tous les services</a>
+                                                    </li>
                                                     @foreach ($top10RandomServices as $service)
-                                                        <li>
-                                                            <a
-                                                                href="{{ route('service', ['id' => $service->id, 'titre' => Str::slug($service->titre)]) }}">
-                                                                {{ Str::limit($service->titre, 20) }}
-                                                            </a>
-                                                        </li>
+                                                        @if ($service->SousServices->count() > 0)
+                                                            <li
+                                                                class="dropdown dropdown-submenu menu-item-has-children">
+                                                                <a href="#" class="dropdown-toggle"
+                                                                    data-toggle="dropdown">
+                                                                    {{ Str::limit($service->titre, 20) }}
+                                                                </a>
+                                                                <ul class="dropdown-menu">
+                                                                    @foreach ($service->SousServices as $sous)
+                                                                        <li>
+                                                                            <a href="{{ route('s_service', ['id' => $sous->id, 'titre' => Str::slug($sous->titre)]) }}">
+                                                                                {{ Str::limit($sous->titre, 20) }}
+                                                                            </a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </li>
+                                                        @else
+                                                            <li>
+                                                                <a
+                                                                    href="{{ route('service', ['id' => $service->id, 'titre' => Str::slug($service->titre)]) }}">
+                                                                    {{ Str::limit($service->titre, 20) }}
+                                                                </a>
+                                                            </li>
+                                                        @endif
                                                     @endforeach
                                                 </ul>
                                             </li>
@@ -211,7 +230,8 @@
                                         <!-- #search start -->
                                         <div id="search">
                                             <form method="GET" action="{{ route('blog') }}">
-                                                <input class="search-submit" type="submit" required style="background-color: white;color:black;">
+                                                <input class="search-submit" type="submit" required
+                                                    style="background-color: white;color:black;">
                                                 <input id="m_search" name="s" type="text"
                                                     placeholder="Recherche...">
                                             </form>
@@ -377,7 +397,7 @@
 
                     <div class="col-md-4 col-sm-4">
                         <p>
-                            <a href="{{ route('mentions')}}">
+                            <a href="{{ route('mentions') }}">
                                 Mentions légales
                             </a>
                             -
