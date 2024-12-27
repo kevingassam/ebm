@@ -96,7 +96,7 @@
                                 <ul id="menu-quick-links" class="menu">
                                     @foreach ($service->SousServices as $sous)
                                         <li class="menu-item">
-                                            <a href="{{ route('s_service', ['id' => $sous->id, 'titre' => Str::slug($sous->titre)]) }}">
+                                            <a href="{{ route('s_service', ['service' => $sous->service->slug, 'slug' => $sous->slug]) }}">
                                                 {{ Str::limit($sous->titre ,30) }}
                                             </a>
                                         </li>

@@ -196,9 +196,9 @@ class FrontController extends Controller
     }
 
 
-    public function projet_details($id, $titre)
+    public function projet_details($slug)
     {
-        $projet = Projet::find($id);
+        $projet = Projet::where('slug', $slug)->first();
         if (!$projet) {
             abort(404);
         }
@@ -269,9 +269,9 @@ class FrontController extends Controller
     }
 
 
-    public function s_service($id, $titre)
+    public function s_service($service,$slug)
     {
-        $SousService = SousService::find($id);
+        $SousService = SousService::where('slug',$slug)->first();
         if (!$SousService) {
             abort(404);
         }
@@ -281,7 +281,7 @@ class FrontController extends Controller
             ->get();
         return view("front.sous-service")
             ->with('service', $SousService)
-            ->with('titre', $titre)
+            ->with('titre', $SousService->titre)
             ->with('autres', $autres);
     }
 

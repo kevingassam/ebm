@@ -111,7 +111,7 @@
                                 <div class="nivo-slider nivoSlider">
                                     @foreach ($autres as $key => $item)
                                         <a
-                                            href="{{ route('projet_details', ['id' => $item->id, 'titre' => Str::slug($item->nom)]) }}">
+                                            href="{{ route('projet_details', ['slug' => $item->slug ]) }}">
                                             <img src="{{ $item->Cover() }}" alt="{{ $item->nom }}"
                                                 title="#slider-caption-0{{ $key + 1 }}">
                                         </a>
@@ -124,7 +124,7 @@
                                             {{ $item->nom }}
                                         </h3>
 
-                                        <a href="{{ route('projet_details', ['id' => $item->id, 'titre' => Str::slug($item->nom)]) }}"
+                                        <a href="{{ route('projet_details', ['slug' => $item->slug ]) }}"
                                             class="read-more">
                                             Voir le projet
                                         </a><!-- .read-more end -->
@@ -153,7 +153,7 @@
                                     @forelse ($autres as $item)
                                         <li class="menu-item">
                                             <a
-                                                href="{{ route('projet_details', ['id' => $item->id, 'titre' => Str::slug($item->nom)]) }}">
+                                                href="{{ route('projet_details', ['slug' => $item->slug ]) }}">
                                                 {{ Str::limit($item->nom) }}
                                             </a>
                                         </li>

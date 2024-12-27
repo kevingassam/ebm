@@ -43,12 +43,12 @@ class TemoignageController extends Controller
             'note' => 'required|integer|min:0|max:5',
             'message' => 'required|string|max:2550',
         ]);
-        $temoinage = Temoignage::find($id);
-        $temoinage->nom = $request->input('nom');
-        $temoinage->poste = $request->input('poste');
-        $temoinage->note = $request->input('note');
-        $temoinage->message = $request->input('message');
-        $temoinage->save();
+        $temoignage = Temoignage::find($id);
+        $temoignage->nom = $request->input('nom');
+        $temoignage->poste = $request->input('poste');
+        $temoignage->note = $request->input('note');
+        $temoignage->message = $request->input('message');
+        $temoignage->save();
         return redirect()
         ->route('temoignages.index')
         ->with('success', 'Témoignage modifié avec succès');
@@ -57,9 +57,11 @@ class TemoignageController extends Controller
 
     public function destroy($id)
     {
-        $temoinage = Temoignage::find($id);
-        Storage::delete($temoinage->photo);
-        $temoinage->delete();
+        $temoignage = Temoignage::find($id);
+       if($temoignage->photo){
+        Storage::delete($temoignage->photo);
+       }
+        $temoignage->delete();
         return redirect()->route('temoignages.index')->with('success', 'Témoignage supprimé avec succès');
     }
 }

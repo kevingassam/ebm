@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
@@ -36,6 +37,7 @@ class ServiceController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
         $service = new Service();
+        $service->slug = Str::slug($request->titre);
         $service->titre = $request->input('titre');
         $service->description = $request->input('description');
         $service->image = $request->file('image')->store('services', 'public');
@@ -54,6 +56,7 @@ class ServiceController extends Controller
         ]);
         $service = Service::find($id);
         $service->titre = $request->input('titre');
+        $service->slug = Str::slug($request->titre);
         $service->description = $request->input('description');
         if ($request->hasFile('image')) {
             Storage::disk('public')->delete($service->image);

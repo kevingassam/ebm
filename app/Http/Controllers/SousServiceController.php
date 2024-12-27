@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Models\SousService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SousServiceController extends Controller
 {
@@ -32,6 +33,7 @@ class SousServiceController extends Controller
         ]);
         $sous_service = new SousService();
         $sous_service->titre = $request->titre;
+        $sous_service->slug = Str::slug($request->titre);
         $sous_service->description = $request->description;
         $sous_service->service_id = $request->service_id;
         $sous_service->image = $request->file('image')->store('services', 'public');
@@ -52,6 +54,7 @@ class SousServiceController extends Controller
         ]);
         $sous_service = SousService::find($id);
         $sous_service->titre = $request->titre;
+        $sous_service->slug = Str::slug($request->titre);
         $sous_service->description = $request->description;
         if ($request->hasFile('image')) {
             Storage::disk('public')->delete($sous_service->image);

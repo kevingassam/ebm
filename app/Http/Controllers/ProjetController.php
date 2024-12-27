@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Projet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProjetController extends Controller
 {
@@ -70,6 +71,7 @@ class ProjetController extends Controller
         }
 
         $projet = new Projet();
+        $projet->slug = Str::slug($validated['nom']);
         $projet->photo = $photoPath;
         $projet->photos = json_encode($additionalPhotos);
         $projet->nom = $validated['nom'];
@@ -109,6 +111,7 @@ class ProjetController extends Controller
         ]);
 
         $projet->nom = $validated['nom'];
+        $projet->slug = Str::slug($validated['nom']);
         $projet->description = $validated['description'];
 
         if ($request->hasFile('photo')) {

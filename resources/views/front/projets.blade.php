@@ -64,7 +64,7 @@
                 <li class="col-md-4 col-sm-4">
                     <div class="feature-box service-box-05">
                         <div class="media">
-                            <a href="{{ route('projet_details',['id'=>$projet->id , 'titre'=>Str::slug($projet->nom)]) }}">
+                            <a href="{{ route('projet_details',['slug'=>$projet->slug ]) }}">
                                 <img src="{{ $projet->Cover() }}" alt="{{ $projet->nom }}"/>
                             </a>
                         </div><!-- .media end -->
@@ -74,7 +74,7 @@
                         </div><!-- .icon-container end -->
 
                         <div class="text-container">
-                            <a href="{{ route('projet_details',['id'=>$projet->id , 'titre'=>Str::slug($projet->nom)]) }}">
+                            <a href="{{ route('projet_details',['slug'=>$projet->slug ]) }}">
                                 <h3>
                                     {{ Str::limit($projet->nom, 30)}}
                                 </h3>

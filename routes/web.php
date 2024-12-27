@@ -24,28 +24,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //compter les vues
-Route::middleware(['track.visits'])->group(function () {
-    Route::get('/', [FrontController::class, 'home'])->name('home');
-    Route::get('/about', [FrontController::class, 'about'])->name('about');
-    Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
-    Route::post('/contact', [FrontController::class, 'contact_post'])->name('contact.store');
-    Route::get('/blog', [FrontController::class, 'blogs'])->name('blog');
-    Route::get('/blog/{id}/{titre}', [FrontController::class, 'article'])->name('article');
-    Route::get('/projet', [FrontController::class, 'projet'])->name('projet');
-    Route::get('/list/service', [FrontController::class, 'services'])->name('service_list');
-    Route::get('/service/{id}/{titre}', [FrontController::class, 'service'])->name('service');
-    Route::get('/sous-service/{id}/{titre}', [FrontController::class, 's_service'])->name('s_service');
-    Route::get('/projet/{id}/{titre}', [FrontController::class, 'projet_details'])->name('projet_details');
-    Route::get('/politique', [FrontController::class, 'politique'])->name('politique');
-    Route::get('/mentions', [FrontController::class, 'mentions'])->name('mentions');
-    Route::get('/get_devis', [FrontController::class, 'get_devis'])->name('get_devis');
-    Route::post('/get_devis.post', [FrontController::class, 'get_devis_post'])->name('get_devis.post');
-});
 
+Route::get('/', [FrontController::class, 'home'])->name('home');
 Route::get('/login', [FrontController::class, 'login'])->name('login');
 Route::get('/logout', [FrontController::class, 'logout'])->name('logout');
 Route::post('/login', [FrontController::class, 'login_post'])->name('login.post');
 Route::get('/api-logo', [ApiCrmController::class, 'logo'])->name('logo');
+Route::get('/politique', [FrontController::class, 'politique'])->name('politique');
+Route::get('/mentions', [FrontController::class, 'mentions'])->name('mentions');
+Route::get('/get_devis', [FrontController::class, 'get_devis'])->name('get_devis');
+Route::get('/about', [FrontController::class, 'about'])->name('about');
+Route::get('/contact', [FrontController::class, 'contact'])->name('contact');
+Route::post('/contact', [FrontController::class, 'contact_post'])->name('contact.store');
+Route::get('/blog', [FrontController::class, 'blogs'])->name('blog');
+Route::get('/projet', [FrontController::class, 'projet'])->name('projet');
+
+
+
+Route::prefix('page')->group(function () {
+    Route::middleware(['track.visits'])->group(function () {
+        Route::get('/blog/{id}/{titre}', [FrontController::class, 'article'])->name('article');
+        Route::get('/list/service', [FrontController::class, 'services'])->name('service_list');
+        Route::post('/get_devis.post', [FrontController::class, 'get_devis_post'])->name('get_devis.post');
+    });
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [FrontController::class, 'dashboard'])->name('dashboard');
@@ -67,3 +71,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/sous_service.update/{id}/update', [SousServiceController::class, 'update'])->name('sous_service.update');
 });
 
+
+
+Route::get('/{slug}', [FrontController::class, 'projet_details'])->name('projet_details');
+Route::get('/service/{id}/{titre}', [FrontController::class, 'service'])->name('service');
+Route::get('/{service}/{slug}', [FrontController::class, 's_service'])->name('s_service');
