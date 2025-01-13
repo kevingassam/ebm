@@ -60,11 +60,11 @@
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="sortable">
                                 @forelse ($projets as $projet)
-                                    <tr>
+                                    <tr data-id="{{ $projet->id }}" id="tr-projet-{{ $projet->id }}">
                                         <td>
-                                            <input class="form-check-input" type="checkbox">
+                                            <i class="bi bi-grid-3x3-gap" style="cursor: pointer;"></i>
                                         </td>
                                         <td>
                                             <a class="d-flex align-items-center gap-3" href="javascript:;">
@@ -118,4 +118,31 @@
 
     </main>
     <!--end main content-->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <script>
+        var sortable = new Sortable(document.getElementById('sortable'), {
+            onEnd: function(evt) {
+                var order = [];
+                var rows = document.querySelectorAll('#sortable tr');
+                rows.forEach(function(row) {
+                    order.push(row.getAttribute('data-id'));
+                });
+                $.ajax({
+                    url: '{{ route('update.project.order') }}',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        order: order
+                    },
+                    success: function(response) {
+                        console.log('Ordre mis à jour avec succès');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Erreur lors de la mise à jour de l\'ordre', error);
+                    }
+                });
+            }
+        });
+    </script>
 @endsection

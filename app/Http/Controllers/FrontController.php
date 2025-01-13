@@ -21,7 +21,7 @@ class FrontController extends Controller
     public function home()
     {
         $articles = Blog::Orderby('created_at', 'desc')->select('id', 'titre', 'photo', 'created_at')->take(10)->get();
-        $services = Service::Orderby('created_at', 'desc')
+        $services = Service::orderby("order","asc")
             ->select('id', 'titre', 'image', 'description')
             ->with('SousServices')
             ->take(10)
@@ -185,7 +185,7 @@ class FrontController extends Controller
         if ($key) {
             $projets = $projets->where('nom', 'LIKE', '%' . $key . '%');
         }
-        $projets = $projets->paginate(30);
+        $projets = $projets->orderby("order","asc")->paginate(30);
         $total = Projet::count();
         return view("front.projets")
             ->with('projets', $projets)
@@ -202,7 +202,7 @@ class FrontController extends Controller
         if (!$projet) {
             abort(404);
         }
-        $autres = Projet::where('id', '!=', $projet->id)->take(5)->get();
+        $autres = Projet::where('id', '!=', $projet->id)->Orderby("order","asc")->take(5)->get();
         return view("front.projet")
             ->with('projet', $projet)
             ->with('autres', $autres);

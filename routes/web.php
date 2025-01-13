@@ -69,6 +69,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/sous_service/{id}/delete', [SousServiceController::class, 'destroy'])->name('sous_service.destroy');
     Route::post('/sous_service', [SousServiceController::class, 'store'])->name('sous_service.store');
     Route::post('/sous_service.update/{id}/update', [SousServiceController::class, 'update'])->name('sous_service.update');
+
+
+    Route::post('/update-project-order', [ProjetController::class, 'updateProjectOrder'])->name('update.project.order');
+    Route::post('/update-services-order', [ServiceController::class, 'updateServicesOrder'])->name('update.service.order');
 });
 
 

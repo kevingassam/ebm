@@ -13,7 +13,7 @@ class ServiceController extends Controller
 
     public function index()
     {
-        $services = Service::paginate(15);
+        $services = Service::Orderby("order","asc")->paginate(15);
         return view('admin.services.index')
             ->with('services', $services);
     }
@@ -28,6 +28,17 @@ class ServiceController extends Controller
         return view('admin.services.update')
         ->with('service', $service);
     }
+
+
+    public function updateServicesOrder(Request $request)
+    {
+        $order = $request->input('order');
+        foreach ($order as $index => $id) {
+            Service::where('id', $id)->update(['order' => $index + 1]);
+        }
+        return response()->json(['success' => true]);
+    }
+
 
     public function store(Request $request)
     {

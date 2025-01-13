@@ -117,14 +117,14 @@
                         <li>
                             <i class="fa fa-clock-o"></i>
                             <p>
-                                Mon - Fri: 08am - 04pm
+                                Lundi - Vendredi : DE 08 am - 05pm
                             </p>
                         </li>
 
                         <li>
                             <i class="fa fa-clock-o"></i>
                             <p>
-                                SAT - SUN Closed
+                                Samedi - Dimanche : Fermé
                             </p>
                         </li>
                     </ul><!-- .fa-ul.default end -->

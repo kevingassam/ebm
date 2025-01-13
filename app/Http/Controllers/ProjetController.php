@@ -14,11 +14,19 @@ class ProjetController extends Controller
      */
     public function index()
     {
-        $projets = Projet::paginate(15);
+        $projets = Projet::orderby("order","asc")->paginate(20);
         return view('admin.projets.index', compact('projets'));
     }
 
 
+    public function updateProjectOrder(Request $request)
+    {
+        $order = $request->input('order');
+        foreach ($order as $index => $id) {
+            Projet::where('id', $id)->update(['order' => $index + 1]);
+        }
+        return response()->json(['success' => true]);
+    }
 
 
 

@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
                 ->limit(2)
                 ->get();
 
-            $top10RandomServices = Service::select('id', 'titre')->with('SousServices')->inRandomOrder()->limit(10)->get();
+            $top10RandomServices = Service::select('id', 'titre')->with('SousServices')->orderby("order","asc")->limit(10)->get();
 
             $view->with('infos', $infos)
                 ->with('last2Blog', $last2Blog)
