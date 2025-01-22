@@ -81,7 +81,7 @@
                                                 <h2>
                                                     {{ Str::limit($service->titre, 30) }}
                                                 </h2>
-                                                {{ Str::limit(strip_tags($service->description, 80)) }}
+                                                {{ e(Str::limit(html_entity_decode(strip_tags($service->description)), 80)) }}
                                             </a>
                                         </div><!-- .body end -->
                                     </div><!-- .featured-page-box end -->
@@ -263,7 +263,8 @@
                 <!-- .col-md-12 start -->
                 <div class="col-md-12">
                     @if ($infos->map)
-                    <iframe src="{{ $infos->map }}" class="map-height-lg" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <iframe src="{{ $infos->map }}" class="map-height-lg" style="border:0;" allowfullscreen=""
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     @endif
                 </div><!-- .col-md-12 end -->
             </div><!-- .row end -->
@@ -304,7 +305,7 @@
     <meta name="keywords" content="{{ $keywords ?? 'mots-clés, par défaut, pour, SEO' }}">
     <meta name="author" content="{{ $author ?? 'Nom de l\'auteur du site' }}">
     {{-- Open Graph pour Facebook et autres réseaux --}}
-    <meta property="og:title" content="{{ $infos->app_name  }}">
+    <meta property="og:title" content="{{ $infos->app_name }}">
     <meta property="og:description" content="{{ $description ?? 'Description par défaut' }}">
     <meta property="og:image" content="{{ $infos->GetLogo() }}">
     <meta property="og:url" content="{{ url()->current() }}">

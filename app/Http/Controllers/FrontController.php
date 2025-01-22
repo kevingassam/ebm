@@ -211,7 +211,7 @@ class FrontController extends Controller
 
     public function services()
     {
-        $services = Service::all();
+        $services = Service::orderby("order","asc")->get();
         return view("front.services")
             ->with('services', $services);
     }

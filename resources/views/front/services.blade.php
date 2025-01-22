@@ -60,7 +60,7 @@
                                             <h4>{{ Str::limit($service->titre, 20) }}</h4>
                                         </div><!-- .custom-heading-01 end -->
                                         <p>
-                                            {{ Str::limit(strip_tags($service->description, 150)) }}
+                                            {{ e(Str::limit(html_entity_decode(strip_tags($service->description, 150)))) }}
                                         </p>
                                         <a href="{{ route('service', ['id' => $service->id, 'titre' => Str::slug($service->titre)]) }}"
                                             class="read-more">
