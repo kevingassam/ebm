@@ -193,7 +193,7 @@
                                                                     @foreach ($service->SousServices as $sous)
                                                                         <li>
                                                                             <a href="{{ route('s_service', ['service' => $sous->service->slug, 'slug' => $sous->slug]) }}">
-                                                                                {{ Str::limit($sous->titre, 20) }}
+                                                                                {{ $sous->titre }}
                                                                             </a>
                                                                         </li>
                                                                     @endforeach
